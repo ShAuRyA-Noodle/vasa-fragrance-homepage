@@ -165,3 +165,71 @@ footer{background:#111;color:#f4f2ee}.footer-main h2{font-size:12px}.footer-main
 
 @media(max-width:900px){.campaign{grid-template-columns:1fr;min-height:0}.campaign-photo{min-height:0;aspect-ratio:16/10}.craft-strip{grid-template-columns:1fr}.craft-principles{grid-template-columns:repeat(3,1fr)}.gifting.section{grid-template-columns:1fr;margin:70px 4vw}.gift-art,.gift-copy{min-height:0}.gift-art{min-height:430px}}
 @media(max-width:760px){.hero-media:after{background:linear-gradient(180deg,transparent 45%,rgba(12,10,8,.65))}.hero-copy{background:#111}.hero h1 em{color:#d6aa69}.hero-foot{display:none}.story-navigation{background:rgba(18,18,18,.58)}.product-image .product-world{opacity:1}.product-image .product-bottle{opacity:0;transform:scale(.82)}.campaign-photo{min-height:0;aspect-ratio:16/10}.campaign-copy{padding:50px 25px 58px}.campaign-copy h2{font-size:40px}.campaign-copy>p:not(.kicker){font-size:14px}.craft-strip{padding:58px 25px;gap:42px}.craft-intro h2{font-size:42px}.craft-principles{grid-template-columns:1fr}.craft-principles>div{padding:22px 0 22px 44px}.craft-principles span{position:absolute;left:8px;top:27px;margin:0}.craft-principles h3{font-size:22px}.craft-principles p{font-size:13px;max-width:none}.gifting.section{margin:58px 22px}.gift-art{min-height:320px;padding:44px}.gift-copy{padding:42px 28px 48px}.gift-copy h2{font-size:42px}.gift-copy>p:not(.kicker){font-size:14px}.gift-actions{width:100%;margin-top:30px}.gift-actions>.button{min-width:0;width:100%}.footer-main>div>a,.footer-main>div>button:not(.text-link),.footer-social>p{font-size:11px}}
+
+/* React Bits study, recut for VASA: one useful interaction per surface. */
+.word-loop{position:relative;display:inline-grid;height:1.5em;min-width:76px;overflow:hidden;vertical-align:middle;color:#e0b679}
+.word-loop>span{grid-area:1/1;display:block;will-change:transform,opacity}
+.hero h1 em{color:transparent;background:linear-gradient(105deg,#c99750 0 34%,#f3dfad 49%,#c99750 66% 100%);background-size:220% auto;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:heroGold 7s ease-in-out infinite}
+@keyframes heroGold{0%,38%,100%{background-position:100% 50%}62%{background-position:0 50%}}
+
+#click-spark-canvas{position:fixed;inset:0;z-index:140;pointer-events:none}
+
+/* The atlas supplies one rich gallery moment without disturbing the product grid. */
+.mood-gallery{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.mood-gallery .section-head{align-items:end}.gallery-instruction{font-size:10px;letter-spacing:.16em;color:#77716a;margin:0 0 6px}
+.mood-gallery-track{display:flex;gap:10px;width:100%;height:clamp(520px,50vw,680px);overflow:hidden}
+.mood-gallery-panel{--mouse-x:50%;--mouse-y:50%;position:relative;flex:1 1 0;min-width:0;overflow:hidden;background:#111;color:#fff;text-align:left;isolation:isolate;transition:flex-grow 1.05s cubic-bezier(.2,.8,.2,1),filter .7s ease}
+.mood-gallery-panel.is-active{flex-grow:3}
+.mood-gallery-panel>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.76) contrast(1.04);transform:scale(1.035);transition:filter .8s ease,transform 1.25s cubic-bezier(.2,.8,.2,1)}
+.mood-gallery-panel.is-active>img{filter:saturate(.98) contrast(1.04);transform:scale(1)}
+.mood-gallery-panel:before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(460px circle at var(--mouse-x) var(--mouse-y),rgba(230,194,128,.19),transparent 46%);opacity:0;transition:opacity .5s ease}
+.mood-gallery-panel:is(:hover,:focus-visible):before{opacity:1}
+.mood-gallery-shade{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 38%,rgba(8,8,8,.78) 100%)}
+.mood-gallery-copy{position:absolute;right:clamp(20px,3vw,42px);bottom:clamp(24px,3.5vw,48px);left:clamp(20px,3vw,42px);z-index:2;display:grid;gap:8px;min-width:240px;transform:translateY(12px);transition:transform .7s ease}
+.mood-gallery-panel.is-active .mood-gallery-copy{transform:translateY(0)}
+.mood-gallery-copy small{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.mood-gallery-copy strong{font-size:clamp(30px,3.4vw,54px);font-weight:400;line-height:1;letter-spacing:-.055em;white-space:nowrap;opacity:0;transform:translateY(9px);transition:opacity .42s ease .12s,transform .6s ease .12s}
+.mood-gallery-copy em{max-width:38ch;font-size:12px;line-height:1.6;font-style:normal;color:rgba(255,255,255,.78);opacity:0;transform:translateY(8px);transition:opacity .45s ease .18s,transform .55s ease .18s}
+.mood-gallery-panel.is-active .mood-gallery-copy strong,.mood-gallery-panel.is-active .mood-gallery-copy em{opacity:1;transform:none}
+
+/* Scenery gives way to the bottle as a single clean reveal. */
+.product-image{--mouse-x:50%;--mouse-y:50%;isolation:isolate}
+.product-image:before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(320px circle at var(--mouse-x) var(--mouse-y),rgba(213,176,108,.16),transparent 48%);opacity:0;transition:opacity .5s ease}
+.product-image:is(:hover,:focus-visible):before{opacity:1}
+.product-image .product-bottle{z-index:2;clip-path:inset(100% 0 0 0);transition:clip-path .82s cubic-bezier(.2,.8,.2,1),opacity .62s ease,transform .9s cubic-bezier(.2,.8,.2,1),filter .9s ease}
+.product-image:is(:hover,:focus-visible) .product-bottle{clip-path:inset(0 0 0 0)}
+.product-image:after{z-index:3}
+
+/* Quiet glare and glass responses for controls. */
+.button,.add-button{isolation:isolate;overflow:hidden}
+.button>* ,.add-button>*{position:relative;z-index:2}
+.button:after,.add-button:after{content:'';position:absolute;inset:-150% -70%;z-index:1;pointer-events:none;background:linear-gradient(100deg,transparent 42%,rgba(255,255,255,.38) 50%,transparent 58%);transform:translateX(-42%) rotate(8deg);opacity:0;transition:transform .85s cubic-bezier(.2,.8,.2,1),opacity .35s ease}
+.button:is(:hover,:focus-visible):after,.add-button:is(:hover,:focus-visible):after{transform:translateX(42%) rotate(8deg);opacity:.68}
+.site-header .icon-button{border:1px solid transparent;border-radius:999px;background:rgba(255,255,255,0);transition:background .4s ease,border-color .4s ease,box-shadow .45s ease,transform .45s var(--ease-out),opacity .3s ease}
+.site-header .icon-button:is(:hover,:focus-visible){opacity:1;transform:translateY(-2px);background:rgba(255,255,255,.68);border-color:rgba(155,123,69,.28);box-shadow:0 10px 30px rgba(30,25,18,.1);backdrop-filter:blur(15px) saturate(1.2);-webkit-backdrop-filter:blur(15px) saturate(1.2)}
+.nav-left>a.is-active,.nav-right>a.is-active{color:#7e6335}
+.nav-left>a.is-active:after,.nav-right>a.is-active:after{transform:scaleX(1);transform-origin:left}
+
+/* The gift mark carries the curved-loop detail, kept inside its frame. */
+.gift-curve{position:absolute;inset:7%;z-index:1;width:86%;height:86%;overflow:visible;pointer-events:none;fill:#c4a26a;stroke:none;font-size:11px;font-weight:500;letter-spacing:.22em;opacity:.82;filter:drop-shadow(0 0 10px rgba(196,162,106,.16))}
+.gift-art>img,.gift-art>span{position:relative;z-index:2}.gift-orbit{opacity:.38}
+
+/* Particle wordmark and drawn contours turn the footer into a closing scene. */
+footer{position:relative;isolation:isolate;overflow:hidden}
+#footer-topography{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.9}
+.footer-particle,.footer-main,.footer-bottom{position:relative;z-index:1}
+.footer-particle{height:clamp(180px,19vw,280px);margin:0 4vw;border-bottom:1px solid rgba(255,255,255,.12);overflow:hidden}
+#footer-particle-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.footer-main{padding-top:clamp(52px,6vw,82px)}
+
+/* The mobile drawer uses the same stagger rhythm as the editorial reveals. */
+.menu-links{counter-reset:vasa-menu}.menu-links>*{counter-increment:vasa-menu;position:relative;padding-left:42px;overflow:hidden}
+.menu-links>*:before{content:'0' counter(vasa-menu);position:absolute;left:0;top:1.25em;color:#9b7b45;font-size:9px;letter-spacing:.12em}
+
+@media(max-width:900px){.mood-gallery-track{height:540px}.mood-gallery-panel.is-active{flex-grow:2.2}.mood-gallery-copy{min-width:200px}.mood-gallery-copy strong{font-size:34px}}
+@media(max-width:760px){
+ .hero h1 em{animation:none;background-position:50% 50%}.product-image .product-bottle{clip-path:inset(100% 0 0 0)}
+ .mood-gallery .section-head{align-items:start}.gallery-instruction{display:none}.mood-gallery-track{display:grid;grid-template-columns:1fr 1fr;height:auto;gap:8px;overflow:visible}.mood-gallery-panel,.mood-gallery-panel.is-active{aspect-ratio:4/5;min-width:0}.mood-gallery-copy{right:14px;bottom:16px;left:14px;min-width:0;gap:5px;transform:none}.mood-gallery-copy strong{font-size:23px;white-space:normal;opacity:1;transform:none}.mood-gallery-copy em{display:none}.mood-gallery-copy small{font-size:7px}.mood-gallery-panel>img,.mood-gallery-panel.is-active>img{filter:saturate(.86) contrast(1.04);transform:scale(1)}
+ .gift-curve{inset:4%;width:92%;height:92%;font-size:9px}.footer-particle{height:150px;margin:0 22px}
+}
+@media(prefers-reduced-motion:reduce){.hero h1 em{animation:none}.mood-gallery-panel,.mood-gallery-panel>img,.mood-gallery-copy,.mood-gallery-copy em,.button:after,.add-button:after{transition:none!important}}
