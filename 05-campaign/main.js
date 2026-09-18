@@ -61,6 +61,7 @@ function lockStoryHeight(){
  storyStack.style.minHeight=max?`${max}px`:'';
 }
 lockStoryHeight();
+document.fonts.ready.then(lockStoryHeight);
 let storyResizeTimer;
 addEventListener('resize',()=>{clearTimeout(storyResizeTimer);storyResizeTimer=setTimeout(lockStoryHeight,150)},{passive:true});
 let current=0,busy=false,requested=null,destination=null,playing=false,timer=null,progressTween=null,inView=false;
