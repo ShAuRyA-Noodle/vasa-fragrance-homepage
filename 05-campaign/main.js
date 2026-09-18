@@ -53,17 +53,16 @@ function schedule(){clearTimeout(timer);progressTween?.kill();tabs.forEach(tab=>
 function go(index){index=(index+slides.length)%slides.length;if(busy){requested=index;return;}if(index===current){schedule();return;}busy=true;destination=index;clearTimeout(timer);progressTween?.kill();const from=slides[current],to=slides[index],direction=index>current?1:-1,stack=document.querySelector('#story-slides');stack.style.minHeight=`${from.offsetHeight}px`;to.hidden=false;to.inert=true;gsap.set([from,to],{position:'absolute',inset:0,width:'100%'});gsap.set(from,{zIndex:1});gsap.set(to,{zIndex:2});
  const finish=()=>{if(from.contains(document.activeElement))stage.focus({preventScroll:true});from.hidden=true;from.inert=true;to.inert=false;gsap.set([from,to],{clearProps:'position,inset,width,zIndex,clipPath,opacity,filter,transform'});stack.style.minHeight='';current=index;destination=null;busy=false;tabs.forEach((b,n)=>b.setAttribute('aria-pressed',String(n===index)));document.querySelector('#story-counter').textContent=`0${index+1} / 04`;document.querySelector('#story-status').textContent=catalog[index].name;if(requested!==null){const next=requested;requested=null;go(next)}else schedule();};
  if(reduced.matches){finish();return;}
- const incomingMask=direction>0?'inset(0 0 0 100%)':'inset(0 100% 0 0)';
  const timeline=gsap.timeline({onComplete:finish,defaults:{overwrite:'auto'}});
  timeline
-  .set(to,{opacity:1,clipPath:incomingMask})
-  .to(from,{scale:.985,filter:'brightness(.72)',duration:1.02,ease:'power2.inOut'},0)
-  .to(from.querySelector('.story-copy'),{y:-12,opacity:0,duration:.52,ease:'power2.in'},.2)
-  .to(from.querySelector('.story-photo img'),{xPercent:-direction*3,scale:1.035,duration:1.05,ease:'power2.inOut'},0)
-  .to(stage,{backgroundColor:stageColor(catalog[index].color),duration:1.08,ease:'sine.inOut'},0)
-  .to(to,{clipPath:'inset(0 0% 0 0)',duration:1.08,ease:'power3.inOut'},0)
-  .fromTo(to.querySelector('.story-photo img'),{xPercent:direction*4,scale:1.075},{xPercent:0,scale:1,duration:1.24,ease:'power3.out',clearProps:'all'},.02)
-  .fromTo(to.querySelectorAll('.story-copy>*'),{y:30,opacity:0},{y:0,opacity:1,duration:.72,stagger:.055,ease:'power3.out',clearProps:'all'},.14);
+  .set(to,{opacity:0,scale:1.012,filter:'blur(8px) brightness(.82)'})
+  .to(from,{opacity:0,scale:.992,filter:'blur(5px) brightness(.68)',duration:1.05,ease:'power2.inOut'},0)
+  .to(from.querySelector('.story-copy'),{xPercent:-direction*2,opacity:0,duration:.68,ease:'power2.inOut'},0)
+  .to(from.querySelector('.story-photo img'),{xPercent:-direction*2.5,scale:1.035,duration:1.08,ease:'power2.inOut'},0)
+  .to(stage,{backgroundColor:stageColor(catalog[index].color),duration:1.15,ease:'sine.inOut'},0)
+  .to(to,{opacity:1,scale:1,filter:'blur(0px) brightness(1)',duration:1.08,ease:'power2.inOut'},.08)
+  .fromTo(to.querySelector('.story-photo img'),{xPercent:direction*3,scale:1.055},{xPercent:0,scale:1,duration:1.22,ease:'power3.out',clearProps:'all'},.08)
+  .fromTo(to.querySelectorAll('.story-copy>*'),{x:direction*22,y:12,opacity:0},{x:0,y:0,opacity:1,duration:.72,stagger:.05,ease:'power3.out',clearProps:'all'},.24);
 }
 tabs.forEach((b,i)=>b.onclick=()=>go(i));document.querySelector('#story-next').onclick=()=>go((requested??destination??current)+1);document.querySelector('#story-prev').onclick=()=>go((requested??destination??current)-1);
 stage.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();go((requested??destination??current)+(e.key==='ArrowRight'?1:-1))}});
