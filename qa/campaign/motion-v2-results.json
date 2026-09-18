@@ -1,0 +1,30 @@
+[
+  {
+    "width": 1440,
+    "height": 1000,
+    "reduced": false,
+    "mp4Requests": 1,
+    "passed": true
+  },
+  {
+    "width": 768,
+    "height": 900,
+    "reduced": false,
+    "mp4Requests": 1,
+    "passed": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "reduced": false,
+    "mp4Requests": 0,
+    "passed": true
+  },
+  {
+    "width": 320,
+    "height": 760,
+    "reduced": true,
+    "mp4Requests": 0,
+    "passed": true
+  }
+]

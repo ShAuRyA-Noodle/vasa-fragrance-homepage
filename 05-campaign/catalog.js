@@ -1,0 +1,10 @@
+// Source: Orignal/PERFUME NOTES AND DISCRIPTION FOR TEAM .pdf.
+// Prices and commerce variant IDs must come from the merchant, never from generated copy.
+export const catalog = [
+ {id:'silent-storm',name:'Silent Storm',family:'Fresh · Spicy · Woody',color:'#8faab5',image:'silent-storm',world:'world-silent-storm',line:'A memory that stayed.',description:'Bright bergamot and pepper. Aromatic lavender. A composed trail of cedar and labdanum.',notes:[['Opening','Bergamot, pepper'],['Heart','Sichuan pepper, lavender, pink pepper, vetiver, patchouli, geranium, elemi'],['Base','Cedar, labdanum']]},
+ {id:'sweetest-stranger',name:'Sweetest Stranger',family:'Fruity · Floral · Soft',color:'#c99593',image:'sweetest-stranger',world:'world-sweetest-stranger',line:'Some encounters stay.',description:'Pear blossom and mandarin open into white gardenia and jasmine, softened by brown sugar and patchouli.',notes:[['Opening','Pear blossom, Italian mandarin, red berries'],['Heart','White gardenia, jasmine, frangipani'],['Base','Patchouli, brown sugar']]},
+ {id:'rebel-in-velvet',name:'Rebel in Velvet',family:'Amber · Floral · Creamy',color:'#77556e',image:'rebel-in-velvet',world:'world-rebel-in-velvet',line:'Softness has a bold side.',description:'Creamy almond meets tuberose and Bulgarian rose. Tonka bean and cocoa bring a warm, velvety finish.',notes:[['Opening','Almond'],['Heart','Tuberose, jasmine sambac, Bulgarian rose'],['Base','Tonka bean, cocoa']]},
+ {id:'the-night-lingers',name:'The Night Lingers',family:'Amber · Woody · Smoky',color:'#9f7044',image:'the-night-lingers',world:'world-the-night-lingers',line:'The warmth that stays.',description:'Oud and rose, softened by benzoin. Saffron, raspberry and incense leave a dark, intimate impression.',notes:[['Opening','Oud wood'],['Heart','Benzoin, rose'],['Base','Saffron, raspberry, incense']]}
+].map(p=>({...p,volumeMl:50,priceMinor:null,currency:'INR',variantId:null,concentration:null}));
+export const productById=id=>catalog.find(p=>p.id===id);
+export const photo=p=>`/media/campaign/${p.image}.webp`;
