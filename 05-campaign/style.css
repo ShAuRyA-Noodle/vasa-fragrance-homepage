@@ -327,8 +327,8 @@ body{font-size:16px;line-height:1.72}
 .campaign-copy>p:not(.kicker),.gift-copy>p:not(.kicker){font-size:17px}.craft-principles p{font-size:15px}.product-info h3{font-size:20px}.product-info>p,.product-meta,.product-meta>span:last-child{font-size:12px}
 
 .hero-media{background:radial-gradient(circle at 66% 42%,#3b0d13 0%,#18080b 38%,#050505 78%)}
-.hero-media:after{background:linear-gradient(90deg,rgba(3,3,3,.84) 0%,rgba(12,5,7,.56) 40%,rgba(54,6,13,.2) 70%,rgba(2,2,2,.5) 100%),linear-gradient(180deg,rgba(0,0,0,.08),rgba(20,0,5,.3) 62%,rgba(0,0,0,.68));backdrop-filter:blur(.45px);-webkit-backdrop-filter:blur(.45px)}
-.hero-media>video,.hero-media>.hero-poster{background:transparent;filter:saturate(1.14) contrast(1.08) brightness(.78)}
+.hero-media:after{display:none;background:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.hero-media>video,.hero-media>.hero-poster{background:transparent;filter:none}
 .hero-copy>p:not(.kicker){font-size:16px;color:#eee6dc}
 .hero-copy>.button.light{background:#f5f0e8;color:#090909;border:1px solid #f5f0e8;box-shadow:0 14px 38px rgba(0,0,0,.28)}
 .hero-copy>.button.light:before,.hero-copy>.button.light:after{display:none}
