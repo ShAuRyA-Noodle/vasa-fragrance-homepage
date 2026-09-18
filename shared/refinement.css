@@ -1,0 +1,8 @@
+/* Full-frame photography is an invariant across every viewport. */
+img{object-fit:contain!important;clip-path:none!important;border-radius:0!important}
+.motion-word{display:inline-block;perspective:500px}.motion-char{display:inline-block;backface-visibility:hidden}
+.reading-progress{position:fixed;inset:0 auto auto 0;width:100%;height:2px;background:currentColor;z-index:50;transform-origin:left;pointer-events:none}
+button,a,summary{touch-action:manipulation}
+html.lenis{scroll-behavior:auto!important}dialog{overscroll-behavior:contain}
+.skip{clip-path:inset(100%);pointer-events:none}.skip:focus{clip-path:none;pointer-events:auto;top:10px}
+@media(prefers-reduced-motion:reduce){.reading-progress{display:none}.motion-word,.motion-char{transform:none!important;opacity:1!important}}
