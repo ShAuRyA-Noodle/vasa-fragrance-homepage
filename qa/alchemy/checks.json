@@ -1,0 +1,157 @@
+[
+  {
+    "width": 1440,
+    "errors": [],
+    "badResponses": [],
+    "renderer": "webgl",
+    "scrollProgress": 0.571,
+    "images": [
+      {
+        "src": "/media/editorial/journal-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-pair.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-craft.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "brokenAnchors": [],
+    "passed": true
+  },
+  {
+    "width": 768,
+    "errors": [],
+    "badResponses": [],
+    "renderer": "webgl",
+    "scrollProgress": 0.571,
+    "images": [
+      {
+        "src": "/media/editorial/journal-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-pair.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-craft.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "brokenAnchors": [],
+    "passed": true
+  },
+  {
+    "width": 390,
+    "errors": [],
+    "badResponses": [],
+    "renderer": "webgl",
+    "scrollProgress": 0.856,
+    "images": [
+      {
+        "src": "/media/editorial/journal-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-pair.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-craft.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "brokenAnchors": [],
+    "passed": true
+  },
+  {
+    "width": 320,
+    "reduced": true,
+    "errors": [],
+    "badResponses": [],
+    "renderer": "webgl",
+    "images": [
+      {
+        "src": "/media/editorial/journal-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-pair.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-craft.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "brokenAnchors": [],
+    "passed": true
+  },
+  {
+    "width": 390,
+    "noWebGL": true,
+    "errors": [],
+    "badResponses": [],
+    "renderer": "fallback",
+    "images": [
+      {
+        "src": "/media/editorial/journal-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-pair.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-craft.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "brokenAnchors": [],
+    "passed": true
+  }
+]

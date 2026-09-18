@@ -1,3 +1,3 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'node:path';
-export default defineConfig({build:{rollupOptions:{input:{index:resolve(import.meta.dirname,'index.html'),maison:resolve(import.meta.dirname,'01-maison/index.html'),nocturne:resolve(import.meta.dirname,'02-nocturne/index.html'),journal:resolve(import.meta.dirname,'03-journal/index.html')}}}});
+export default defineConfig({build:{rollupOptions:{input:{index:resolve(import.meta.dirname,'index.html'),preserved:resolve(import.meta.dirname,'00-preserved/index.html'),maison:resolve(import.meta.dirname,'01-maison/index.html'),nocturne:resolve(import.meta.dirname,'02-nocturne/index.html'),journal:resolve(import.meta.dirname,'03-journal/index.html'),alchemy:resolve(import.meta.dirname,'04-alchemy/index.html')}}}});
