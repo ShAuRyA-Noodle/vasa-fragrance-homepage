@@ -1,0 +1,47 @@
+[
+  {
+    "route": "03-journal",
+    "width": 320,
+    "reduced": "reduce",
+    "errors": [],
+    "images": [
+      {
+        "src": "/media/editorial/journal-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-storm.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-storm.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-stranger.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "brokenAnchors": [],
+    "passed": true
+  }
+]

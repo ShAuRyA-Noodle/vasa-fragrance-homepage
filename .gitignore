@@ -1,5 +1,6 @@
 node_modules/
 dist/
 .DS_Store
-reference-library/gsap-source/.git/
+reference-library/gsap-source/
+reference-library/react-bits/
 .vercel

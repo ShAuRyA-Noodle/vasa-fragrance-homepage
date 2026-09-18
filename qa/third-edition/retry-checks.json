@@ -1,0 +1,52 @@
+[
+  {
+    "route": "02-nocturne",
+    "width": 1440,
+    "reduced": "no-preference",
+    "errors": [],
+    "images": [
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-silent.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-stranger.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-ritual.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "brokenAnchors": [],
+    "passed": true
+  }
+]

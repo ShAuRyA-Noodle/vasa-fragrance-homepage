@@ -1,0 +1,18 @@
+{
+  "maison": {
+    "colorBefore": "rgba(229,229,214,1)",
+    "colorAfter": "#d5bcae"
+  },
+  "nocturne": {
+    "transformBefore": "matrix(1, 0, 0, 1, 0, -18)",
+    "transformAfter": "matrix(1, 0, 0, 1, 0, 0)"
+  },
+  "journal": {
+    "scrollDrivenSlides": [
+      "Silent Storm",
+      "The Night Lingers",
+      "The Sweetest Stranger",
+      "Rebel in Velvet"
+    ]
+  }
+}

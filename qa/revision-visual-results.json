@@ -1,0 +1,56 @@
+[
+  {
+    "route": "01-maison",
+    "w": 1440,
+    "errors": [],
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "broken": [],
+    "cropped": []
+  },
+  {
+    "route": "01-maison",
+    "w": 390,
+    "errors": [],
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "broken": [],
+    "cropped": []
+  },
+  {
+    "route": "02-nocturne",
+    "w": 1440,
+    "errors": [],
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "broken": [],
+    "cropped": []
+  },
+  {
+    "route": "02-nocturne",
+    "w": 390,
+    "errors": [],
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "broken": [],
+    "cropped": []
+  },
+  {
+    "route": "03-journal",
+    "w": 1440,
+    "errors": [],
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "broken": [],
+    "cropped": []
+  },
+  {
+    "route": "03-journal",
+    "w": 390,
+    "errors": [],
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "broken": [],
+    "cropped": []
+  }
+]

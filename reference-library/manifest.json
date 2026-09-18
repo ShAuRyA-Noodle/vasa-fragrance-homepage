@@ -1,0 +1,32 @@
+[
+  {
+    "url": "https://gsap.com/",
+    "file": "gsap-home.html",
+    "bytes": 338247
+  },
+  {
+    "url": "https://gsap.com/core/",
+    "file": "gsap-core.html",
+    "bytes": 608804
+  },
+  {
+    "url": "https://gsap.com/scroll/",
+    "file": "gsap-scroll.html",
+    "bytes": 267079
+  },
+  {
+    "url": "https://gsap.com/svg/",
+    "file": "gsap-svg.html",
+    "bytes": 232320
+  },
+  {
+    "url": "https://gsap.com/ui/",
+    "file": "gsap-ui.html",
+    "bytes": 247408
+  },
+  {
+    "url": "https://gsap.com/text/",
+    "file": "gsap-text.html",
+    "bytes": 249099
+  }
+]

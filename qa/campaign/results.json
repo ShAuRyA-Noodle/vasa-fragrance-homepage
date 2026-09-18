@@ -1,0 +1,194 @@
+[
+  {
+    "width": 1440,
+    "errors": [],
+    "bad": [],
+    "images": [
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/hero-red-himalayan-poster.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/silent-storm.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/silent-storm.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/sweetest-stranger.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/rebel-in-velvet.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/the-night-lingers.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/portrait-red-himalayan.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/logo-gold.svg"
+      }
+    ],
+    "passed": true
+  },
+  {
+    "width": 768,
+    "errors": [],
+    "bad": [],
+    "images": [
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/hero-red-himalayan-poster.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/silent-storm.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/silent-storm.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/sweetest-stranger.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/rebel-in-velvet.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/the-night-lingers.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/portrait-red-himalayan.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/logo-gold.svg"
+      }
+    ],
+    "passed": true
+  },
+  {
+    "width": 390,
+    "errors": [],
+    "bad": [],
+    "images": [
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/hero-red-himalayan-poster.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/silent-storm.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/silent-storm.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/sweetest-stranger.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/rebel-in-velvet.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/the-night-lingers.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/portrait-red-himalayan.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/logo-gold.svg"
+      }
+    ],
+    "passed": true
+  },
+  {
+    "width": 320,
+    "errors": [],
+    "bad": [],
+    "images": [
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/hero-red-himalayan-poster.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/silent-storm.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/silent-storm.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/sweetest-stranger.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/rebel-in-velvet.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/the-night-lingers.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/portrait-red-himalayan.webp"
+      },
+      {
+        "loaded": true,
+        "fit": "contain",
+        "src": "/media/campaign/logo-gold.svg"
+      }
+    ],
+    "passed": true
+  }
+]

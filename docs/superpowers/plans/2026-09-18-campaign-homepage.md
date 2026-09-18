@@ -1,0 +1,12 @@
+# VASA campaign homepage implementation plan
+
+Goal: replace the main homepage with the approved campaign/shop flow, actual brand artwork and new imagery; preserve all existing routes. Build the homepage and a local cart, leaving payment and account services unconnected until merchant data is supplied.
+
+Architecture: independent vanilla Vite entry in 05-campaign, promoted to root. GSAP owns transitions; Lenis owns desktop wheel smoothing. Product data and local cart are separate modules. Original source and previous routes stay intact.
+
+1. Inspect original PDF logo guide, vector logo art, fragrance notes, brand meaning, and bottle drawing. Extract original vector branding; preserve source PDFs. Brand colours: Leather #11100f, Musk #efe9e1, Silk #4a1a2a, Saffron #a67d45. Use available licensed sans font until supplied Forma DJR webfont is available.
+2. Generate fresh independent hero reference frames (glass/liquid, blotter/workbench), original bottle packshot reference grounded in dimensions, and model campaign. Save outputs and exact prompts in 11-campaign-assets; provide originals for Seedance. No rejected imagery in new entry. Hero uses a clearly documented poster until user supplies the finished film; no invented video.
+3. Build 05-campaign/index.html, style.css, catalog.js, main.js, cart.js. Navbar ordered Collection / Gifting / logo / Art Story / Contact / search / cart / profile. Homepage: film-ready hero, GSAP one-frame four-scent slideshow, four-product shop grid, model/story, gifting/online exclusive area without invented offer, footer. Original logo is centred. White/black contrast, restrained sans typography, no giant serif headings or long pin sections.
+4. Catalog uses supplied notes and 50ml drawing; prices remain null until supplied. Add-to-bag and quantity/removal persist locally. No fabricated totals, checkout, account sign-in, discounts, contact addresses, social links or exclusive offers. Drawers explain unavailable service honestly.
+5. Build keyboard-accessible dialogs, search, mobile menu, carousel arrows/swipe/pause; reduced motion and video poster fallback. Isolate all new CSS/JS from original entries. Test cart persistence/removal, invalid stored data, carousel rapid input, navigation, dialogs, search, 320/390/768/1440 layouts, reduced motion, missing media and original-route preservation.
+6. Inspect desktop/mobile screenshots; production build; commit and publish exact source to existing private Site. Deliver new homepage and Seedance image references, including pending price/video/commerce details.

@@ -1,0 +1,194 @@
+[
+  {
+    "route": "01-maison",
+    "width": 1440,
+    "motion": "no-preference",
+    "passed": true,
+    "checks": [
+      "images",
+      "no-overflow",
+      "fragrance-selection",
+      "dialog-content",
+      "focus-containment",
+      "escape",
+      "accordions",
+      "no-errors"
+    ]
+  },
+  {
+    "route": "01-maison",
+    "width": 390,
+    "motion": "no-preference",
+    "passed": true,
+    "checks": [
+      "images",
+      "no-overflow",
+      "fragrance-selection",
+      "dialog-content",
+      "focus-containment",
+      "escape",
+      "accordions",
+      "no-errors"
+    ]
+  },
+  {
+    "route": "01-maison",
+    "width": 768,
+    "motion": "reduce",
+    "passed": true,
+    "checks": [
+      "images",
+      "no-overflow",
+      "fragrance-selection",
+      "dialog-content",
+      "focus-containment",
+      "escape",
+      "accordions",
+      "no-errors"
+    ]
+  },
+  {
+    "route": "01-maison",
+    "width": 390,
+    "motion": "reduce",
+    "passed": true,
+    "checks": [
+      "images",
+      "no-overflow",
+      "fragrance-selection",
+      "dialog-content",
+      "focus-containment",
+      "escape",
+      "accordions",
+      "no-errors"
+    ]
+  },
+  {
+    "route": "02-nocturne",
+    "width": 1440,
+    "motion": "no-preference",
+    "passed": true,
+    "checks": [
+      "images",
+      "no-overflow",
+      "fragrance-selection",
+      "dialog-content",
+      "focus-containment",
+      "escape",
+      "accordions",
+      "no-errors"
+    ]
+  },
+  {
+    "route": "02-nocturne",
+    "width": 390,
+    "motion": "no-preference",
+    "passed": true,
+    "checks": [
+      "images",
+      "no-overflow",
+      "fragrance-selection",
+      "dialog-content",
+      "focus-containment",
+      "escape",
+      "accordions",
+      "no-errors"
+    ]
+  },
+  {
+    "route": "02-nocturne",
+    "width": 768,
+    "motion": "reduce",
+    "passed": true,
+    "checks": [
+      "images",
+      "no-overflow",
+      "fragrance-selection",
+      "dialog-content",
+      "focus-containment",
+      "escape",
+      "accordions",
+      "no-errors"
+    ]
+  },
+  {
+    "route": "02-nocturne",
+    "width": 390,
+    "motion": "reduce",
+    "passed": true,
+    "checks": [
+      "images",
+      "no-overflow",
+      "fragrance-selection",
+      "dialog-content",
+      "focus-containment",
+      "escape",
+      "accordions",
+      "no-errors"
+    ]
+  },
+  {
+    "route": "03-journal",
+    "width": 1440,
+    "motion": "no-preference",
+    "passed": true,
+    "checks": [
+      "images",
+      "no-overflow",
+      "fragrance-selection",
+      "dialog-content",
+      "focus-containment",
+      "escape",
+      "accordions",
+      "no-errors"
+    ]
+  },
+  {
+    "route": "03-journal",
+    "width": 390,
+    "motion": "no-preference",
+    "passed": true,
+    "checks": [
+      "images",
+      "no-overflow",
+      "fragrance-selection",
+      "dialog-content",
+      "focus-containment",
+      "escape",
+      "accordions",
+      "no-errors"
+    ]
+  },
+  {
+    "route": "03-journal",
+    "width": 768,
+    "motion": "reduce",
+    "passed": true,
+    "checks": [
+      "images",
+      "no-overflow",
+      "fragrance-selection",
+      "dialog-content",
+      "focus-containment",
+      "escape",
+      "accordions",
+      "no-errors"
+    ]
+  },
+  {
+    "route": "03-journal",
+    "width": 390,
+    "motion": "reduce",
+    "passed": true,
+    "checks": [
+      "images",
+      "no-overflow",
+      "fragrance-selection",
+      "dialog-content",
+      "focus-containment",
+      "escape",
+      "accordions",
+      "no-errors"
+    ]
+  }
+]

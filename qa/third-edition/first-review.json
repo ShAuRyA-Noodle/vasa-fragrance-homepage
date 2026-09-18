@@ -1,0 +1,246 @@
+[
+  {
+    "route": "01-maison",
+    "width": 1440,
+    "errors": [],
+    "overflow": 0,
+    "images": [
+      {
+        "src": "/media/editorial/maison-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-detail.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-pair.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-craft.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "height": 6538
+  },
+  {
+    "route": "02-nocturne",
+    "width": 1440,
+    "errors": [],
+    "overflow": 0,
+    "images": [
+      {
+        "src": "/media/hero-four-fragrances.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/hero-silent-storm.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/hero-the-night-lingers.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/hero-the-sweetest-stranger.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/hero-rebel-in-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/collection-the-night-lingers.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/collection-rebel-in-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/ritual.webp",
+        "loaded": false,
+        "fit": "contain"
+      }
+    ],
+    "height": 6004
+  },
+  {
+    "route": "03-journal",
+    "width": 1440,
+    "errors": [],
+    "overflow": 0,
+    "images": [
+      {
+        "src": "/media/editorial/journal-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-storm.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-storm.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-stranger.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "height": 5131
+  },
+  {
+    "route": "01-maison",
+    "width": 390,
+    "errors": [],
+    "overflow": 0,
+    "images": [
+      {
+        "src": "/media/editorial/maison-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-detail.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-pair.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-craft.webp",
+        "loaded": false,
+        "fit": "contain"
+      }
+    ],
+    "height": 5914
+  },
+  {
+    "route": "02-nocturne",
+    "width": 390,
+    "errors": [],
+    "overflow": 0,
+    "images": [
+      {
+        "src": "/media/hero-four-fragrances.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/hero-silent-storm.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/hero-the-night-lingers.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/hero-the-sweetest-stranger.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/hero-rebel-in-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/collection-the-night-lingers.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/collection-rebel-in-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/ritual.webp",
+        "loaded": false,
+        "fit": "contain"
+      }
+    ],
+    "height": 5456
+  },
+  {
+    "route": "03-journal",
+    "width": 390,
+    "errors": [],
+    "overflow": 0,
+    "images": [
+      {
+        "src": "/media/editorial/journal-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-storm.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-storm.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-stranger.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "height": 4945
+  }
+]
