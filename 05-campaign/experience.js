@@ -11,21 +11,18 @@ function headingReveals(){
 
 function cardEntrances(){
  const cards=gsap.utils.toArray('.product-card');
- gsap.from(cards,{y:index=>index%2?120:70,rotate:index=>index%2?1.2:-1.2,duration:1.25,stagger:.12,ease:'power4.out',scrollTrigger:{trigger:'.product-grid',start:'top 84%',once:true}});
+ gsap.from(cards,{y:68,duration:1.05,stagger:.08,ease:'power4.out',scrollTrigger:{trigger:'.product-grid',start:'top 84%',once:true}});
  cards.forEach(card=>{
   const world=card.querySelector('.product-world');
   gsap.fromTo(world,{scale:1.22},{scale:1.04,ease:'none',scrollTrigger:{trigger:card,start:'top bottom',end:'bottom top',scrub:1.2}});
   if(!pointerFine.matches)return;
-  const bottle=card.querySelector('.product-bottle');
   const worldX=gsap.quickTo(world,'x',{duration:.7,ease:'power3.out'});
   const worldY=gsap.quickTo(world,'y',{duration:.7,ease:'power3.out'});
-  const bottleX=gsap.quickTo(bottle,'x',{duration:.55,ease:'power3.out'});
-  const bottleY=gsap.quickTo(bottle,'y',{duration:.55,ease:'power3.out'});
   card.addEventListener('pointermove',event=>{
    const box=card.getBoundingClientRect(),x=(event.clientX-box.left)/box.width-.5,y=(event.clientY-box.top)/box.height-.5;
-   worldX(x*-18);worldY(y*-18);bottleX(x*13);bottleY(y*10);
+   worldX(x*-12);worldY(y*-12);
   });
-  card.addEventListener('pointerleave',()=>{worldX(0);worldY(0);bottleX(0);bottleY(0)});
+  card.addEventListener('pointerleave',()=>{worldX(0);worldY(0)});
  });
 }
 
@@ -42,9 +39,9 @@ function pinnedPrinciples(){
  const mm=gsap.matchMedia();
  mm.add('(min-width: 901px)',()=>{
   const items=gsap.utils.toArray('.craft-strip>div');
-  gsap.set(items,{opacity:.26,y:24});
+  gsap.set(items,{opacity:.62,y:16});
   const tl=gsap.timeline({scrollTrigger:{trigger:'.craft-strip',start:'center center',end:'+=520',pin:true,scrub:1,anticipatePin:1}});
-  items.forEach((item,index)=>tl.to(item,{opacity:1,y:0,duration:1,ease:'power2.out'},index*.7).to(item,{opacity:index===items.length-1?1:.38,y:index===items.length-1?0:-12,duration:.7,ease:'power2.inOut'},index*.7+.7));
+  items.forEach((item,index)=>tl.to(item,{opacity:1,y:0,duration:1,ease:'power2.out'},index*.7).to(item,{opacity:index===items.length-1?1:.62,y:index===items.length-1?0:-8,duration:.7,ease:'power2.inOut'},index*.7+.7));
   return()=>tl.scrollTrigger?.kill();
  });
 }
