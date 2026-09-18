@@ -107,3 +107,61 @@ html,body{max-width:100%;overflow-x:clip}body{background:var(--porcelain)}
 @media(max-width:1100px) and (min-width:761px){.site-header nav{grid-template-columns:1fr 175px 1fr}.brand{width:175px;min-width:175px}.nav-left>a,.nav-right>a,.text-button{font-size:12px}.kicker{font-size:11px}.product-info h3{font-size:17px}.product-info>p{font-size:11px}}
 @media(max-width:760px){.site-header nav{height:76px}.brand{width:118px;min-width:118px;height:55px;min-height:55px}.brand-mark{width:39px;height:48px}.brand .brand-mark img{width:38px;height:46px}.brand-name,.brand-stroke{display:none}.brand:hover .brand-mark,.brand:focus-visible .brand-mark{left:50%;transform:translate(-50%,-50%)}.scent-rail{height:45px}.scent-rail span{font-size:9px}.kicker{font-size:10px}.product-image .product-world{clip-path:inset(0);opacity:1;filter:saturate(.78) contrast(1.05) brightness(.8)}.product-wash{opacity:.64;background:linear-gradient(180deg,rgba(12,10,8,.1),rgba(12,10,8,.06) 42%,rgba(12,10,8,.72))}.product-world-label{opacity:1;transform:none;font-size:7px;bottom:10px;left:10px;right:10px}.product-index{font-size:34px;right:8px}.product-label{font-size:7px;left:10px;top:10px}.product-image .product-bottle{padding:9px;opacity:.76;transform:scale(.88)}.product-info h3{min-height:42px;font-size:15px}.product-info>p{min-height:34px;font-size:10px}.product-meta,.product-meta>span:last-child{font-size:9px}.craft-strip{min-height:0}.craft-strip>div{padding:17px 0 17px 42px}.craft-strip span{left:8px;top:22px}.craft-strip h3{font-size:21px}.craft-strip p{font-size:12px}.gift-orbit{width:90%}#scent-cursor{display:none}}
 @media(prefers-reduced-motion:reduce){.scent-rail-track,.gift-orbit{animation:none}.product-world,.product-bottle,.product-card{transition:none!important}#scent-cursor{display:none}}
+
+/* Brand-kit refinement: ivory, neutral black and antique gold. */
+:root{--ink:#121212;--paper:#fff;--musk:#f4f2ee;--carbon:#121212;--porcelain:#f8f7f4;--antique-gold:#9b7b45;--line:#d9d6d0}
+body{background:#fff}
+
+/* Shared award-style navigation treatment, including the Contact button. */
+.nav-left>a,.nav-right>a,.contact-nav{position:relative;transition:color .35s var(--ease-out),transform .45s var(--ease-out),letter-spacing .45s var(--ease-out)}
+.nav-left>a:after,.nav-right>a:after,.contact-nav:after{content:'';position:absolute;right:0;bottom:3px;left:0;height:1px;background:var(--antique-gold);transform:scaleX(0);transform-origin:right;transition:transform .55s var(--ease-out)}
+.nav-left>a:is(:hover,:focus-visible),.nav-right>a:is(:hover,:focus-visible),.contact-nav:is(:hover,:focus-visible){color:#7e6335;transform:translateY(-2px);letter-spacing:.025em}
+.nav-left>a:is(:hover,:focus-visible):after,.nav-right>a:is(:hover,:focus-visible):after,.contact-nav:is(:hover,:focus-visible):after{transform:scaleX(1);transform-origin:left}
+
+/* A restrained grade lets the campaign film carry colour without losing type. */
+.hero-media:after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(10,8,7,.7) 0%,rgba(10,8,7,.38) 38%,transparent 70%),linear-gradient(180deg,rgba(10,8,7,.04),rgba(8,8,8,.34))}
+.hero-media>img,.hero-media>video{filter:saturate(1.06) contrast(1.04) brightness(.92)}
+.hero-copy,.hero-foot{z-index:2}.hero-copy .kicker{color:#d5b06d;text-shadow:0 1px 16px rgba(0,0,0,.32)}
+.hero h1{color:#f8f1e8;text-shadow:0 3px 24px rgba(0,0,0,.22)}.hero h1 em{color:#e0b679;font-style:normal}
+.hero-copy>p:not(.kicker){color:rgba(248,241,232,.88)}
+.hero-foot{right:auto;color:rgba(248,241,232,.76)}
+
+/* The fragrance story remains one composed frame throughout its transition. */
+#story-slides{position:relative}.story-stage{background:#151515}.story-stage:after{background:linear-gradient(100deg,transparent 42%,rgba(255,255,255,.025) 72%,transparent)}
+.story-navigation{border-color:rgba(255,255,255,.2);background:rgba(18,18,18,.52)}
+.story-tabs{display:flex;flex:1;gap:7px}.story-tab{flex:1;width:auto;height:22px}.story-tab:before{height:1px;background:rgba(255,255,255,.28)}.story-tab[aria-pressed=true]:before{background:rgba(255,255,255,.28)}.story-tab:after{content:'';position:absolute;left:0;right:0;top:50%;height:2px;background:#fff;transform:scaleX(var(--fill,0));transform-origin:left center}
+
+/* Scenery at rest; a clean studio product reveal on interaction. */
+.shop{background:linear-gradient(180deg,#faf9f6 0%,#f3f2ee 100%)}
+.product-image{background:linear-gradient(145deg,color-mix(in srgb,var(--scent) 10%,#f5f3ef),#eeece7)}
+.product-image .product-world{opacity:1;transition:opacity .72s ease,filter .8s ease,transform 1.2s var(--ease-out)}
+.product-wash{transition:opacity .65s ease}
+.product-world-label{font-size:10px;font-weight:600;letter-spacing:.12em}
+.product-image:hover .product-world,.product-image:focus-visible .product-world{opacity:0;filter:saturate(.8) brightness(1)}
+.product-image:hover .product-wash,.product-image:focus-visible .product-wash{opacity:0}
+.product-image:hover .product-world-label,.product-image:focus-visible .product-world-label{opacity:0;transform:translateY(8px)}
+.product-image:hover .product-bottle,.product-image:focus-visible .product-bottle{opacity:1;mix-blend-mode:multiply;transform:translateY(0) scale(.96);filter:drop-shadow(0 30px 28px rgba(0,0,0,.18))}
+
+/* Editorial story and principles use one uninterrupted neutral palette. */
+.campaign{grid-template-columns:minmax(0,1.1fr) minmax(420px,.9fr);margin:0;background:#f4f2ee;min-height:640px}
+.campaign-photo{min-height:640px;background:#efede8}.campaign-photo img{width:100%;height:100%;object-fit:cover;object-position:center}
+.campaign-copy{padding:clamp(64px,7vw,118px)}.campaign-copy h2{font-size:clamp(46px,4.2vw,68px)}.campaign-copy>p:not(.kicker){font-size:15px;max-width:48ch}
+.craft-strip{display:grid;grid-template-columns:minmax(260px,.72fr) minmax(0,1.28fr);gap:clamp(40px,6vw,100px);min-height:0;padding:clamp(72px,8vw,118px) 6vw;background:#fff;color:var(--ink);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.craft-intro .kicker{color:#78684f}.craft-intro h2{font-size:clamp(42px,4.2vw,66px);line-height:1;letter-spacing:-.055em;margin-top:18px}
+.craft-principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+.craft-principles>div{position:relative;padding:12px 26px 18px;border-left:1px solid rgba(18,18,18,.16)}
+.craft-principles span{position:static;display:block;margin-bottom:48px;color:#8a7046;font-size:11px}.craft-principles h3{font-size:23px;margin-bottom:12px}.craft-principles p{font-size:13px;line-height:1.75;color:#625e58;max-width:26ch}
+
+/* Gifting is larger and its actions share an exact left edge. */
+.gifting.section{grid-template-columns:minmax(0,1.08fr) minmax(420px,.92fr);margin:clamp(58px,6vw,92px) 4vw;padding:0;background:#fff}
+.gift-art,.gift-copy{min-height:clamp(500px,42vw,650px)}
+.gift-art{padding:clamp(52px,6vw,92px);border-color:#171717;background:radial-gradient(circle at center,#24211d 0%,#111 68%);outline-color:rgba(155,123,69,.64)}
+.gift-art>img{width:min(82%,410px);max-width:none}.gift-art>span{font-size:9px;color:#c4aa7b}
+.gift-orbit{animation:none;border-color:rgba(155,123,69,.34)}
+.gift-copy{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:clamp(58px,7vw,112px);background:#f5f3ef}
+.gift-copy h2{font-size:clamp(48px,4.5vw,70px);line-height:1.02;margin:22px 0 28px}.gift-copy>p:not(.kicker){font-size:16px;line-height:1.75;max-width:42ch;margin:0}
+.gift-actions{display:grid;justify-items:start;gap:18px;margin-top:36px}.gift-actions>.button,.gift-actions>.exclusive-link{justify-self:start;margin:0;transform:none}.gift-actions>.button{min-width:310px}.exclusive-link{display:inline-flex;width:auto}
+footer{background:#111;color:#f4f2ee}.footer-main h2{font-size:12px}.footer-main>div>a,.footer-main>div>button:not(.text-link),.footer-social>p{font-size:12px}
+
+@media(max-width:900px){.campaign{grid-template-columns:1fr;min-height:0}.campaign-photo{min-height:0;aspect-ratio:16/10}.craft-strip{grid-template-columns:1fr}.craft-principles{grid-template-columns:repeat(3,1fr)}.gifting.section{grid-template-columns:1fr;margin:70px 4vw}.gift-art,.gift-copy{min-height:0}.gift-art{min-height:430px}}
+@media(max-width:760px){.hero-media:after{background:linear-gradient(180deg,transparent 45%,rgba(12,10,8,.65))}.hero-copy{background:#111}.hero h1 em{color:#d6aa69}.hero-foot{display:none}.story-navigation{background:rgba(18,18,18,.58)}.product-image .product-world{opacity:1}.product-image .product-bottle{opacity:0;transform:scale(.82)}.campaign-photo{min-height:0;aspect-ratio:16/10}.campaign-copy{padding:50px 25px 58px}.campaign-copy h2{font-size:40px}.campaign-copy>p:not(.kicker){font-size:14px}.craft-strip{padding:58px 25px;gap:42px}.craft-intro h2{font-size:42px}.craft-principles{grid-template-columns:1fr}.craft-principles>div{padding:22px 0 22px 44px}.craft-principles span{position:absolute;left:8px;top:27px;margin:0}.craft-principles h3{font-size:22px}.craft-principles p{font-size:13px;max-width:none}.gifting.section{margin:58px 22px}.gift-art{min-height:320px;padding:44px}.gift-copy{padding:42px 28px 48px}.gift-copy h2{font-size:42px}.gift-copy>p:not(.kicker){font-size:14px}.gift-actions{width:100%;margin-top:30px}.gift-actions>.button{min-width:0;width:100%}.footer-main>div>a,.footer-main>div>button:not(.text-link),.footer-social>p{font-size:11px}}

@@ -1,0 +1,142 @@
+{
+  "project": "VASA fragrance collection — product reveal studio plates",
+  "version": "1.0",
+  "purpose": "Four separate luxury commercial-photography background plates for compositing supplied, real VASA bottle cutouts. Each plate is a 4:5 portrait and must reserve the same central product-safe zone; it is not a finished bottle image.",
+  "master_art_direction": {
+    "campaign_idea": "A quiet, modern Indian luxury fragrance campaign photographed as physical studio still life. The image is the moment just before the bottle is placed: material, light and air give each scent a precise emotional setting without becoming a scene or illustration.",
+    "visual_language": "High-end beauty advertising photographed in a real studio with a restrained set build. Tactile materials, controlled tonal transitions, credible reflections and contact-shadow potential. The campaign should feel premium, contemporary and editorial, with the discipline of a fragrance house rather than a decorative lifestyle brand.",
+    "shared_set_system": "Use one vertical tabletop-to-backdrop cyclorama construction, viewed near eye level. The product position remains identical in every frame. Distinction comes only from the backdrop finish, surface material, palette and light character. Keep every set physically plausible and sparse.",
+    "product_compositing_rule": "Do not generate any perfume bottle, cap, box, label, logo, typography, lettering, symbol or packaging. The supplied real bottle cutout will be composited later. Leave the central product-safe zone clear, evenly usable and free from props, seams, high-contrast reflections, cast shadows, haze and hard texture crossings.",
+    "safe_zone": {
+      "coordinate_system": "Percentages of the final 4:5 frame; x runs left to right and y runs top to bottom.",
+      "primary_bottle_bounds": "x: 31–69%, y: 17–84%",
+      "base_contact_area": "x: 36–64%, y: 78–88%; retain a quiet, physically plausible tabletop plane here so a natural bottle contact shadow can be added in post.",
+      "copy_margin": "Keep the upper 10% and outer 8% of the frame calm enough for optional responsive cropping; no baked text anywhere."
+    },
+    "consistent_capture": {
+      "camera": "100 MP medium-format digital camera on tripod, portrait orientation, ISO 100, tethered studio capture",
+      "lens_and_view": "80 mm equivalent lens, camera level with a slight 5–8 degree downward angle, f/8 to f/11; 1/125 s flash sync",
+      "finish": "Natural, neutral commercial retouching; realistic micro-contrast; restrained analogue-like grain only; no heavy vignette or filter",
+      "lighting_principle": "One dominant shaped key with controlled fill and flags. Light must describe real material and leave a believable grounding plane for the later bottle, never create a theatrical beam or fantasy atmosphere."
+    },
+    "non_negotiables": [
+      "Generate four separate images, never a collage, diptych, contact sheet, website mockup or mood board.",
+      "Every output is 4:5 portrait at 2400 × 3000 px or larger, with no crop into the product-safe zone.",
+      "No flowers, fruit, spices, ingredients, hands, people, animals, buildings, landscapes or scenery.",
+      "No floating objects, smoke, mist, flames, liquid splash, glitter, lens flare, excessive bokeh, surreal light, CGI geometry or ornamental pedestal.",
+      "No text, branding, watermarks, readable marks, invented packaging or AI-generated bottle forms."
+    ]
+  },
+  "images": [
+    {
+      "id": "silent-storm",
+      "fragrance": "Silent Storm",
+      "olfactive_direction": "Fresh, spicy, woody — bergamot, pepper, lavender, vetiver, cedar and labdanum.",
+      "palette": {
+        "backdrop": "cool blue-grey mineral plaster #8798A0",
+        "surface": "pale weathered limestone #B8B7AD",
+        "shadow": "smoky graphite #343D40",
+        "accent": "muted eucalyptus reflection #6E9290"
+      },
+      "material_direction": "A hand-finished cool mineral-plaster sweep meets a honed pale limestone tabletop at a soft horizontal curve. The finish is dry, matte and softly clouded, with only faint real plaster variation around the far edges.",
+      "prompt": "Premium fragrance campaign studio plate for VASA Silent Storm, photographed as real commercial still life before the product is placed. 4:5 portrait, 2400 by 3000 pixels or larger. A physical cool blue-grey mineral-plaster sweep meets a honed pale limestone tabletop through a soft seamless curve. The central vertical product-safe area is completely empty and calm: x 31–69%, y 17–84%; reserve x 36–64%, y 78–88% as a quiet, level base for a later bottle contact shadow. The visual mood is composed, fresh and quietly architectural: cool grey-blue, pale stone and a restrained eucalyptus cast only at the outer edges. Broad diffused key light from upper left through large silk, gentle negative fill from camera right, a faint low-intensity side reflection to reveal the limestone; soft short shadow direction designed to be completed in post. Photograph on a 100 MP medium-format camera, 80 mm equivalent lens, tripod, eye-level with a slight 5–8 degree downward angle, f/9, ISO 100, 1/125 second. Physical studio set, high-end beauty advertising, accurate material texture, neutral colour science, restrained analogue grain. No object is present; this is an intentionally blank compositing plate.",
+      "negative_prompt": "perfume bottle, bottle silhouette, cap, box, label, logo, letters, words, watermark, product packaging, person, hand, flower, fruit, spice, plant, landscape, window view, architecture, prop, tray, pedestal, rock, fabric pile, water, rain, smoke, fog, fire, liquid splash, floating object, glitter, lens flare, sunbeam, heavy vignette, bokeh, CGI, 3D render, fantasy scene, busy texture, hard seam, high contrast inside the product-safe zone",
+      "camera_lens_lighting": {
+        "camera": "100 MP medium-format digital, tethered, ISO 100",
+        "lens": "80 mm equivalent, f/9",
+        "lighting": "Large diffused softbox through silk at upper left; black flag on camera right; weak bounced fill from front; subtle edge reflection kept outside central safe zone."
+      },
+      "composition_constraints": [
+        "Keep the central safe zone free of visible plaster mottling, hard shadow, reflected shapes and surface edges.",
+        "The cyclorama curve must sit below y: 54% at the edges and remain visually quiet behind the product zone.",
+        "Any tonal variation must remain under 12% luminance contrast in the product-safe zone."
+      ]
+    },
+    {
+      "id": "sweetest-stranger",
+      "fragrance": "Sweetest Stranger",
+      "olfactive_direction": "Fruity, floral, soft — pear blossom, mandarin, red berries, gardenia, jasmine, frangipani, brown sugar and patchouli.",
+      "palette": {
+        "backdrop": "powdered rose clay #CDA6A0",
+        "surface": "warm ivory satin-matte lacquer #E7D9CA",
+        "shadow": "soft cocoa taupe #7C625A",
+        "accent": "subtle apricot bounce #D99B7D"
+      },
+      "material_direction": "A powdery rose-clay backdrop and warm ivory lacquer tabletop create a gentle, polished setting. The appeal is soft warmth and invitation, expressed through pigment, curved studio light and a barely perceptible satin sheen — never through literal flowers or fruit.",
+      "prompt": "Premium fragrance campaign studio plate for VASA Sweetest Stranger, photographed as real commercial still life before the product is placed. 4:5 portrait, 2400 by 3000 pixels or larger. A physical powder-rose clay backdrop transitions through a smooth studio curve into a warm ivory satin-matte lacquer tabletop. Leave the central vertical product-safe area completely empty and calm: x 31–69%, y 17–84%; reserve x 36–64%, y 78–88% as an unbroken, level base for a later bottle and contact shadow. The mood is soft, intimate and unexpectedly refined: powdered rose, ivory, low cocoa shadow and one restrained apricot reflected note at the far perimeter. Use a large frontal-right octabox with double diffusion, pale bounce fill from camera left and a narrow black flag to maintain gentle shape; no visible reflection source. Photograph on a 100 MP medium-format camera, 80 mm equivalent lens, tripod, eye-level with a slight 5–8 degree downward angle, f/10, ISO 100, 1/125 second. Real set construction, sophisticated beauty editorial, precise colour separation, natural lacquer sheen, restrained analogue grain. No object is present; this is an intentionally blank compositing plate.",
+      "negative_prompt": "perfume bottle, bottle silhouette, cap, box, label, logo, letters, words, watermark, product packaging, person, hand, flower, petal, bouquet, fruit, pear, citrus, berry, sugar, plant, landscape, room, prop, mirror, tray, pedestal, ribbon, drapery, water, smoke, fog, fire, liquid splash, floating object, glitter, lens flare, sunbeam, bokeh, CGI, 3D render, fantasy scene, glossy plastic, excessive pink, busy texture, hard seam, high contrast inside the product-safe zone",
+      "camera_lens_lighting": {
+        "camera": "100 MP medium-format digital, tethered, ISO 100",
+        "lens": "80 mm equivalent, f/10",
+        "lighting": "Double-diffused octabox from frontal right, large pale bounce at camera left, subtle black flag for contour, no direct specular hotspot in safe zone."
+      },
+      "composition_constraints": [
+        "Keep the product-safe zone more matte than the perimeter so the real glass cutout remains readable.",
+        "The rose and ivory transition must be a real sweep and not a gradient graphic; the curve is low and subtle.",
+        "No material fold, rim, reflection line or decorative element may enter x: 31–69%, y: 17–84%."
+      ]
+    },
+    {
+      "id": "rebel-in-velvet",
+      "fragrance": "Rebel in Velvet",
+      "olfactive_direction": "Amber, floral, creamy — almond, tuberose, jasmine sambac, Bulgarian rose, tonka bean and cocoa.",
+      "palette": {
+        "backdrop": "deep mulberry #51313F",
+        "surface": "oxidised aubergine lacquer #3C2935",
+        "shadow": "near-black plum #211923",
+        "accent": "dusty rose edge light #B17B8A"
+      },
+      "material_direction": "A deep mulberry velvet backdrop is stretched perfectly flat and kept only to the outer perimeter; it lands behind an oxidised aubergine lacquer tabletop. This hints at softness with a controlled edge, while the clear central zone stays flat enough for clean bottle compositing.",
+      "prompt": "Premium fragrance campaign studio plate for VASA Rebel in Velvet, photographed as real commercial still life before the product is placed. 4:5 portrait, 2400 by 3000 pixels or larger. A physical deep-mulberry velvet backdrop, stretched smooth with no folds, frames only the outer perimeter and transitions low into an oxidised aubergine lacquer tabletop. The central vertical product-safe area is completely empty and calm: x 31–69%, y 17–84%; reserve x 36–64%, y 78–88% as a flat, quiet base for a later bottle contact shadow. Create softness with restraint: deep mulberry, aubergine, near-black plum and a thin dusty-rose edge-light cue at the far outer edges. Use a narrow softened key from upper right, a broad low fill from front left and black flags for richer falloff; preserve a muted, physically believable surface reflection only outside the safe zone. Photograph on a 100 MP medium-format camera, 80 mm equivalent lens, tripod, eye-level with a slight 5–8 degree downward angle, f/11, ISO 100, 1/125 second. Real luxury beauty campaign still life, tactile velvet pile, realistic lacquer, precise dark-tone separation, restrained analogue grain. No object is present; this is an intentionally blank compositing plate.",
+      "negative_prompt": "perfume bottle, bottle silhouette, cap, box, label, logo, letters, words, watermark, product packaging, person, hand, flower, rose, tuberose, almond, cocoa, food, plant, landscape, room, prop, chair, tray, pedestal, curtain, loose velvet folds, ribbon, water, smoke, fog, fire, liquid splash, floating object, glitter, lens flare, neon, bokeh, CGI, 3D render, fantasy scene, gothic set, overly black frame, busy texture, hard seam, high contrast inside the product-safe zone",
+      "camera_lens_lighting": {
+        "camera": "100 MP medium-format digital, tethered, ISO 100",
+        "lens": "80 mm equivalent, f/11",
+        "lighting": "Narrow large-source key from upper right with diffusion, low broad fill from front left, negative fill on both sides, tiny edge cue restricted to far perimeter."
+      },
+      "composition_constraints": [
+        "Velvet must remain flat, tensioned and peripheral; no folds or pile direction changes may approach the central safe zone.",
+        "The lacquer tabletop must provide enough midtone detail at the base-contact area for a believable post-production shadow.",
+        "Avoid crushing blacks: retain separable detail in the backdrop, tabletop and near-black shadow."
+      ]
+    },
+    {
+      "id": "the-night-lingers",
+      "fragrance": "The Night Lingers",
+      "olfactive_direction": "Amber, woody, smoky — oud wood, benzoin, rose, saffron, raspberry and incense.",
+      "palette": {
+        "backdrop": "charcoal-black #1E1B1B",
+        "surface": "dark oxblood lacquer #34181B",
+        "shadow": "black plum #120F13",
+        "accent": "low amber tungsten reflection #9B6840"
+      },
+      "material_direction": "A charcoal-black studio backdrop meets a dark oxblood lacquer tabletop. One subdued warm practical-style reflection at the far right provides an after-dark glow while retaining a clean, deep central placement area. The effect is intimacy and lingering warmth, not smoke or spectacle.",
+      "prompt": "Premium fragrance campaign studio plate for VASA The Night Lingers, photographed as real commercial still life before the product is placed. 4:5 portrait, 2400 by 3000 pixels or larger. A physical charcoal-black backdrop transitions through a low, seamless studio curve into a dark oxblood lacquer tabletop. Leave the central vertical product-safe area completely empty and calm: x 31–69%, y 17–84%; reserve x 36–64%, y 78–88% as a level base for a later bottle and its contact shadow. Build a quiet after-dark atmosphere entirely with real studio light: dense charcoal, deep oxblood and one controlled low-amber practical-style reflection held at the far right edge, never across the safe zone. Use a gridded soft key from camera-right rear, minimal soft frontal fill and strong flags, allowing a subtle grounded shadow direction from lower right toward left to be added in post. Photograph on a 100 MP medium-format camera, 80 mm equivalent lens, tripod, eye-level with a slight 5–8 degree downward angle, f/9, ISO 100, 1/125 second. Real studio set, world-class perfume beauty photography, nuanced black detail, realistic lacquer reflection, neutral commercial retouching, restrained analogue grain. No object is present; this is an intentionally blank compositing plate.",
+      "negative_prompt": "perfume bottle, bottle silhouette, cap, box, label, logo, letters, words, watermark, product packaging, person, hand, flower, rose, oud chips, saffron, raspberry, incense stick, candle, fire, flame, plant, landscape, architecture, room, prop, tray, pedestal, mirror, water, smoke, fog, haze, liquid splash, floating object, gold dust, glitter, lens flare, dramatic spotlight, bokeh, CGI, 3D render, fantasy scene, crushed black, hard seam, high contrast or warm reflection inside the product-safe zone",
+      "camera_lens_lighting": {
+        "camera": "100 MP medium-format digital, tethered, ISO 100",
+        "lens": "80 mm equivalent, f/9",
+        "lighting": "Gridded diffused key from rear camera-right, very low soft frontal fill, black flags, a dim amber card reflection at far right only; maintain detail in all dark tones."
+      },
+      "composition_constraints": [
+        "Keep all amber reflection outside x: 31–69%, y: 17–84%; the central zone stays neutral-dark and compositing-safe.",
+        "Retain a readable tabletop horizon and low studio curve without making a scenic room.",
+        "Protect shadow detail in the lower third so the post-production bottle grounding can remain realistic."
+      ]
+    }
+  ],
+  "generation_and_delivery_controls": {
+    "one_image_per_prompt": true,
+    "aspect_ratio": "4:5 portrait",
+    "minimum_resolution": "2400 × 3000 px",
+    "file_recommendation": "16-bit TIFF or PNG master; export a lossless or high-quality WebP derivative only after bottle compositing.",
+    "colour_management": "Capture and deliver in a wide-gamut working space; convert the final web derivative to sRGB after retouching.",
+    "retouching": "Remove dust and accidental imperfections that read as defects, but preserve believable plaster, velvet and lacquer texture. Do not introduce artificial gradients or effects.",
+    "approval_checklist": [
+      "The central safe zone matches the prescribed bounds and contains no generated object, lettering, reflection or high-contrast texture.",
+      "Each image is recognisably part of one campaign through angle, framing, capture quality and lighting discipline.",
+      "Silent Storm reads cool/mineral; Sweetest Stranger reads warm/powdered; Rebel in Velvet reads mulberry/tactile; The Night Lingers reads dark/ambered.",
+      "Every background is physically plausible as a real studio set and supports a later real-bottle composite without masking or reconstruction."
+    ]
+  }
+}
