@@ -271,3 +271,51 @@ footer{position:relative;isolation:isolate;overflow:hidden}
 
 @media(max-width:900px){.gift-art{min-height:0;aspect-ratio:4/3}.gift-seal{width:160px}}
 @media(max-width:760px){.gift-art{min-height:0;padding:0;aspect-ratio:4/3}.gift-seal{width:118px;top:6%;right:5%}.gift-seal .gift-curve{font-size:15px}.gift-art figcaption{left:18px;bottom:16px;font-size:7px}.gift-copy h2 span{font-size:1.02em}.footer-main>div>a,.footer-main>div>button{font-size:12px!important}}
+
+/* VASA nocturne palette: black foundations, ivory type and antique-gold actions. */
+:root{--ink:#f3efe8;--paper:#090909;--musk:#101010;--carbon:#080808;--porcelain:#0c0c0c;--antique-gold:#c49a56;--line:rgba(244,239,231,.16);--muted:#aaa39a;--surface:#111}
+html{background:#080808;color-scheme:dark}body{background:#080808;color:#f3efe8}
+.site-header{background:rgba(8,8,8,.88);border-bottom-color:rgba(255,255,255,.1);color:#f5f1ea;box-shadow:0 12px 38px rgba(0,0,0,.16)}
+.site-header.scrolled{background:rgba(8,8,8,.78);border-bottom-color:rgba(196,154,86,.18)}
+.brand .mark-dark{filter:invert(1) sepia(.08) saturate(.25);opacity:.94}.brand:hover .mark-dark,.brand:focus-visible .mark-dark{opacity:0}.brand .mark-gold{filter:none}
+.site-header .icon-button:is(:hover,:focus-visible){background:rgba(255,255,255,.08);border-color:rgba(196,154,86,.42);box-shadow:0 12px 32px rgba(0,0,0,.34)}
+.nav-left>a.is-active,.nav-right>a.is-active,.nav-left>a:is(:hover,:focus-visible),.nav-right>a:is(:hover,:focus-visible),.contact-nav:is(:hover,:focus-visible){color:#ddb779}
+
+.stories,.shop,.mood-gallery{background:#080808;color:#f3efe8;border-color:rgba(255,255,255,.12)}
+.stories{border-top:1px solid rgba(255,255,255,.08)}
+.section-head h2,.product-info h3,.product-info h3 button{color:#f6f2eb}
+.section-head .kicker,.collection-count,.gallery-instruction{color:#c3a16a}
+.section-head>.text-link{color:#e8e1d6}
+.story-stage{border:1px solid rgba(255,255,255,.12);box-shadow:0 34px 90px rgba(0,0,0,.35)}
+.story-photo{background:#eae6df}.story-number{color:#615b54}
+.story-copy{background:#101010}.story-copy .story-line{color:#f4eee5}.story-copy>p:not(.kicker):not(.story-line){color:#aaa39a}.story-copy>.text-link{color:#eee8df}
+
+.shop{background:linear-gradient(180deg,#080808 0%,#0e0e0e 100%)}
+.product-card{color:#f3efe8}.product-info>p,.product-meta>span:last-child{color:#aaa39a}.product-meta{color:#ded7ce}
+.product-image{background:#121212}.product-image:after{border-color:rgba(255,255,255,.18)}
+.add-button{border-color:rgba(244,239,231,.62);color:#f4efe7}.add-button:hover,.add-button:focus-visible{border-color:#c49a56;color:#090909;background:#c49a56}
+.product-card:nth-child(1) .product-image:is(:hover,:focus-visible),.product-card:nth-child(2) .product-image:is(:hover,:focus-visible){background:#f8f6f5}
+.product-card:nth-child(3) .product-image:is(:hover,:focus-visible){background:#f8f6f7}.product-card:nth-child(4) .product-image:is(:hover,:focus-visible){background:#f7f5f4}
+
+.mood-gallery{background:#0b0b0b}.mood-gallery-panel{border:1px solid rgba(255,255,255,.08)}
+.campaign{background:#0b0b0b;color:#f3efe8;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1)}
+.campaign-photo{background:#111}.campaign-copy{background:#0d0d0d}.campaign-copy .kicker{color:#c6a36a}.campaign-copy h2{color:#f6f1e9}.campaign-copy>p:not(.kicker){color:#b5aea5}.campaign-copy>.text-link{color:#efe8df}
+.craft-strip{background:#080808;color:#f3efe8;border-color:rgba(255,255,255,.14)}
+.craft-intro .kicker,.craft-principles span{color:#c6a36a}.craft-intro h2,.craft-principles h3{color:#f4efe7}.craft-principles p{color:#aaa39a}.craft-principles>div{border-left-color:rgba(255,255,255,.18)}
+
+.gifting.section{background:#080808}.gift-copy{background:#101010;color:#f2ede5;border:1px solid rgba(255,255,255,.1);border-left:0}.gift-copy .kicker{color:#c6a36a}.gift-copy h2{color:#f7f2ea}.gift-copy h2 span{color:#d1ad70}.gift-copy>p:not(.kicker){color:#b8b1a7}
+.button.dark{background:#f2ede5;color:#090909}.button.dark:hover,.button.dark:focus-visible{background:transparent;color:#090909;border-color:#c49a56}.button.dark:before{background:#c49a56}
+.exclusive-link{color:#ece5dc}
+
+footer{background:#050505;border-top:1px solid rgba(255,255,255,.1)}
+.footer-main>div>a,.footer-main>div>button,.footer-social>p,.footer-bottom,.footer-bottom button{color:#aaa39a}.footer-main h2{color:#f5f0e8}
+
+dialog{background:#0d0d0d;color:#f2ede5;border-left:1px solid rgba(255,255,255,.13)}dialog::backdrop{background:rgba(0,0,0,.72)}
+.panel-header{background:rgba(13,13,13,.94);border-bottom-color:rgba(255,255,255,.13)}.panel-header h2{color:#f4efe7}
+.panel-note,.detail-description,.bag-item small,.search-result small{color:#aaa39a}.panel-note strong,.bag-item h3,.search-result strong{color:#f4efe7}
+.panel-search{background:#0d0d0d;color:#f4efe7;border-bottom-color:#ded7ce}.panel-search::placeholder{color:#77716a}
+.search-result,.bag-item,.note-list>div,.menu-links>a,.menu-links>button{border-color:rgba(255,255,255,.13)}
+.detail-image{background:#f4f0e9}.bag-status{background:#151515;color:#b8b1a7}.quantity button{border-color:rgba(255,255,255,.18)}
+#toast{background:#f2ede5;color:#090909;border-color:#c49a56}
+
+@media(max-width:760px){.hero-copy{background:#080808}.stories,.shop,.mood-gallery,.gifting.section{background:#080808}.gift-copy{border-left:1px solid rgba(255,255,255,.1);border-top:0}}
