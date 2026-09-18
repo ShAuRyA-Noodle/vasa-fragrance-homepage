@@ -1,0 +1,54 @@
+{
+  "project": "VASA — three distinct photographic worlds",
+  "task": "Generate six separate finished photographs from the shot list. One image per filename. Do not combine them into a contact sheet, collage, website mockup or mood board.",
+  "reference_instruction": "Use the attached standalone VASA product photographs solely to preserve the exact bottle geometry, wooden hemispherical cap, glass thickness, liquid colour and label design. Do not use any old website screenshot or vasa-original.webp. Preserve product names and label typography; never redesign the packaging. If precise lettering cannot be preserved, keep the label plane clean for later compositing rather than inventing text.",
+  "global_art_direction": "Independent luxury perfume campaign photographed by a real editorial still-life photographer. Physical sets, plausible optics and light. Restrained colour grading, subtle photographic grain, natural contact shadows, believable transparent glass and small surface irregularities. Each world must have its own composition, lighting and palette. No CGI showroom aesthetic, molten gold, mystical smoke, floating bottles, excessive bokeh, repeated stone podiums, decorative ingredient piles or artificial lens flares. No text outside the existing bottle label. No invented historical imagery or family portraits.",
+  "outputs": [
+    {
+      "filename": "maison-hero.webp",
+      "aspect_ratio": "16:10",
+      "resolution": "3840x2400",
+      "reference_product": "Silent Storm",
+      "art_direction": "Quiet contemporary atelier, shot on medium-format film. The bottle sits slightly off-centre to the right on a worn walnut worktable, beside one folded unbleached linen cloth. Pale warm-grey plaster wall. Broad indirect north-window light from the left; soft irregular shadow, cool natural glass reflections, muted teal liquid. Eye-level 80mm lens, bottle entirely visible and occupying approximately 38 percent of image height. Keep the left 45 percent calm and naturally empty for website typography. Human-scale, intimate and unstyled; absolutely no arch, pedestal, dramatic sunbeam or ornamental foliage.",
+      "mobile_crop": "Keep bottle and cloth inside the right-centre 40 percent; enough space above cap and below base for a portrait crop."
+    },
+    {
+      "filename": "maison-craft.webp",
+      "aspect_ratio": "4:5",
+      "resolution": "2400x3000",
+      "reference_product": "Silent Storm",
+      "art_direction": "Contemporary hands-only still-life photograph at the same walnut table. A hand gently holds an unprinted blotter near the bottle; partial sleeve in washed cotton, no face. Soft cloudy daylight, tactile paper, authentic skin creases, one subtle spill of reflected teal light. Compose like a candid observed moment, not a stock beauty advertisement. The image is a conceptual depiction of present-day fragrance exploration, never a claim to show a real founder or family member."
+    },
+    {
+      "filename": "nocturne-hero.webp",
+      "aspect_ratio": "16:9",
+      "resolution": "3840x2160",
+      "reference_product": "The Night Lingers",
+      "art_direction": "Cinematic close still life on a dark oxblood lacquer console after dusk. One amber VASA bottle in the right third, complete cap and base visible. A narrow practical tungsten lamp outside frame creates one believable warm reflection on glass; the room falls into deep charcoal shadow. Low camera angle, 65mm lens, gentle film grain, amber and near-black palette with restrained burgundy. No fog, spotlit pedestal, rocks, candle or gold particles. The left half is almost black with faint room texture, suitable for light website text. Tension comes from framing and darkness, not visual effects.",
+      "mobile_crop": "Bottle remains fully visible in a right-centre portrait crop."
+    },
+    {
+      "filename": "nocturne-detail.webp",
+      "aspect_ratio": "3:4",
+      "resolution": "2400x3200",
+      "reference_product": "The Night Lingers",
+      "art_direction": "Extreme photographic crop of the same amber bottle's lower glass corner resting on the oxblood lacquer console. Real refraction, tiny surface imperfections, one elongated amber reflection, deep background shadow. 100mm macro lens with enough depth of field to understand the material. Abstract but physically believable; no liquid splashes or invented bottle geometry."
+    },
+    {
+      "filename": "journal-hero.webp",
+      "aspect_ratio": "4:3",
+      "resolution": "3200x2400",
+      "reference_product": "All four VASA fragrances",
+      "art_direction": "Graphic editorial product photograph shot from directly above on one flat matte vermilion-red paper sweep. Four original bottles arranged in a deliberately irregular but balanced composition: two upright in frame orientation, one rotated slightly clockwise, one slightly counterclockwise; they lie physically flat with caps attached. Bare paper, hard single-source studio flash, crisp honest shadows, no other props. Exact original glass and liquid colours remain visible. Feels like an independent printed culture magazine, bold and direct rather than a beauty catalogue. Leave generous breathing room between objects; show every bottle completely.",
+      "mobile_crop": "All four bottles fit within the central 80 percent; image may be shown uncropped."
+    },
+    {
+      "filename": "journal-detail.webp",
+      "aspect_ratio": "4:5",
+      "resolution": "2400x3000",
+      "reference_product": "Rebel in Velvet",
+      "art_direction": "Direct-flash editorial photograph of one original purple VASA bottle on a plain pale-grey paper sweep. Close framing, bottle at a slight diagonal in the image plane, complete package visible. Strong crisp shadow falls left; the violet liquid and wooden cap provide all colour. Minimal, a little confrontational, no velvet fabric despite the product name, no pedestal, no decorative ingredients. Slight analogue grain and truthful glass reflections."
+    }
+  ],
+  "quality_gate": "Reject any output with changed packaging, duplicate caps, warped labels, floating objects, impossible glass refraction, synthetic skin, excessive smoothness or collateral text. Deliver images separately at full resolution."
+}
