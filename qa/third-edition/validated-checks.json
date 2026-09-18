@@ -1,0 +1,502 @@
+[
+  {
+    "route": "01-maison",
+    "width": 1440,
+    "reduced": "no-preference",
+    "errors": [],
+    "images": [
+      {
+        "src": "/media/editorial/maison-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "http://127.0.0.1:5174/media/editorial/maison-detail.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-pair.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-craft.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "brokenAnchors": [],
+    "passed": true
+  },
+  {
+    "route": "02-nocturne",
+    "width": 1440,
+    "reduced": "no-preference",
+    "errors": [],
+    "images": [
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-silent.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-stranger.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-ritual.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "brokenAnchors": [],
+    "passed": true
+  },
+  {
+    "route": "03-journal",
+    "width": 1440,
+    "reduced": "no-preference",
+    "errors": [],
+    "images": [
+      {
+        "src": "/media/editorial/journal-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-storm.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-storm.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-stranger.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "brokenAnchors": [],
+    "passed": true
+  },
+  {
+    "route": "01-maison",
+    "width": 390,
+    "reduced": "no-preference",
+    "errors": [],
+    "images": [
+      {
+        "src": "/media/editorial/maison-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "http://127.0.0.1:5174/media/editorial/maison-detail.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-pair.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-craft.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "brokenAnchors": [],
+    "passed": true
+  },
+  {
+    "route": "02-nocturne",
+    "width": 390,
+    "reduced": "no-preference",
+    "errors": [],
+    "images": [
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-silent.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-stranger.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-ritual.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "brokenAnchors": [],
+    "passed": true
+  },
+  {
+    "route": "03-journal",
+    "width": 390,
+    "reduced": "no-preference",
+    "errors": [],
+    "images": [
+      {
+        "src": "/media/editorial/journal-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-storm.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-storm.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-stranger.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "brokenAnchors": [],
+    "passed": true
+  },
+  {
+    "route": "01-maison",
+    "width": 768,
+    "reduced": "no-preference",
+    "errors": [],
+    "images": [
+      {
+        "src": "/media/editorial/maison-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "http://127.0.0.1:5174/media/editorial/maison-detail.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-pair.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-craft.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "brokenAnchors": [],
+    "passed": true
+  },
+  {
+    "route": "02-nocturne",
+    "width": 768,
+    "reduced": "no-preference",
+    "errors": [],
+    "images": [
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-silent.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-stranger.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-ritual.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "brokenAnchors": [],
+    "passed": true
+  },
+  {
+    "route": "03-journal",
+    "width": 768,
+    "reduced": "no-preference",
+    "errors": [],
+    "images": [
+      {
+        "src": "/media/editorial/journal-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-storm.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-storm.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-stranger.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "brokenAnchors": [],
+    "passed": true
+  },
+  {
+    "route": "01-maison",
+    "width": 320,
+    "reduced": "reduce",
+    "errors": [],
+    "images": [
+      {
+        "src": "/media/editorial/maison-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "http://127.0.0.1:5174/media/editorial/maison-detail.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-pair.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/maison-craft.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "brokenAnchors": [],
+    "passed": true
+  },
+  {
+    "route": "02-nocturne",
+    "width": 320,
+    "reduced": "reduce",
+    "errors": [],
+    "images": [
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-silent.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-stranger.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-ritual.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "brokenAnchors": [],
+    "passed": true
+  },
+  {
+    "route": "03-journal",
+    "width": 320,
+    "reduced": "reduce",
+    "errors": [],
+    "images": [
+      {
+        "src": "/media/editorial/journal-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-storm.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-storm.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/nocturne-hero.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-stranger.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      },
+      {
+        "src": "/media/editorial/journal-velvet.webp",
+        "loaded": true,
+        "fit": "contain"
+      }
+    ],
+    "brokenAnchors": [],
+    "passed": true
+  }
+]

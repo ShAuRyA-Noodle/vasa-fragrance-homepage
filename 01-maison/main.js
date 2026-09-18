@@ -1,41 +1,26 @@
-import {gsap,ScrollTrigger,SplitText,Flip,reduced,smoothScroll,revealType,progressLine,openMotion,drawPaths} from '../shared/motion.js';
-const lenis=smoothScroll();
-const menu=document.querySelector('.menu-toggle'),mobile=document.querySelector('#mobile-nav');
-menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));mobile.hidden=!open;if(open&&!reduced.matches)gsap.fromTo('#mobile-nav a',{y:12,opacity:0},{y:0,opacity:1,stagger:.06,duration:.4});});
-mobile.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.setAttribute('aria-expanded','false');mobile.hidden=true;}));
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){mobile.hidden=true;menu.setAttribute('aria-expanded','false');}});
-const products=[['Silent Storm','silent-storm','A quiet presence. Stillness with a sense of depth; a world of cool colour and considered calm.'],['The Night Lingers','the-night-lingers','For the feeling of an evening you wish would last. Warm light, close company, and the beauty of staying a little longer.'],['The Sweetest Stranger','the-sweetest-stranger','An unexpected connection. An invitation to meet the unfamiliar with softness, curiosity, and an open heart.'],['Rebel in Velvet','rebel-in-velvet','Softness with an edge. A study in contrasts, for the days when you feel most like yourself.']];
-const images=['/media/editorial/maison-hero.webp','/media/editorial/maison-craft.webp','/media/editorial/maison-stranger.webp','/media/editorial/maison-velvet.webp'];
-const dialog=document.querySelector('dialog');
-function openProduct(index){const p=products[index];document.querySelector('#dialog-title').textContent=p[0];document.querySelector('#dialog-description').textContent=p[2];const img=document.querySelector('#dialog-image');img.src=images[index];img.alt=`${p[0]} perfume bottle detail`;dialog.showModal();lenis?.stop();openMotion(dialog);}
-document.querySelectorAll('[data-product]').forEach(b=>b.addEventListener('click',()=>openProduct(Number(b.dataset.product))));
-document.querySelectorAll('.close-dialog,.close-second').forEach(b=>b.addEventListener('click',()=>dialog.close()));
-dialog.addEventListener('close',()=>lenis?.start());dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
-const tones=['#d3d9c6','#c8ae96','#e0c3b9','#c8b9c7'];
-document.querySelectorAll('[data-mood]').forEach(b=>b.addEventListener('click',()=>{
- const index=Number(b.dataset.mood),p=products[index];document.querySelectorAll('[data-mood]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
- const state=Flip.getState('.mood-result');document.querySelector('#mood-name').textContent=p[0];document.querySelector('#mood-discover').dataset.product=b.dataset.mood;
- const image=document.querySelector('#finder-image');image.src=images[index];image.alt=`${p[0]} perfume`;
- if(!reduced.matches){Flip.from(state,{duration:.6,ease:'power3.out',absolute:false});gsap.fromTo(image,{opacity:.2,y:12},{opacity:1,y:0,duration:.65});gsap.to('.finder',{'--mood-tone':tones[index],duration:.8});}
+import {gsap,ScrollTrigger,SplitText,reduced} from '../shared/motion.js';
+import {initAtelier,fragrances} from '../shared/atelier-ui.js';
+initAtelier({theme:'light'});
+const scenes=['maison-detail','maison-craft','maison-stranger','maison-velvet'];
+const washes=['#dbdac7','#c9b18d','#d9bbad','#beb3b5'];
+let request=0;const portrait=document.querySelector('#scent-image');
+scenes.forEach(s=>{const i=new Image();i.src=`/media/editorial/${s}.webp`});
+document.querySelectorAll('[data-scent]').forEach(button=>button.addEventListener('click',async()=>{
+ const n=Number(button.dataset.scent),version=++request;document.querySelectorAll('[data-scent]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+ document.querySelector('#selected-discover').dataset.product=n;document.querySelector('#scent-status').textContent=`Showing ${fragrances[n].name}`;
+ const preload=new Image();preload.src=`/media/editorial/${scenes[n]}.webp`;try{await preload.decode()}catch{return}if(version!==request)return;
+ gsap.killTweensOf(portrait);const update=()=>{if(version!==request)return;portrait.src=preload.src;portrait.alt=`${fragrances[n].name}, complete VASA perfume bottle`;document.querySelector('#scent-mood').textContent=fragrances[n].mood.toUpperCase();document.querySelector('.scent-portrait').style.background=washes[n];if(!reduced.matches)gsap.fromTo(portrait,{opacity:0,y:12},{opacity:1,y:0,duration:.95,ease:'power2.out'});};
+ if(reduced.matches)update();else gsap.to(portrait,{opacity:0,y:-10,duration:.3,onComplete:update});
 }));
-document.querySelectorAll('.principles details').forEach(detail=>detail.addEventListener('toggle',()=>{if(detail.open){document.querySelectorAll('.principles details').forEach(other=>{if(other!==detail)other.open=false;});if(!reduced.matches)gsap.fromTo(detail.querySelector('p'),{opacity:0,y:10},{opacity:1,y:0,duration:.4});}ScrollTrigger.refresh();}));
-document.fonts.ready.then(()=>{
-gsap.matchMedia().add('(prefers-reduced-motion: no-preference)',()=>{
- progressLine();revealType('.hero h1',{hero:true});revealType('.opening h2,.wear-heading h2,.section-heading h2,.roots h2,.finder h2',{words:true});
- gsap.from('.hero-copy .eyebrow,.hero-description,.hero-copy .text-link',{y:20,opacity:0,stagger:.15,duration:1,delay:.2});
- gsap.from('.arched-image',{opacity:0,y:25,duration:1.3,ease:'power3.out'});
- gsap.to('.hero-halo',{xPercent:-8,scale:1.07,opacity:.6,duration:7,repeat:-1,yoyo:true,ease:'sine.inOut'});
- gsap.fromTo('.hero-visual .arched-image',{y:-12},{y:12,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1.5}});
- drawPaths('.stem path,.wear-orbit path,.wear-orbit ellipse');
- gsap.to('body',{'--wash':'#d5bcae',ease:'none',scrollTrigger:{trigger:'.opening',start:'top 80%',end:'bottom 10%',scrub:1.3}});
- gsap.to('.wear-story',{'--chapter-tone':'#c4ccbb',ease:'none',scrollTrigger:{trigger:'.wear-story',start:'top 50%',end:'bottom 50%',scrub:1}});
- gsap.utils.toArray('.wear-chapters article').forEach((el,i)=>{gsap.fromTo(el,{opacity:.35,y:15},{opacity:1,y:0,ease:'none',scrollTrigger:{trigger:el,start:'top 85%',end:'top 40%',scrub:.7}});});
- gsap.utils.toArray('.product').forEach((card,i)=>{gsap.from(card.querySelector('.product-image'),{y:35,opacity:.35,duration:1,ease:'power3.out',scrollTrigger:{trigger:card,start:'top 88%'}});});
- gsap.from('.principles-title>*',{y:25,opacity:0,stagger:.1,duration:.85,scrollTrigger:{trigger:'.principles',start:'top 80%'}});
- gsap.fromTo('.roots-photo img',{y:-15},{y:15,ease:'none',scrollTrigger:{trigger:'.roots-photo',start:'top bottom',end:'bottom top',scrub:1.2}});
- gsap.to('.finder',{backgroundPosition:'100% 70%',duration:8,repeat:-1,yoyo:true,ease:'sine.inOut'});
- gsap.from('.footer-wordmark',{yPercent:10,opacity:.4,ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'bottom bottom',scrub:1}});
-});
-addEventListener('load',()=>ScrollTrigger.refresh());
-
-});
+if(!reduced.matches){
+ document.fonts.ready.then(()=>{
+ const title=SplitText.create('.campaign h1',{type:'words',aria:'auto',wordsClass:'motion-word'});
+ gsap.from(title.words,{opacity:0,y:35,filter:'blur(10px)',duration:1.6,stagger:.16,ease:'power3.out',delay:.15});
+ gsap.from('.campaign-copy>.kicker,.campaign-copy>p:not(.kicker),.campaign-copy>.line-link',{opacity:0,y:12,duration:1.25,stagger:.12,delay:.4});
+ gsap.utils.toArray('.collection-intro h2,.wear-intro h2,.house-title h2,.last-word h2').forEach(el=>{const s=SplitText.create(el,{type:'words',aria:'auto',wordsClass:'motion-word'});gsap.from(s.words,{y:30,opacity:0,filter:'blur(4px)',duration:1.2,stagger:.055,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 89%',once:true}})});ScrollTrigger.refresh();
+ });
+ const mm=gsap.matchMedia();mm.add('(min-width: 701px)',()=>{gsap.to('.campaign-copy',{y:90,opacity:.15,ease:'none',scrollTrigger:{trigger:'.campaign',start:'top top',end:'bottom 20%',scrub:1.4}});gsap.from('.collection-intro',{y:55,ease:'none',scrollTrigger:{trigger:'.collection',start:'top bottom',end:'top 25%',scrub:1.5}})});
+ document.querySelectorAll('.wear-essays article').forEach((article,n)=>{ScrollTrigger.create({trigger:article,start:'top 58%',end:'bottom 58%',onEnter:()=>tone(article,n),onEnterBack:()=>tone(article,n)});gsap.from(article.children,{opacity:.2,y:30,duration:1.25,stagger:.1,scrollTrigger:{trigger:article,start:'top 82%',once:true}})});
+ function tone(article,n){gsap.to('.wear',{backgroundColor:article.dataset.tone,color:article.dataset.ink,duration:1.45,ease:'power2.inOut',overwrite:true});gsap.to('.wear-gauge i',{left:`${n*50}%`,duration:1.25,ease:'power3.inOut'});document.querySelector('.wear-number').textContent=`0${n+1} / 03`;}
+ gsap.from('.house-copy',{y:35,opacity:0,duration:1.35,scrollTrigger:{trigger:'.house-copy',start:'top 85%',once:true}});
+}

@@ -1,0 +1,14 @@
+{
+  "colors": [
+    "rgb(227, 217, 194)",
+    "rgb(164, 174, 150)",
+    "rgb(57, 74, 60)"
+  ],
+  "distinctColors": 3,
+  "blur": [
+    "blur(4px)",
+    "blur(8px)",
+    "blur(12px)",
+    "blur(18px)"
+  ]
+}

@@ -1,37 +1,95 @@
-import {gsap,ScrollTrigger,Flip,reduced,smoothScroll,revealType,progressLine,openMotion} from '../shared/motion.js';
-import {MotionPathPlugin} from 'gsap/MotionPathPlugin';
-gsap.registerPlugin(MotionPathPlugin);
-const lenis=smoothScroll();
-const products={
-'silent-storm':{name:'Silent Storm',copy:'Still waters. A restless spirit. For the kind of confidence that never needs to announce itself.'},
- 'the-night-lingers':{name:'The Night Lingers',copy:'One more conversation. One more song. An intimate companion for evenings you wish would last a little longer.'},
- 'the-sweetest-stranger':{name:'The Sweetest Stranger',copy:'A chance encounter. An unexpected connection. For the days you leave a little room for possibility.'},
- 'rebel-in-velvet':{name:'Rebel in Velvet',copy:'A soft touch. A strong point of view. For those who know that tenderness and defiance can belong together.'}};
-const images={'silent-storm':'/media/editorial/journal-storm.webp','the-night-lingers':'/media/editorial/nocturne-hero.webp','the-sweetest-stranger':'/media/editorial/journal-stranger.webp','rebel-in-velvet':'/media/editorial/journal-velvet.webp'};
-const dialog=document.querySelector('#product-dialog');let previousFocus;
-document.addEventListener('click',e=>{const button=e.target.closest('[data-product]');if(!button)return;const key=button.dataset.product,p=products[key];if(!p)return;previousFocus=button;document.querySelector('#dialog-title').textContent=p.name;document.querySelector('#dialog-description').textContent=p.copy;const im=document.querySelector('#dialog-image');im.src=images[key];im.alt=`${p.name} perfume bottle`;dialog.showModal();lenis?.stop();openMotion(dialog);});
-document.querySelectorAll('.dialog-close,.dialog-back').forEach(b=>b.addEventListener('click',()=>dialog.close()));dialog.addEventListener('close',()=>{lenis?.start();previousFocus?.focus({preventScroll:true});});dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
-document.querySelectorAll('[data-mood]').forEach(button=>button.addEventListener('click',()=>{const key=button.dataset.mood,p=products[key];const state=Flip.getState('.result-info');document.querySelectorAll('[data-mood]').forEach(b=>{b.classList.toggle('active',b===button);b.setAttribute('aria-pressed',String(b===button));});const image=document.querySelector('#mood-image');image.src=images[key];image.alt=`${p.name} perfume`;document.querySelector('#mood-title').textContent=p.name;document.querySelector('#mood-copy').textContent=p.copy;document.querySelector('#mood-open').dataset.product=key;if(!reduced.matches){gsap.fromTo(image,{opacity:.2,y:15},{opacity:1,y:0,duration:.65,ease:'power2.out'});Flip.from(state,{duration:.6,ease:'power2.out'});}}));
-const cards=[...document.querySelectorAll('.filmstrip .product')],tones=['#283b37','#423025','#55404b','#3e2b49'];let current=0,galleryTrigger;
-cards.forEach((c,i)=>{c.inert=i!==0;c.setAttribute('aria-hidden',String(i!==0));});
-function showSlide(index){if(index===current)return;const old=cards[current],next=cards[index];current=index;cards.forEach((c,i)=>{c.inert=i!==index;c.setAttribute('aria-hidden',String(i!==index));});document.querySelector('#gallery-index').textContent=String(index+1).padStart(2,'0');gsap.killTweensOf(cards);if(reduced.matches){gsap.set(cards,{autoAlpha:0,pointerEvents:'none'});gsap.set(next,{autoAlpha:1,pointerEvents:'auto'});}else{gsap.to(old,{autoAlpha:0,y:-12,duration:.35,pointerEvents:'none'});gsap.fromTo(next,{autoAlpha:0,y:18},{autoAlpha:1,y:0,pointerEvents:'auto',duration:.7,ease:'power3.out',delay:.1});gsap.to('.collection',{'--gallery-tone':tones[index],duration:1});}gsap.to('.gallery-track span',{xPercent:index*100,duration:reduced.matches?0:.7,ease:'power3.out'});}
-function navigate(delta){const next=(current+delta+cards.length)%cards.length;if(galleryTrigger){const target=galleryTrigger.start+(galleryTrigger.end-galleryTrigger.start)*((next+.5)/4);if(lenis)lenis.scrollTo(target,{duration:1.05});else scrollTo(0,target);}else showSlide(next);}
-document.querySelector('#gallery-next').addEventListener('click',()=>navigate(1));document.querySelector('#gallery-prev').addEventListener('click',()=>navigate(-1));document.querySelector('.gallery-navigation').addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();navigate(e.key==='ArrowRight'?1:-1);}});
-document.querySelectorAll('details').forEach(d=>d.addEventListener('toggle',()=>ScrollTrigger.refresh()));
-document.fonts.ready.then(()=>{
-const mm=gsap.matchMedia();
-mm.add('(prefers-reduced-motion: no-preference)',()=>{
- progressLine();revealType('.hero h1',{hero:true});revealType('.manifesto h2,.anatomy-title h2,.principles h2,.closing h2',{words:true});
- gsap.from('.hero-picture',{y:20,opacity:0,duration:1.25,ease:'power3.out'});
- gsap.fromTo('.hero-picture img',{y:-10},{y:10,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1.2}});
- gsap.from('.journal-edition',{rotation:-4,y:20,opacity:.2,duration:1,scrollTrigger:{trigger:'.manifesto',start:'top 85%'}});
- const trace=document.querySelector('.trace');gsap.from(trace,{drawSVG:'0%',ease:'none',scrollTrigger:{trigger:'.scent-map',start:'top 85%',end:'bottom 35%',scrub:1}});
- const dot=document.querySelector('.scent-dot');gsap.set(dot,{autoAlpha:1});gsap.to(dot,{motionPath:{path:trace,align:trace,alignOrigin:[.5,.5]},ease:'none',scrollTrigger:{trigger:'.scent-map',start:'top 85%',end:'bottom 35%',scrub:1}});
- gsap.from('.scent-stages>div',{y:20,opacity:.3,stagger:.15,duration:.8,scrollTrigger:{trigger:'.scent-stages',start:'top 88%'}});
- gsap.to('.explorer',{'--editorial-tone':'#c3aabf',ease:'none',scrollTrigger:{trigger:'.explorer',start:'top 85%',end:'bottom 15%',scrub:1.3}});
- gsap.fromTo('.principle-intro img',{y:-15},{y:15,ease:'none',scrollTrigger:{trigger:'.principles',start:'top bottom',end:'bottom top',scrub:1.1}});
-});
-mm.add('(min-width:1000px) and (min-height:760px) and (prefers-reduced-motion:no-preference)',()=>{galleryTrigger=ScrollTrigger.create({trigger:'.collection',start:'top top',end:'+=1700',pin:true,anticipatePin:1,onUpdate:self=>showSlide(Math.min(3,Math.floor(self.progress*4))),invalidateOnRefresh:true});return()=>{galleryTrigger=null;};});
-addEventListener('load',()=>ScrollTrigger.refresh(),{once:true});
+import { gsap, ScrollTrigger, reduced, revealType } from '../shared/motion.js';
+import { initAtelier } from '../shared/atelier-ui.js';
 
+const products = [
+  { name: 'Silent Storm', mood: 'COMPOSED / ENIGMATIC', text: 'Still waters. A restless spirit. A private confidence that never needs to announce itself.', image: '/media/editorial/journal-storm.webp', tone: '#6e5361', toneTwo: '#3d1524', accent: '#bb9e86' },
+  { name: 'The Night Lingers', mood: 'AFTER DARK / INTIMATE', text: 'One more conversation. One more song. An intimate companion for evenings you wish would last a little longer.', image: '/media/editorial/nocturne-hero.webp', tone: '#49313b', toneTwo: '#27151e', accent: '#d3b28d' },
+  { name: 'The Sweetest Stranger', mood: 'OPEN / UNEXPECTED', text: 'A chance encounter. An unexpected connection. A little room for possibility.', image: '/media/editorial/journal-stranger.webp', tone: '#786550', toneTwo: '#3d3025', accent: '#dcc49a' },
+  { name: 'Rebel in Velvet', mood: 'SOFT / UNCOMPROMISING', text: 'A soft touch. A strong point of view. Tenderness and defiance in the same gesture.', image: '/media/editorial/journal-velvet.webp', tone: '#704052', toneTwo: '#351421', accent: '#d59a9f' }
+];
+
+initAtelier({ theme: 'light', collection: '#collection', house: '#house' });
+
+const stage = document.querySelector('.portrait-stage');
+const image = document.querySelector('#portrait-image');
+const title = document.querySelector('#portrait-title');
+const kicker = document.querySelector('#portrait-kicker');
+const text = document.querySelector('#portrait-text');
+const action = document.querySelector('.portrait-action');
+const number = document.querySelector('.portrait-number');
+const library = document.querySelector('.portrait-library');
+const tabs = [...document.querySelectorAll('[data-mood]')];
+let active = 0;
+let changeId = 0;
+let portraitTransition;
+const portraitImages = products.map(product=>{const image=new Image();image.src=product.image;return image.decode().catch(()=>{});});
+
+function selectPortrait(index, { focus = false } = {}) {
+  if (!products[index] || index === active) return;
+  const request = ++changeId;
+  active = index;
+  portraitTransition?.kill();
+  const product = products[index];
+  tabs.forEach((tab, tabIndex) => {
+    const selected = tabIndex === index;
+    tab.setAttribute('aria-selected', String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+  });
+  stage.setAttribute('aria-labelledby', `mood-${index}`);
+  stage.setAttribute('aria-busy','true');
+  action.dataset.product = String(index);
+  if (focus) tabs[index].focus();
+  portraitImages[index].finally(() => {
+    if (request !== changeId) return;
+    stage.setAttribute('aria-busy','false');
+    const update = () => {
+      if (request !== changeId) return;
+      image.src = product.image;
+      image.alt = `${product.name} fragrance bottle`;
+      title.innerHTML = product.name.replace(' ', '<br>');
+      kicker.textContent = product.mood;
+      text.textContent = product.text;
+      number.textContent = String(index + 1).padStart(2, '0');
+      action.dataset.product = String(index);
+      library.style.setProperty('--tone', product.tone);
+      library.style.setProperty('--tone-two', product.toneTwo);
+      library.style.setProperty('--accent', product.accent);
+    };
+    if (reduced.matches) update();
+    else {
+      const targets = [image, title, kicker, text, number, action];
+      portraitTransition = gsap.timeline({ defaults: { overwrite: 'auto' } })
+        .to(targets, { autoAlpha: 0, y: -10, duration: 0.18, stagger: 0.015, ease: 'power2.in' })
+        .add(update)
+        .fromTo(targets, { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.045, ease: 'power3.out' });
+    }
+    if (focus) tabs[index].focus();
+  });
+}
+
+tabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => selectPortrait(index));
+  tab.addEventListener('keydown', event => {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+    event.preventDefault();
+    const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+    selectPortrait(next, { focus: true });
+  });
+});
+
+document.fonts.ready.then(() => {
+  if (reduced.matches) return;
+  revealType('.opening h1', { hero: true });
+  revealType('.foreword h2,.portrait-library h2,.scent-sheets h2,.house-notes h2,.closing-portrait h2', { words: true });
+  gsap.timeline({ defaults: { ease: 'power3.out' } })
+    .from('.opening-wordmark', { autoAlpha: 0, yPercent: 20, duration: 1.35 })
+    .from('.opening-image', { autoAlpha: 0, scale: 0.94, duration: 1.25 }, 0.12)
+    .from('.opening-kicker,.opening-caption', { autoAlpha: 0, duration: 0.6, stagger: 0.1 }, 0.25);
+  gsap.from('.foreword-side,.foreword-copy', { y: 28, autoAlpha: 0, duration: 0.9, stagger: 0.12, scrollTrigger: { trigger: '.foreword', start: 'top 78%', once: true } });
+  gsap.from('.mood-tabs button', { y: 16, autoAlpha: 0, duration: 0.65, stagger: 0.07, scrollTrigger: { trigger: '.portrait-library', start: 'top 76%', once: true } });
+  gsap.from('.scent-sheet', { y: 36, autoAlpha: 0, duration: 0.85, stagger: 0.1, scrollTrigger: { trigger: '.sheets-grid', start: 'top 80%', once: true } });
+  gsap.from('.note-list article', { y: 20, autoAlpha: 0, duration: 0.7, stagger: 0.08, scrollTrigger: { trigger: '.note-list', start: 'top 82%', once: true } });
+  gsap.to('.opening-wordmark', { y: 32, ease: 'none', scrollTrigger: { trigger: '.opening', start: 'top top', end: 'bottom top', scrub: 1.4 } });
+
+  ScrollTrigger.refresh();
 });

@@ -1,0 +1,12 @@
+# VASA third edition — campaign, discovery and interaction
+
+User-authorized structural redesign of all three homepages. Keep stable deployed URLs, Vite infrastructure, local fonts, GSAP/Lenis, approved standalone photography, and all four brand pillars. Preserve original bottle/cap/base framing. No old website screenshots. Prices, sizes, formula percentages, wear hours, exact ambiguous source names await user clarification; do not fabricate facts or checkout.
+
+1. Research current official component libraries, luxury campaign/navigation patterns, original Pinterest videos and Lusion. Save observations, sources, inference boundaries and public sitemap results in ../07-research-and-docs/research/2026-09-18-redesign.
+2. Replace accumulated page-level CSS overrides with deliberate, coherent page compositions. Three independent templates: flowing perfume-house campaign; YSL/Dior-inspired dark fragrance campaign; Billie/Cartier-inspired expressive house and collection.
+3. shared/atelier-ui.js and shared/atelier-ui.css: progressive blurred sticky navigation, slow full-screen staggered menu, searchable four-fragrance catalogue, product side panel, persistent personal selection, accessible drawers, rolling link labels, GSAP/Lenis. No copied paid Skiper source. Patterns adapted with source/license attribution where used.
+4. Maison: full-scene light campaign, large integrated typography, continuous image-to-story transformation, collection browsing, family atelier story. Slow GSAP blur-to-sharp words and synchronized colour/scene progression.
+5. Nocturne: dramatic full-scene campaign, fragrance chapters with direct selection and clear active states, guided concentration/presence/time explanation, ritual and house story. Rich backdrop blur on navigation/panels; intact image framing with bounded parallax.
+6. Journal: burgundy/ivory campaign house, centered wordmark, asymmetric editorial collection and sensory story, tactile tabs and image transitions. Distinct hierarchy and page sequence from other two.
+7. Provide actual sitemap.xml for currently implemented URLs and separately document proposed production shopping sitemap (not falsely live). Preserve homepage-only scope pending confirmed expansion.
+8. Verify builds, desktop/mobile overflow, complete product imagery, menu/search/selection keyboard flows, slow motion observed at intermediate states, reduced motion, no console/resource errors. Review screenshots and interaction capture, not only DOM assertions. Publish exact tested source to existing private Site.
