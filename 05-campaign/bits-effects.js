@@ -71,9 +71,10 @@ function initClickSpark(){
    const spark=sparks[index],progress=Math.min(1,(now-spark.start)/520);
    if(progress>=1){sparks.splice(index,1);continue;}
    const eased=1-Math.pow(1-progress,3);
-   context.strokeStyle=`rgba(183,145,79,${1-progress})`;
    context.lineWidth=1.2;
-   spark.angles.forEach(angle=>{
+   spark.angles.forEach((angle,ray)=>{
+    const color=spark.colors[ray%spark.colors.length];
+    context.strokeStyle=`rgba(${color},${1-progress})`;
     const inner=4+eased*10,outer=10+eased*26;
     context.beginPath();
     context.moveTo(spark.x+Math.cos(angle)*inner,spark.y+Math.sin(angle)*inner);
@@ -87,7 +88,8 @@ function initClickSpark(){
  if(reduced.matches)return;
  addEventListener('pointerdown',event=>{
   if(!event.target.closest('button,a'))return;
-  sparks.push({x:event.clientX,y:event.clientY,start:performance.now(),angles:Array.from({length:7},(_,index)=>index*Math.PI*2/7)});
+  const dark=Boolean(event.target.closest('.hero,.story-stage,footer,.gift-art,.button.dark'));
+  sparks.push({x:event.clientX,y:event.clientY,start:performance.now(),colors:dark?['244,226,190','184,145,78']:['147,111,55','202,164,94'],angles:Array.from({length:8},(_,index)=>index*Math.PI/4)});
   if(!frame)frame=requestAnimationFrame(draw);
  },{passive:true});
 }

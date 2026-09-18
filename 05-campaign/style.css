@@ -233,3 +233,41 @@ footer{position:relative;isolation:isolate;overflow:hidden}
  .gift-curve{inset:4%;width:92%;height:92%;font-size:9px}.footer-particle{height:150px;margin:0 22px}
 }
 @media(prefers-reduced-motion:reduce){.hero h1 em{animation:none}.mood-gallery-panel,.mood-gallery-panel>img,.mood-gallery-copy,.mood-gallery-copy em,.button:after,.add-button:after{transition:none!important}}
+
+/* Review pass: uninterrupted carousel timing and cleaner retail surfaces. */
+.story-tab:before{height:2px;background:rgba(255,255,255,.24)}
+.story-tab:after{height:3px;background:linear-gradient(90deg,#d4ad6c,#fff2cf);box-shadow:0 0 12px rgba(212,173,108,.34)}
+.story-stage{isolation:isolate}.story-slide{will-change:clip-path,transform,filter}.story-copy>*{will-change:transform,opacity}
+
+/* Each opaque packshot now meets a matching surface, removing its visible rectangle. */
+.product-card:nth-child(1) .product-image:is(:hover,:focus-visible),.product-card:nth-child(2) .product-image:is(:hover,:focus-visible){background:#f8f6f5}
+.product-card:nth-child(3) .product-image:is(:hover,:focus-visible){background:#f8f6f7}
+.product-card:nth-child(4) .product-image:is(:hover,:focus-visible){background:#f7f5f4}
+.product-image .product-bottle{padding:0;object-fit:cover;mix-blend-mode:normal}
+
+/* Gifting is now a contextual still with a precise live brand seal. */
+.gifting.section{align-items:center;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)}
+.gift-art{display:block;align-self:center;min-width:0;width:100%;min-height:0;margin:0;padding:0;border:0;outline:0;aspect-ratio:4/3;background:#111}
+.gift-art>.gift-photo{position:absolute;inset:0;z-index:0;width:100%;max-width:none;height:100%;padding:0;object-fit:cover;object-position:center}
+.gift-art:after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(120deg,transparent 40%,rgba(10,9,8,.1) 68%,rgba(10,9,8,.42))}
+.gift-art figcaption{position:absolute;z-index:3;left:28px;bottom:24px;color:rgba(255,255,255,.84);font-size:9px;letter-spacing:.18em}
+.gift-seal{position:absolute!important;z-index:3!important;top:8%;right:7%;width:min(34%,190px);aspect-ratio:1;border:1px solid rgba(211,174,106,.55);border-radius:50%;background:rgba(12,11,10,.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 18px 46px rgba(0,0,0,.2)}
+.gift-seal .gift-curve{inset:-8%;width:116%;height:116%;opacity:.92;font-size:13px}
+.gift-seal>img{position:absolute;left:50%;top:50%;width:36%;height:36%;transform:translate(-50%,-50%);object-fit:contain;filter:drop-shadow(0 4px 12px rgba(0,0,0,.35))}
+.gift-copy{align-self:stretch;min-width:0;min-height:0}.gift-copy h2 span{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.08em;font-style:italic;letter-spacing:-.04em;color:#7f6438}
+
+/* Footer navigation has its own restrained motion language. */
+.footer-main h2{font-size:13px;letter-spacing:.045em;color:#f6efe5}
+.footer-main>div>a,.footer-main>div>button{position:relative;width:max-content;max-width:100%;font-size:13px!important;transition:color .38s ease,transform .5s cubic-bezier(.2,.8,.2,1)}
+.footer-main>div>a:not(.footer-logo):before,.footer-main>div>button:before{content:'';position:absolute;left:-14px;top:50%;width:4px;height:4px;border-radius:50%;background:#c79a54;opacity:0;transform:translate(-7px,-50%);transition:opacity .35s ease,transform .45s ease}
+.footer-main>div>a:not(.footer-logo):is(:hover,:focus-visible),.footer-main>div>button:is(:hover,:focus-visible){color:#fff;transform:translateX(8px)}
+.footer-main>div>a:not(.footer-logo):is(:hover,:focus-visible):before,.footer-main>div>button:is(:hover,:focus-visible):before{opacity:1;transform:translate(0,-50%)}
+.footer-social .text-link{border:0;padding:8px 0 11px;transform:none!important}
+.footer-social .text-link:after{right:0;bottom:0;background:linear-gradient(90deg,#c79a54,#f2dfb8);transform:scaleX(1);transform-origin:left}
+.footer-social .text-link:is(:hover,:focus-visible):after{transform:scaleX(.34);transform-origin:right}
+.footer-social .text-link>span{font-size:18px;transition:transform .45s cubic-bezier(.2,.8,.2,1),color .35s ease}
+.footer-social .text-link:is(:hover,:focus-visible)>span{color:#d7ae69;transform:translate(7px,-6px) rotate(8deg)}
+.footer-social>p{font-size:13px!important;line-height:1.8}
+
+@media(max-width:900px){.gift-art{min-height:0;aspect-ratio:4/3}.gift-seal{width:160px}}
+@media(max-width:760px){.gift-art{min-height:0;padding:0;aspect-ratio:4/3}.gift-seal{width:118px;top:6%;right:5%}.gift-seal .gift-curve{font-size:15px}.gift-art figcaption{left:18px;bottom:16px;font-size:7px}.gift-copy h2 span{font-size:1.02em}.footer-main>div>a,.footer-main>div>button{font-size:12px!important}}

@@ -10,18 +10,18 @@ const icon='<svg><use href="#i-arrow"/></svg>';
 const panel=document.querySelector('#panel'),content=document.querySelector('#panel-content'),title=document.querySelector('#panel-title');
 let opener,activePanel='',toastTimer;
 const escapeText=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const imageMarkup=(p,cls='')=>`<img class="${cls}" src="${photo(p)}" alt="${p.name}, full 50 ml bottle concept" loading="lazy" width="1122" height="1402">`;
+const imageMarkup=(p,cls='',loading='lazy')=>`<img class="${cls}" src="${photo(p)}" alt="${p.name}, full 50 ml bottle concept" loading="${loading}" width="1122" height="1402">`;
 document.querySelector('#year').textContent=new Date().getFullYear();
 document.querySelector('#product-grid').innerHTML=catalog.map(p=>`<article class="product-card" style="--scent:${p.color}"><button class="product-image" data-product="${p.id}" aria-label="Discover ${p.name}"><img class="product-world" src="/media/campaign/${p.world}.webp" alt="" loading="lazy" width="1200" height="960"><span class="product-wash"></span>${imageMarkup(p,'product-bottle')}</button><div class="product-info"><h3><button data-product="${p.id}" style="padding:0;text-align:left">${p.name}</button></h3><p>${p.family}</p><div class="product-meta"><span>50 ml</span><span>Price announced at launch</span></div><button class="add-button" data-add="${p.id}" aria-label="Add ${p.name} to bag"><span>ADD TO BAG</span><span>+</span></button></div></article>`).join('');
 document.querySelector('#mood-gallery').innerHTML=catalog.map((p,i)=>`<button class="mood-gallery-panel${i===0?' is-active':''}" data-product="${p.id}" aria-label="Discover ${p.name}"><img src="/media/campaign/${p.world}.webp" alt="" loading="lazy" width="1200" height="960"><span class="mood-gallery-shade"></span><span class="mood-gallery-copy"><small>0${i+1} / ${p.family}</small><strong>${p.name}</strong><em>${p.line}</em></span></button>`).join('');
-document.querySelector('#story-slides').innerHTML=catalog.map((p,i)=>`<article class="story-slide" ${i?'hidden inert':''} aria-label="${i+1} of 4: ${p.name}" style="--scent:${p.color}"><div class="story-photo"><span class="story-number">0${i+1} / THE COLLECTION</span>${imageMarkup(p)}</div><div class="story-copy"><p class="kicker">${p.family}</p><h3>${p.name}</h3><p class="story-line">${p.line}</p><p>${p.description}</p><button class="text-link" data-product="${p.id}">DISCOVER THE FRAGRANCE <span>↗</span></button></div></article>`).join('');
+document.querySelector('#story-slides').innerHTML=catalog.map((p,i)=>`<article class="story-slide" ${i?'hidden inert':''} aria-label="${i+1} of 4: ${p.name}" style="--scent:${p.color}"><div class="story-photo"><span class="story-number">0${i+1} / THE COLLECTION</span>${imageMarkup(p,'','eager')}</div><div class="story-copy"><p class="kicker">${p.family}</p><h3>${p.name}</h3><p class="story-line">${p.line}</p><p>${p.description}</p><button class="text-link" data-product="${p.id}">DISCOVER THE FRAGRANCE <span>↗</span></button></div></article>`).join('');
 document.querySelector('.story-tabs').innerHTML=catalog.map((p,i)=>`<button class="story-tab" aria-label="Show ${p.name}" aria-pressed="${i===0}" data-slide="${i}"></button>`).join('');
 function showPanel(name,heading,html){
- if(!panel.open){opener=document.activeElement;panel.showModal();document.body.classList.add('modal-open');lenis?.stop();if(!reduced.matches)gsap.fromTo(panel,{xPercent:100},{xPercent:0,duration:.55,ease:'power3.out'});}
+ if(!panel.open){opener=document.activeElement;panel.showModal();document.body.classList.add('modal-open');lenis?.stop();if(typeof schedule==='function')schedule();if(!reduced.matches)gsap.fromTo(panel,{xPercent:100},{xPercent:0,duration:.55,ease:'power3.out'});}
  activePanel=name;title.textContent=heading;content.innerHTML=html;panel.scrollTop=0;requestAnimationFrame(()=>{const focus=name==='search'?content.querySelector('input'):document.querySelector('#close-panel');focus?.focus({preventScroll:true})});
 }
 function closePanel(){panel.close();}
-panel.addEventListener('close',()=>{document.body.classList.remove('modal-open');lenis?.start();activePanel='';opener?.focus({preventScroll:true})});
+panel.addEventListener('close',()=>{document.body.classList.remove('modal-open');lenis?.start();activePanel='';opener?.focus({preventScroll:true});if(typeof schedule==='function')schedule()});
 panel.addEventListener('click',e=>{if(e.target===panel){const r=panel.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right)closePanel()}});
 document.querySelector('#close-panel').onclick=closePanel;
 function productPanel(id){const p=productById(id);if(!p)return;showPanel('product',p.name,`<div class="detail-image">${imageMarkup(p)}</div><p class="detail-family">${p.family} · 50 ML</p><p class="detail-description">${p.description}</p><dl class="note-list">${p.notes.map(([n,d])=>`<div><dt>${n}</dt><dd>${d}</dd></div>`).join('')}</dl><button class="add-button" data-add="${p.id}">ADD TO BAG <span>+</span></button><p class="panel-note">Price and concentration details will be published at launch. Your bag saves your selection; ordering is not open yet.</p>`)}
@@ -48,26 +48,28 @@ document.addEventListener('click',e=>{const el=e.target.closest('button,a');if(!
 const slides=[...document.querySelectorAll('.story-slide')],tabs=[...document.querySelectorAll('.story-tab')],stage=document.querySelector('.story-stage');
 const stageColor=hex=>{const value=parseInt(hex.slice(1),16),mix=.2,base=17;const channel=shift=>Math.round(((value>>shift)&255)*mix+base*(1-mix));return `rgb(${channel(16)}, ${channel(8)}, ${channel(0)})`};
 stage.style.backgroundColor=stageColor(catalog[0].color);
-let current=0,busy=false,requested=null,destination=null,playing=false,timer=null,progressTween=null,inView=false,hovered=false,focused=false;
-function schedule(){clearTimeout(timer);progressTween?.kill();tabs.forEach(tab=>tab.style.setProperty('--fill','0'));if(playing&&inView&&!document.hidden&&!panel.open&&!hovered&&!focused){progressTween=gsap.to(tabs[current],{'--fill':1,duration:6,ease:'none'});timer=setTimeout(()=>go(current+1),6000)}}
+let current=0,busy=false,requested=null,destination=null,playing=false,timer=null,progressTween=null,inView=false;
+function schedule(){clearTimeout(timer);progressTween?.kill();tabs.forEach(tab=>tab.style.setProperty('--fill','0'));if(playing&&inView&&!document.hidden&&!panel.open){progressTween=gsap.to(tabs[current],{'--fill':1,duration:6,ease:'none'});timer=setTimeout(()=>go(current+1),6000)}}
 function go(index){index=(index+slides.length)%slides.length;if(busy){requested=index;return;}if(index===current){schedule();return;}busy=true;destination=index;clearTimeout(timer);progressTween?.kill();const from=slides[current],to=slides[index],direction=index>current?1:-1,stack=document.querySelector('#story-slides');stack.style.minHeight=`${from.offsetHeight}px`;to.hidden=false;to.inert=true;gsap.set([from,to],{position:'absolute',inset:0,width:'100%'});gsap.set(from,{zIndex:1});gsap.set(to,{zIndex:2});
  const finish=()=>{if(from.contains(document.activeElement))stage.focus({preventScroll:true});from.hidden=true;from.inert=true;to.inert=false;gsap.set([from,to],{clearProps:'position,inset,width,zIndex,clipPath,opacity,filter,transform'});stack.style.minHeight='';current=index;destination=null;busy=false;tabs.forEach((b,n)=>b.setAttribute('aria-pressed',String(n===index)));document.querySelector('#story-counter').textContent=`0${index+1} / 04`;document.querySelector('#story-status').textContent=catalog[index].name;if(requested!==null){const next=requested;requested=null;go(next)}else schedule();};
  if(reduced.matches){finish();return;}
+ const incomingMask=direction>0?'inset(0 0 0 100%)':'inset(0 100% 0 0)';
  const timeline=gsap.timeline({onComplete:finish,defaults:{overwrite:'auto'}});
  timeline
-  .to(from,{scale:.994,opacity:0,duration:.48,ease:'power2.inOut'},0)
-  .to(from.querySelector('.story-copy'),{opacity:0,duration:.28,ease:'power2.out'},0)
-  .to(from.querySelector('.story-photo img'),{x:-direction*24,scale:1.025,duration:.58,ease:'power2.inOut'},0)
-  .to(stage,{backgroundColor:stageColor(catalog[index].color),duration:.78,ease:'sine.inOut'},0)
-  .fromTo(to,{scale:1.012,opacity:0},{scale:1,opacity:1,duration:.76,ease:'power3.inOut'},.03)
-  .fromTo(to.querySelector('.story-photo img'),{x:direction*34,scale:1.04},{x:0,scale:1,duration:.82,ease:'power3.out',clearProps:'all'},.05)
-  .fromTo(to.querySelectorAll('.story-copy>*'),{y:20,opacity:0},{y:0,opacity:1,duration:.52,stagger:.04,ease:'power3.out',clearProps:'all'},.1);
+  .set(to,{opacity:1,clipPath:incomingMask})
+  .to(from,{scale:.985,filter:'brightness(.72)',duration:1.02,ease:'power2.inOut'},0)
+  .to(from.querySelector('.story-copy'),{y:-12,opacity:0,duration:.52,ease:'power2.in'},.2)
+  .to(from.querySelector('.story-photo img'),{xPercent:-direction*3,scale:1.035,duration:1.05,ease:'power2.inOut'},0)
+  .to(stage,{backgroundColor:stageColor(catalog[index].color),duration:1.08,ease:'sine.inOut'},0)
+  .to(to,{clipPath:'inset(0 0% 0 0)',duration:1.08,ease:'power3.inOut'},0)
+  .fromTo(to.querySelector('.story-photo img'),{xPercent:direction*4,scale:1.075},{xPercent:0,scale:1,duration:1.24,ease:'power3.out',clearProps:'all'},.02)
+  .fromTo(to.querySelectorAll('.story-copy>*'),{y:30,opacity:0},{y:0,opacity:1,duration:.72,stagger:.055,ease:'power3.out',clearProps:'all'},.14);
 }
 tabs.forEach((b,i)=>b.onclick=()=>go(i));document.querySelector('#story-next').onclick=()=>go((requested??destination??current)+1);document.querySelector('#story-prev').onclick=()=>go((requested??destination??current)-1);
 stage.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();go((requested??destination??current)+(e.key==='ArrowRight'?1:-1))}});
 let touchX;stage.addEventListener('pointerdown',e=>{if(e.pointerType==='touch')touchX=e.clientX});stage.addEventListener('pointerup',e=>{if(touchX!==undefined&&Math.abs(e.clientX-touchX)>45)go(current+(e.clientX<touchX?1:-1));touchX=undefined});stage.addEventListener('pointercancel',()=>{touchX=undefined});
 function setPlaying(value){playing=value;const b=document.querySelector('#story-pause');b.textContent=value?'Ⅱ':'▷';b.setAttribute('aria-label',value?'Pause fragrance slideshow':'Play fragrance slideshow');schedule()}
-document.querySelector('#story-pause').onclick=()=>setPlaying(!playing);stage.addEventListener('mouseenter',()=>{hovered=true;clearTimeout(timer);progressTween?.pause()});stage.addEventListener('mouseleave',()=>{hovered=false;schedule()});stage.addEventListener('focusin',()=>{focused=true;clearTimeout(timer);progressTween?.pause()});stage.addEventListener('focusout',()=>{setTimeout(()=>{focused=stage.contains(document.activeElement);schedule()},0)});
+document.querySelector('#story-pause').onclick=()=>setPlaying(!playing);
 new IntersectionObserver(entries=>{inView=entries[0].isIntersecting;schedule()},{threshold:.3}).observe(stage);document.addEventListener('visibilitychange',schedule);if(!reduced.matches)setPlaying(true);
 ScrollTrigger.create({start:20,onUpdate:self=>document.querySelector('.site-header').classList.toggle('scrolled',self.scroll()>20)});
 initBitsEffects();
