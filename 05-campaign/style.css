@@ -358,3 +358,13 @@ body{font-size:16px;line-height:1.72}
 .footer-main>div>a,.footer-main>div>button,.footer-social>p{font-size:14px!important}.footer-main h2{font-size:14px}
 
 @media(max-width:760px){body{font-size:15px}.nav-left>a,.nav-right>a,.text-button{font-size:13px}.section-head h2{font-size:38px}.hero-copy>p:not(.kicker){font-size:15px}.story-copy>p:not(.kicker):not(.story-line){font-size:14px}.story-copy .story-line{font-size:17px}.product-info h3{font-size:16px}.product-info>p,.product-meta,.product-meta>span:last-child{font-size:11px}.campaign-copy>p:not(.kicker),.gift-copy>p:not(.kicker){font-size:15px}}
+
+/* Bug-fix pass: one consistent underline direction for every text-link (footer socials included), a bottle that stays true to its photo on hover, and readable footer legal text. */
+.text-link::after{transform:scaleX(0)!important;transform-origin:left center!important}
+.text-link:is(:hover,:focus-visible)::after{transform:scaleX(1)!important}
+.footer-social .text-link::after{transform:scaleX(0)!important;transform-origin:left center!important;background:#c9a15f}
+.footer-social .text-link:is(:hover,:focus-visible)::after{transform:scaleX(1)!important;transform-origin:left center!important}
+.product-image:is(:hover,:focus-visible) .product-bottle{mix-blend-mode:normal!important}
+.footer-bottom{font-size:12px!important}
+.footer-bottom button{font-size:12px!important}
+@media(max-width:760px){.footer-bottom{font-size:11px!important}}
