@@ -726,3 +726,8 @@ html,body{overflow-x:clip}
 .site-header .brand .mark-dark{filter:invert(1) sepia(.08) saturate(.25)!important;opacity:.96}
 [data-theme="dark"] .site-header.past-hero .brand .mark-dark{filter:none!important;opacity:.96}
 .site-header .brand:hover .mark-dark,.site-header .brand:focus-visible .mark-dark{opacity:0!important}
+
+/* Explicit logo contrast for the inverse post-hero navbar. */
+[data-theme="light"] .site-header.past-hero .brand .mark-dark{filter:invert(1) sepia(.08) saturate(.25)!important;opacity:.98!important}
+[data-theme="dark"] .site-header.past-hero .brand .mark-dark{filter:none!important;opacity:.98!important}
+[data-theme="light"] .site-header.past-hero .brand:hover .mark-dark,[data-theme="light"] .site-header.past-hero .brand:focus-visible .mark-dark,[data-theme="dark"] .site-header.past-hero .brand:hover .mark-dark,[data-theme="dark"] .site-header.past-hero .brand:focus-visible .mark-dark{opacity:0!important}
