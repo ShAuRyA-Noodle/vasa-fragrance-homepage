@@ -3,19 +3,37 @@ import {catalog,productById,photo} from './catalog.js';
 import {createBag} from './cart.js';
 import {initExperience} from './experience.js';
 import {initBitsEffects,animatePanelContent} from './bits-effects.js';
+import {initFragranceTheatre} from './fragrance-theatre.js';
 const lenis=smoothScroll();
 let storage;try{storage=window.localStorage}catch{storage={getItem:()=>null,setItem:()=>{}}}
+const themeKey='vasa-theme',themeMedia=matchMedia('(prefers-color-scheme: dark)'),themeToggle=document.querySelector('.theme-toggle'),themeIcon=themeToggle?.querySelector('.theme-toggle-icon'),themeMeta=document.querySelector('meta[name="theme-color"]');
+const readTheme=()=>{try{const value=storage.getItem(themeKey);return value==='light'||value==='dark'?value:null}catch{return null}};
+const saveTheme=theme=>{try{storage.setItem(themeKey,theme)}catch{}};
+function applyTheme(theme,persist=false){
+ document.documentElement.dataset.theme=theme;
+ document.documentElement.style.colorScheme=theme;
+ if(themeMeta)themeMeta.content=theme==='dark'?'#11100f':'#efe9e1';
+ if(themeToggle){const dark=theme==='dark',label=dark?'Switch to light theme':'Switch to dark theme';themeToggle.setAttribute('aria-pressed',String(dark));themeToggle.setAttribute('aria-label',label);themeToggle.title=label;if(themeIcon)themeIcon.textContent=dark?'☀':'☾'}
+ if(persist)saveTheme(theme);
+ document.dispatchEvent(new Event('themechange'));
+}
+applyTheme(document.documentElement.dataset.theme||readTheme()||(themeMedia.matches?'dark':'light'));
+themeToggle?.addEventListener('click',()=>applyTheme(document.documentElement.dataset.theme==='dark'?'light':'dark',true));
+themeMedia.addEventListener?.('change',event=>{if(!readTheme())applyTheme(event.matches?'dark':'light')});
 const bag=createBag(storage);
 const icon='<svg><use href="#i-arrow"/></svg>';
 const panel=document.querySelector('#panel'),content=document.querySelector('#panel-content'),title=document.querySelector('#panel-title');
-let opener,activePanel='',toastTimer;
+let opener,activePanel='',toastTimer,schedule;
 const escapeText=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const imageMarkup=(p,cls='',loading='lazy')=>`<img class="${cls}" src="${photo(p)}" alt="${p.name}, full 50 ml bottle concept" loading="${loading}" width="1122" height="1402">`;
 document.querySelector('#year').textContent=new Date().getFullYear();
-document.querySelector('#product-grid').innerHTML=catalog.map(p=>`<article class="product-card" style="--scent:${p.color}"><button class="product-image" data-product="${p.id}" aria-label="Discover ${p.name}"><img class="product-world" src="/media/campaign/${p.world}.webp" alt="" loading="lazy" width="1200" height="960"><span class="product-wash"></span>${imageMarkup(p,'product-bottle')}</button><div class="product-info"><h3><button data-product="${p.id}" style="padding:0;text-align:left">${p.name}</button></h3><p>${p.family}</p><div class="product-meta"><span>50 ml</span><span>Price announced at launch</span></div><button class="add-button" data-add="${p.id}" aria-label="Add ${p.name} to bag"><span>ADD TO BAG</span><span>+</span></button></div></article>`).join('');
+document.querySelector('#product-grid').innerHTML=catalog.map(p=>`<article class="product-card" style="--scent:${p.color}"><button class="product-image" data-product="${p.id}" aria-label="Discover ${p.name}"><img class="product-world" src="/media/campaign/${p.world}.webp" alt="" loading="lazy" width="1200" height="960"><img class="product-reveal" src="${p.hoverImage}" alt="${p.name} presented in its fragrance world" loading="lazy" width="1600" height="1840"></button><div class="product-info"><h3><button data-product="${p.id}" style="padding:0;text-align:left">${p.name}</button></h3><p>${p.family}</p><div class="product-meta"><span>50 ml</span><span>Price announced at launch</span></div><button class="add-button" data-add="${p.id}" aria-label="Add ${p.name} to bag"><span>ADD TO BAG</span><span>+</span></button></div></article>`).join('');
 document.querySelector('#mood-gallery').innerHTML=catalog.map((p,i)=>`<button class="mood-gallery-panel${i===0?' is-active':''}" data-product="${p.id}" aria-label="Discover ${p.name}"><img src="/media/campaign/${p.world}.webp" alt="" loading="lazy" width="1200" height="960"><span class="mood-gallery-shade"></span><span class="mood-gallery-copy"><small>0${i+1} / ${p.family}</small><strong>${p.name}</strong><em>${p.line}</em></span></button>`).join('');
-document.querySelector('#story-slides').innerHTML=catalog.map((p,i)=>`<article class="story-slide" ${i?'hidden inert':''} aria-label="${i+1} of 4: ${p.name}" style="--scent:${p.color}"><div class="story-photo"><span class="story-number">0${i+1} / THE COLLECTION</span>${imageMarkup(p,'','eager')}</div><div class="story-copy"><p class="kicker">${p.family}</p><h3>${p.name}</h3><p class="story-line">${p.line}</p><p>${p.description}</p><button class="text-link" data-product="${p.id}">DISCOVER THE FRAGRANCE <span>↗</span></button></div></article>`).join('');
-document.querySelector('.story-tabs').innerHTML=catalog.map((p,i)=>`<button class="story-tab" aria-label="Show ${p.name}" aria-pressed="${i===0}" data-slide="${i}"></button>`).join('');
+const storySlides=document.querySelector('#story-slides'),storyTabs=document.querySelector('.story-tabs');
+if(storySlides&&storyTabs){
+ storySlides.innerHTML=catalog.map((p,i)=>`<article class="story-slide" ${i?'hidden inert':''} aria-label="${i+1} of 4: ${p.name}" style="--scent:${p.color}"><div class="story-photo"><span class="story-number">0${i+1} / THE COLLECTION</span>${imageMarkup(p,'','eager')}</div><div class="story-copy"><p class="kicker">${p.family}</p><h3>${p.name}</h3><p class="story-line">${p.line}</p><p>${p.description}</p><button class="text-link" data-product="${p.id}">DISCOVER THE FRAGRANCE <span>↗</span></button></div></article>`).join('');
+ storyTabs.innerHTML=catalog.map((p,i)=>`<button class="story-tab" aria-label="Show ${p.name}" aria-pressed="${i===0}" data-slide="${i}"></button>`).join('');
+}
 function showPanel(name,heading,html){
  if(!panel.open){opener=document.activeElement;panel.showModal();document.body.classList.add('modal-open');lenis?.stop();if(typeof schedule==='function')schedule();if(!reduced.matches)gsap.fromTo(panel,{xPercent:100},{xPercent:0,duration:.55,ease:'power3.out'});}
  activePanel=name;title.textContent=heading;content.innerHTML=html;panel.scrollTop=0;requestAnimationFrame(()=>{const focus=name==='search'?content.querySelector('input'):document.querySelector('#close-panel');focus?.focus({preventScroll:true})});
@@ -39,14 +57,15 @@ const simplePanels={
  privacy:['Your privacy','This homepage saves your fragrance selection in local storage on your device. It does not create an account or collect payment information. You can remove saved items from your bag.']
 };
 function open(name){if(name==='bag')return bagPanel();if(name==='search'){showPanel('search','Find your fragrance','<label class="search-label" for="fragrance-search">Search by name or fragrance note</label><input class="panel-search" id="fragrance-search" type="search" placeholder="Try rose, cedar, or a fragrance name" autocomplete="off"><p class="sr-only" id="search-count" aria-live="polite"></p><div class="search-results" id="search-results"></div>');searchResults();content.querySelector('input').addEventListener('input',e=>searchResults(e.target.value));return;}
- if(name==='menu'){showPanel('menu','Explore VASA','<div class="menu-links"><a href="#collection" data-dismiss>Collection</a><a href="#gifting" data-dismiss>Gifting</a><a href="#art-story" data-dismiss>Art Story</a><button data-panel="contact">Contact</button><button data-panel="profile">Your profile</button></div>');requestAnimationFrame(()=>animatePanelContent('menu'));return;}
- if(name==='story'){showPanel('story','The art of VASA','<img class="panel-logo" src="/media/campaign/logo-dark.svg" alt="VASA Fragrance"><p class="panel-note"><strong>Fragrance that resides in you.</strong></p><p class="panel-note">VASA takes its name from “Vāsa”: dwelling, presence and fragrance. We believe scent does more than stay on the skin. It resides in memory.</p><p class="panel-note">Our family’s roots in the perfume business are the foundation for a collection shaped by knowledge, care and personal expression.</p><p class="panel-note">Four compositions. Four distinct characters. Each unfolds through its opening, heart and base, becoming part of the way you remember a moment.</p><button class="button dark" data-continue>MEET THE COLLECTION '+icon+'</button>');return;}
+ if(name==='menu'){showPanel('menu','Explore VASA','<div class="menu-links"><a href="#collection" data-dismiss>Collection</a><a href="#gifting" data-dismiss>Gifting</a><a href="#our-story" data-dismiss>Our Story</a><button data-panel="contact">Contact</button><button data-panel="profile">Your profile</button></div>');requestAnimationFrame(()=>animatePanelContent('menu'));return;}
+ if(name==='story'){showPanel('story','Our Story','<img class="panel-logo" src="/media/campaign/logo-dark.svg" alt="VASA Fragrance"><p class="panel-note"><strong>Fragrance that resides in you.</strong></p><p class="panel-note">VASA takes its name from “Vāsa”: dwelling, presence and fragrance. We believe scent does more than stay on the skin. It resides in memory.</p><p class="panel-note">Our family’s roots in the perfume business are the foundation for a collection shaped by knowledge, care and personal expression.</p><p class="panel-note">Four compositions. Four distinct characters. Each unfolds through its opening, heart and base, becoming part of the way you remember a moment.</p><button class="button dark" data-continue>MEET THE COLLECTION '+icon+'</button>');return;}
  const entry=simplePanels[name];if(entry)showPanel(name,entry[0],`<p class="panel-note">${entry[1]}</p><button class="button dark" data-continue>EXPLORE THE COLLECTION ${icon}</button>`);
 }
 document.addEventListener('click',e=>{const el=e.target.closest('button,a');if(!el)return;if(el.dataset.panel)open(el.dataset.panel);else if(el.dataset.product)productPanel(el.dataset.product);else if(el.dataset.add){bag.add(el.dataset.add);toast(`${productById(el.dataset.add).name} added to your bag`);if(panel.open)bagPanel();}else if(el.dataset.quantity){const id=el.dataset.quantity,increment=el.textContent.trim()==='+';bag.set(id,Number(el.dataset.value));const controls=[...content.querySelectorAll(`[data-quantity="${id}"]`)];const target=controls.find(b=>(b.textContent.trim()==='+')===increment&&!b.disabled)||controls.find(b=>!b.disabled)||content.querySelector('[data-quantity], [data-continue]');target?.focus();}else if(el.dataset.remove){bag.remove(el.dataset.remove);content.querySelector('[data-remove], [data-continue]')?.focus();}else if(el.hasAttribute('data-continue')){closePanel();requestAnimationFrame(()=>document.querySelector('#collection').scrollIntoView({behavior:reduced.matches?'instant':'smooth'}));}else if(el.hasAttribute('data-dismiss')){closePanel();}});
 // One contained editorial carousel. Every transition completes before the next requested slide.
 const slides=[...document.querySelectorAll('.story-slide')],tabs=[...document.querySelectorAll('.story-tab')],stage=document.querySelector('.story-stage'),storyStack=document.querySelector('#story-slides');
 const stageColor=hex=>{const value=parseInt(hex.slice(1),16),mix=.2,base=17;const channel=shift=>Math.round(((value>>shift)&255)*mix+base*(1-mix));return `rgb(${channel(16)}, ${channel(8)}, ${channel(0)})`};
+if(stage&&storyStack&&slides.length&&tabs.length){
 stage.style.backgroundColor=stageColor(catalog[0].color);
 function lockStoryHeight(){
  let max=0;
@@ -65,7 +84,7 @@ document.fonts.ready.then(lockStoryHeight);
 let storyResizeTimer;
 addEventListener('resize',()=>{clearTimeout(storyResizeTimer);storyResizeTimer=setTimeout(lockStoryHeight,150)},{passive:true});
 let current=0,busy=false,requested=null,destination=null,playing=false,timer=null,progressTween=null,inView=false;
-function schedule(){clearTimeout(timer);progressTween?.kill();tabs.forEach(tab=>tab.style.setProperty('--fill','0'));if(playing&&inView&&!document.hidden&&!panel.open){progressTween=gsap.to(tabs[current],{'--fill':1,duration:6,ease:'none'});timer=setTimeout(()=>go(current+1),6000)}}
+schedule=()=>{clearTimeout(timer);progressTween?.kill();tabs.forEach(tab=>tab.style.setProperty('--fill','0'));if(playing&&inView&&!document.hidden&&!panel.open){progressTween=gsap.to(tabs[current],{'--fill':1,duration:6,ease:'none'});timer=setTimeout(()=>go(current+1),6000)}};
 function go(index){index=(index+slides.length)%slides.length;if(busy){requested=index;return;}if(index===current){schedule();return;}busy=true;destination=index;clearTimeout(timer);progressTween?.kill();const from=slides[current],to=slides[index],direction=index>current?1:-1;to.hidden=false;to.inert=true;gsap.set([from,to],{position:'absolute',inset:0,width:'100%'});gsap.set(from,{zIndex:1});gsap.set(to,{zIndex:2});
  const finish=()=>{if(from.contains(document.activeElement))stage.focus({preventScroll:true});from.hidden=true;from.inert=true;to.inert=false;gsap.set([from,to],{clearProps:'position,inset,width,zIndex,clipPath,opacity,filter,transform'});gsap.set([from.querySelector('.story-copy'),to.querySelector('.story-copy')],{clearProps:'opacity,transform'});current=index;destination=null;busy=false;tabs.forEach((b,n)=>b.setAttribute('aria-pressed',String(n===index)));document.querySelector('#story-counter').textContent=`0${index+1} / 04`;document.querySelector('#story-status').textContent=catalog[index].name;if(requested!==null){const next=requested;requested=null;go(next)}else schedule();};
  if(reduced.matches){finish();return;}
@@ -86,10 +105,25 @@ let touchX;stage.addEventListener('pointerdown',e=>{if(e.pointerType==='touch')t
 function setPlaying(value){playing=value;const b=document.querySelector('#story-pause');b.textContent=value?'Ⅱ':'▷';b.setAttribute('aria-label',value?'Pause fragrance slideshow':'Play fragrance slideshow');schedule()}
 document.querySelector('#story-pause').onclick=()=>setPlaying(!playing);
 new IntersectionObserver(entries=>{inView=entries[0].isIntersecting;schedule()},{threshold:.3}).observe(stage);document.addEventListener('visibilitychange',schedule);if(!reduced.matches)setPlaying(true);
-ScrollTrigger.create({start:20,onUpdate:self=>document.querySelector('.site-header').classList.toggle('scrolled',self.scroll()>20)});
+}
+const siteHeader=document.querySelector('.site-header');
+if(siteHeader){
+ const hero=document.querySelector('.hero');
+ const updateHeaderState=()=>{
+  const pastHero=hero?hero.getBoundingClientRect().bottom<=siteHeader.offsetHeight:false;
+  siteHeader.classList.toggle('past-hero',pastHero);
+  siteHeader.classList.toggle('scrolled',scrollY>20);
+ };
+ ScrollTrigger.create({trigger:hero||document.body,start:'top top',end:'max',onUpdate:updateHeaderState});
+ addEventListener('scroll',updateHeaderState,{passive:true});
+ addEventListener('resize',updateHeaderState,{passive:true});
+ document.addEventListener('themechange',updateHeaderState);
+ requestAnimationFrame(updateHeaderState);
+}
 initBitsEffects();
-if(!reduced.matches){document.fonts.ready.then(()=>{const split=SplitText.create('#hero-title',{type:'lines',linesClass:'hero-title-line',aria:'auto'});gsap.fromTo('#hero-title',{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)',duration:1.35,ease:'power4.inOut',delay:.04,clearProps:'clipPath'});gsap.from(split.lines,{yPercent:108,opacity:0,duration:1.15,stagger:.13,ease:'power4.out',delay:.12});gsap.from('.hero-copy>.kicker,.hero-copy>.button',{opacity:0,y:12,duration:.8,stagger:.12,delay:.3});initExperience();ScrollTrigger.refresh()});}
+initFragranceTheatre();
+document.fonts.ready.then(()=>{const heroTitle=document.querySelector('#hero-title');if(!reduced.matches&&heroTitle){const split=SplitText.create(heroTitle,{type:'lines',linesClass:'hero-title-line',aria:'auto'});gsap.fromTo(heroTitle,{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)',duration:1.35,ease:'power4.inOut',delay:.04,clearProps:'clipPath'});gsap.from(split.lines,{yPercent:108,opacity:0,duration:1.15,stagger:.13,ease:'power4.out',delay:.12});gsap.from('.hero-copy>.kicker,.hero-copy>.button',{opacity:0,y:12,duration:.8,stagger:.12,delay:.3});}initExperience();ScrollTrigger.refresh()});
 const filmSources={desktop:'/media/campaign/vasa-red-memory-hero-desktop.mp4',mobile:null};
 const film=document.querySelector('#brand-film');
-const filmURL=matchMedia('(max-width:760px)').matches?filmSources.mobile:filmSources.desktop;
+const filmURL=matchMedia('(max-width:820px)').matches?filmSources.mobile:filmSources.desktop;
 if(filmURL){film.src=filmURL;film.addEventListener('playing',()=>document.querySelector('.hero').classList.add('has-film'));film.addEventListener('error',()=>document.querySelector('.hero').classList.remove('has-film'));if(!reduced.matches)film.play().catch(()=>{});}

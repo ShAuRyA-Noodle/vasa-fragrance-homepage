@@ -51,49 +51,6 @@ function initGallery(){
  }
 }
 
-function initClickSpark(){
- const canvas=document.createElement('canvas');
- canvas.id='click-spark-canvas';
- canvas.setAttribute('aria-hidden','true');
- document.body.append(canvas);
- const context=canvas.getContext('2d');
- let width=0,height=0,dpr=1,frame=0;
- const sparks=[];
- const resize=()=>{
-  width=innerWidth;height=innerHeight;dpr=Math.min(devicePixelRatio||1,2);
-  canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);
-  canvas.style.width=`${width}px`;canvas.style.height=`${height}px`;
-  context.setTransform(dpr,0,0,dpr,0,0);
- };
- const draw=now=>{
-  context.clearRect(0,0,width,height);
-  for(let index=sparks.length-1;index>=0;index--){
-   const spark=sparks[index],progress=Math.min(1,(now-spark.start)/520);
-   if(progress>=1){sparks.splice(index,1);continue;}
-   const eased=1-Math.pow(1-progress,3);
-   context.lineWidth=1.2;
-   spark.angles.forEach((angle,ray)=>{
-    const color=spark.colors[ray%spark.colors.length];
-    context.strokeStyle=`rgba(${color},${1-progress})`;
-    const inner=4+eased*10,outer=10+eased*26;
-    context.beginPath();
-    context.moveTo(spark.x+Math.cos(angle)*inner,spark.y+Math.sin(angle)*inner);
-    context.lineTo(spark.x+Math.cos(angle)*outer,spark.y+Math.sin(angle)*outer);
-    context.stroke();
-   });
-  }
-  if(sparks.length)frame=requestAnimationFrame(draw);else frame=0;
- };
- resize();addEventListener('resize',resize,{passive:true});
- if(reduced.matches)return;
- addEventListener('pointerdown',event=>{
-  if(!event.target.closest('button,a'))return;
-  const dark=Boolean(event.target.closest('.hero,.story-stage,footer,.gift-art,.button.dark'));
-  sparks.push({x:event.clientX,y:event.clientY,start:performance.now(),colors:dark?['244,226,190','184,145,78']:['147,111,55','202,164,94'],angles:Array.from({length:8},(_,index)=>index*Math.PI/4)});
-  if(!frame)frame=requestAnimationFrame(draw);
- },{passive:true});
-}
-
 function initParticleText(){
  const canvas=document.querySelector('#footer-particle-canvas');
  const root=canvas?.closest('.footer-particle');
@@ -126,8 +83,10 @@ function initParticleText(){
    if(progress>=1&&!reduced.matches){targetX+=Math.sin(now*.00045+particle.seed*12)*.65;targetY+=Math.cos(now*.00038+particle.seed*9)*.5;}
    if(pointer.active&&!reduced.matches){const dx=targetX-pointer.x,dy=targetY-pointer.y,distance=Math.hypot(dx,dy);if(distance>0&&distance<115){const force=(1-distance/115)*34;targetX+=dx/distance*force;targetY+=dy/distance*force;}}
    if(progress<1){particle.x+=(particle.tx-particle.x)*(.025+.11*ease);particle.y+=(particle.ty-particle.y)*(.025+.11*ease);}else{particle.x+=(targetX-particle.x)*.14;particle.y+=(targetY-particle.y)*.14;}
-   const gold=.25+.75*(particle.tx/Math.max(1,width));
-   context.fillStyle=`rgba(${Math.round(225-45*gold)},${Math.round(218-76*gold)},${Math.round(202-110*gold)},.9)`;
+   const gold=.25+.75*(particle.tx/Math.max(1,width)),lightTheme=document.documentElement.dataset.theme==='light';
+   context.fillStyle=lightTheme
+    ?`rgba(${Math.round(82-18*gold)},${Math.round(48-12*gold)},${Math.round(45-7*gold)},.9)`
+    :`rgba(${Math.round(239-52*gold)},${Math.round(233-76*gold)},${Math.round(225-108*gold)},.94)`;
    context.fillRect(particle.x,particle.y,1.35,1.35);
   });
   frame=requestAnimationFrame(render);
@@ -136,6 +95,7 @@ function initParticleText(){
  root.addEventListener('pointermove',event=>{const box=root.getBoundingClientRect();pointer.active=true;pointer.x=event.clientX-box.left;pointer.y=event.clientY-box.top});
  root.addEventListener('pointerleave',()=>{pointer.active=false});
  new ResizeObserver(()=>{build();if(visible&&!frame)frame=requestAnimationFrame(render)}).observe(root);
+ document.addEventListener('themechange',()=>{started=performance.now();if(visible&&!frame)frame=requestAnimationFrame(render)});
  observer.observe(root);build();
 }
 
@@ -160,16 +120,6 @@ function initTopography(){
  new ResizeObserver(resize).observe(footer);observer.observe(footer);resize();
 }
 
-function initSectionSpy(){
- const links=[...document.querySelectorAll('.nav-left a[href^="#"],.nav-right a[href^="#"]')];
- const entries=links.map(link=>({link,section:document.querySelector(link.getAttribute('href'))})).filter(entry=>entry.section);
- if(!entries.length)return;
- const activate=target=>entries.forEach(entry=>entry.link.classList.toggle('is-active',entry.section===target));
- const observer=new IntersectionObserver(items=>{const visible=items.filter(item=>item.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(visible)activate(visible.target)},{rootMargin:'-30% 0px -55%',threshold:[0,.1,.35,.7]});
- entries.forEach(entry=>observer.observe(entry.section));
- links.forEach(link=>link.addEventListener('click',()=>{const section=document.querySelector(link.getAttribute('href'));if(section)activate(section)}));
-}
-
 export function animatePanelContent(kind){
  if(reduced.matches)return;
  const selector=kind==='menu'?'.menu-links>*':'.search-result';
@@ -183,9 +133,9 @@ export function initBitsEffects(){
  initCurvedLoop();
  initPointerLighting();
  initGallery();
- initClickSpark();
+ // Click sparks were removed after review: the interaction competed with the
+ // product photography and made ordinary controls feel noisy.
  initParticleText();
  initTopography();
- initSectionSpy();
  requestAnimationFrame(()=>ScrollTrigger.refresh());
 }
