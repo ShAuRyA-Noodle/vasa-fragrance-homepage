@@ -31,6 +31,7 @@ export function initFestivalCarousel(){
  };
  const setPauseControl=()=>{
   const playing=!userPaused;
+  if(!pause)return;
   pause.textContent=playing?'Ⅱ':'▷';
   pause.setAttribute('aria-pressed',String(playing));
   pause.setAttribute('aria-label',playing?'Pause festival slideshow':'Play festival slideshow');
