@@ -1,0 +1,256 @@
+{
+  "project": "VASA Luxury-House Homepage Asset Set",
+  "version": "1.0",
+  "brand_idea": "Fragrance as dwelling, presence and memory",
+  "palette": {
+    "MUSK": "#EFE9E1",
+    "BIRCH": "#CDBCAC",
+    "SILK": "#4A1A2A",
+    "SAFFRON": "#A67D45",
+    "PINE": "#412E27",
+    "LEATHER": "#11100F"
+  },
+  "required_source_references": [
+    "One exact front-facing photograph of the named VASA bottle from /VASA Images",
+    "Official VASA wordmark/logomark artwork from /Orignal",
+    "Official fragrance label artwork when available"
+  ],
+  "shared_fidelity_lock": "Preserve the exact supplied VASA 50 ml bottle: clear heavy rectangular glass, softly bevelled shoulders and lower corners, body approximately 44.9 mm wide by 35.15 mm deep by 57.65 mm high, approximately 61.6 mm including the neck; rounded cup-shaped natural wood cap approximately 40.8 mm diameter by 25.65 mm high; short cylindrical neck; polished warm-gold collar; centered straight ivory paper label; exact official lowercase vāsā wordmark, exact fragrance name, supplied scent icon and 50 ml / 1.7 fl oz line; correct liquid hue and label keyline. Maintain plausible glass thickness, liquid meniscus, refraction, wood grain and contact shadow. Treat generated label text only as a placement proxy and replace it in post with official artwork.",
+  "shared_negative_prompt": "No copied luxury-house campaign, monogram, emblem, layout, packaging, prop language or recognizable signature motif. No competitor name or logo. No invented VASA crest. No misspelled, mirrored or duplicated label. No cylindrical or elongated generic perfume bottle. No stone, metal or plastic cap. No white cutout halo, sticker edge, levitation without support, fake statistics, fantasy palace, mansion, excessive marble, gold dust, random smoke, floating-petal explosion, generic AI glow, neon, oversaturated teal-orange grade, waxy skin, malformed hands, duplicated fingers, plastic botanicals, excessive blur, clipped cap, clipped bottle base, crushed blacks, blown glass highlights, watermark, UI, caption or superimposed typography.",
+  "production_notes": {
+    "text_policy": "No baked website copy. Only authentic physical packaging text may appear.",
+    "pairing_policy": "Generate desktop and mobile as separately composed siblings using the same set, lighting and color grade; do not auto-crop.",
+    "continuity_policy": "Approve A01 first and use it as a secondary style reference for A02-A12.",
+    "render_target": "Photographic realism, high-end commercial retouching, natural microtexture, controlled dynamic range, 2K minimum per delivered crop."
+  },
+  "assets": [
+    {
+      "id": "A01",
+      "name": "The House of Memory",
+      "homepage_section": "Hero poster and NF4 video fallback",
+      "fragrance": "House-level, use The Night Lingers bottle as tonal anchor",
+      "purpose": "Establish the VASA world in one image while leaving live-copy space.",
+      "desktop": {
+        "aspect_ratio": "16:9",
+        "subject_position": "Bottle at 64% canvas width and 60% canvas height; low stone plinth spanning the lower third; atmosphere receding to the left.",
+        "safe_zone": "Keep top 9% clear for transparent navigation, bottom 8% low-detail, and leftmost 30% as continuous live-copy space. Keep full cap and base inside the central 76% height."
+      },
+      "mobile": {
+        "aspect_ratio": "9:16",
+        "subject_position": "Bottle centered slightly below mid-frame on the same dark stone plinth; distant Himalayan ridge raised behind the cap but never intersecting it.",
+        "safe_zone": "Keep top 13% and bottom 17% clear; bottle and ridge silhouette remain inside central 74% width; minimum 7% air above cap and below plinth."
+      },
+      "prompt": "Create a cinematic luxury fragrance campaign still at blue hour in a high-altitude Himalayan landscape. A real VASA The Night Lingers 50 ml bottle stands on one dark weathered slate plinth after light rain. The landscape is expansive, quiet and plausible: layered mountain silhouettes, cool mineral mist and a restrained band of late burgundy light at the horizon. The amber liquid and warm-gold collar catch one narrow saffron highlight; the natural wooden cap remains tactile and dry. The bottle is optically sharp with believable glass refraction while the mountains retain visible structure rather than becoming a blurry backdrop. Compose with architectural calm, large negative space and a single visual hierarchy. The image should feel photographed on location with a medium-format camera, subtle film grain, deep LEATHER shadows, PINE stone, SILK horizon and controlled MUSK highlights. No people, no decorative ingredients, no surreal levitation. Apply the shared bottle and label fidelity lock.",
+      "references": ["Exact The Night Lingers bottle front photograph", "Official VASA label artwork", "Approved NF4 video frame if available"]
+    },
+    {
+      "id": "A02",
+      "name": "Pear Blossom Held in Light",
+      "homepage_section": "Collection tile 01 and The Sweetest Stranger detail",
+      "fragrance": "The Sweetest Stranger",
+      "purpose": "A precise, emotionally warm product portrait for the four-fragrance collection.",
+      "desktop": {
+        "aspect_ratio": "4:5",
+        "subject_position": "Bottle centered at 50% width, base at 82% height; botanicals confined to rear left and lower right.",
+        "safe_zone": "Keep outer 9% clear and entire product inside middle 68% width; minimum 6% air above cap and below base."
+      },
+      "mobile": {
+        "aspect_ratio": "4:5",
+        "subject_position": "Same set rebuilt closer, bottle at 46% width with a soft shadow extending right.",
+        "safe_zone": "Keep outer 10% clear; label fully frontal and readable; no petal may cross the bottle silhouette or label."
+      },
+      "prompt": "Photograph the exact VASA The Sweetest Stranger bottle in a quiet blush-toned studio built from hand-tinted plaster and MUSK paper. Use one fresh pear blossom branch, a few real red berries and the edge of one white gardenia as restrained note cues, all physically grounded and outside the product silhouette. Morning window light makes a soft geometric shadow; the pink liquid glows naturally through the heavy clear glass. Preserve subtle surface imperfections, paper fibre and living botanical texture. The tone is intimate and graceful, with blush, MUSK and a controlled SILK accent, never sugary or juvenile. Flat frontal product clarity with slight three-quarter depth, no floating objects, no copy. Apply the shared bottle and label fidelity lock.",
+      "references": ["Exact The Sweetest Stranger bottle front photograph", "Official The Sweetest Stranger label artwork"]
+    },
+    {
+      "id": "A03",
+      "name": "Velvet Confidence",
+      "homepage_section": "Collection tile 02 and Rebel in Velvet detail",
+      "fragrance": "Rebel in Velvet",
+      "purpose": "Translate creamy floral depth without cliché glamour styling.",
+      "desktop": {
+        "aspect_ratio": "4:5",
+        "subject_position": "Bottle centered at 53% width on a folded matte textile plane; cocoa shell and almond at far edges.",
+        "safe_zone": "Keep outer 9% clear; preserve an uninterrupted 12% halo of background around cap and label."
+      },
+      "mobile": {
+        "aspect_ratio": "4:5",
+        "subject_position": "Bottle centered, textile fold runs diagonally behind but does not touch the label.",
+        "safe_zone": "Keep outer 10% clear; full bottle visible; botanicals remain in the lower 22% only."
+      },
+      "prompt": "Create a refined studio product portrait of the exact VASA Rebel in Velvet bottle against a dusty lavender mineral wall. The bottle rests on a low cocoa-brown suede plane with one deliberate fold, a cracked almond shell and a single real tuberose stem used as quiet note cues. A broad diffused side light reveals glass thickness, lavender liquid, wood grain and the warm-gold collar; a narrow reflected highlight traces one bottle edge. The image feels tactile, self-possessed and adult, with lavender, cocoa, PINE and MUSK. Avoid glossy nightclub styling, jewellery, cosmetic powder, floating petals or theatrical smoke. No superimposed text. Apply the shared bottle and label fidelity lock.",
+      "references": ["Exact Rebel in Velvet bottle front photograph", "Official Rebel in Velvet label artwork"]
+    },
+    {
+      "id": "A04",
+      "name": "Stillness with an Edge",
+      "homepage_section": "Collection tile 03 and Silent Storm detail",
+      "fragrance": "Silent Storm",
+      "purpose": "Express freshness, mineral tension and quiet longevity.",
+      "desktop": {
+        "aspect_ratio": "4:5",
+        "subject_position": "Bottle centered at 48% width on dark blue-grey stone; one cedar shaving low right.",
+        "safe_zone": "Keep 10% clear on every edge and a clean 14% background gap around the product silhouette."
+      },
+      "mobile": {
+        "aspect_ratio": "4:5",
+        "subject_position": "Bottle centered lower with misted stone plane rising behind; peppercorns limited to lower left corner.",
+        "safe_zone": "Keep full cap and base visible; no mist, cedar or pepper overlaps label; outer 9% clear."
+      },
+      "prompt": "Photograph the exact VASA Silent Storm bottle on a cool blue-grey mineral slab with a lightly wet surface, set against a soft fog gradient. Use three black peppercorns, one pale cedar shaving and a short sprig of real lavender as precise note cues, placed low and away from the label. Cool overcast light is cut by one clean lateral beam that catches the glass bevels and pale blue-green liquid. The composition is calm, masculine and exact, with mineral blue, PINE, BIRCH and a restrained SAFFRON reflection at the collar. Maintain true material detail and an uncluttered editorial frame. No lightning, rain effects, mountains pasted behind the product, floating ingredients or superimposed text. Apply the shared bottle and label fidelity lock.",
+      "references": ["Exact Silent Storm bottle front photograph", "Official Silent Storm label artwork"]
+    },
+    {
+      "id": "A05",
+      "name": "After the Night",
+      "homepage_section": "Collection tile 04 and The Night Lingers detail",
+      "fragrance": "The Night Lingers",
+      "purpose": "Build a dark amber product portrait with open blacks and believable warmth.",
+      "desktop": {
+        "aspect_ratio": "4:5",
+        "subject_position": "Bottle centered at 55% width on charred wood and smoked glass planes; rose at far left edge.",
+        "safe_zone": "Keep outer 9% clear and product fully separated from the background; label area must remain above 65% perceived brightness."
+      },
+      "mobile": {
+        "aspect_ratio": "4:5",
+        "subject_position": "Bottle at center with a thin incense trail rising behind and to the right, never crossing cap or label.",
+        "safe_zone": "Keep outer 10% clear; smoke limited to rightmost 22%; full contact shadow visible below base."
+      },
+      "prompt": "Create a dark, intimate product portrait of the exact VASA The Night Lingers bottle on a small plane of charred wood beside smoked glass. Include one deep red rose seen in partial profile, one saffron thread cluster and a very thin physically plausible incense trail in the far background. Warm amber liquid carries the light; the LEATHER background remains deep but open, with SILK and SAFFRON accents and visible separation around every bottle edge. Use a focused side key, faint warm bounce and precise specular highlights, as if photographed in a controlled studio after dusk. The mood is composed and lingering, not gothic. No flames, excessive smoke, gold particles, nightclub styling or text overlay. Apply the shared bottle and label fidelity lock.",
+      "references": ["Exact The Night Lingers bottle front photograph", "Official The Night Lingers label artwork"]
+    },
+    {
+      "id": "A06",
+      "name": "Measured Concentration",
+      "homepage_section": "The VASA Standard — Concentration",
+      "fragrance": "Use The Night Lingers liquid tone; bottle can appear partially at edge",
+      "purpose": "Visualize high perfume concentration through material evidence, not a fake statistic.",
+      "desktop": {
+        "aspect_ratio": "3:2",
+        "subject_position": "Glass dropper and viscous amber droplet at 62% width; partial VASA bottle edge at far right; left third quiet.",
+        "safe_zone": "Reserve left 34% as low-detail live-copy space; keep droplet inside central 52% height; outer 8% clear."
+      },
+      "mobile": {
+        "aspect_ratio": "4:5",
+        "subject_position": "Droplet suspended over a clean scent blotter in upper middle; bottle base visible at lower right.",
+        "safe_zone": "Keep top 12% and bottom 14% clear; essential droplet and blotter within central 72% width."
+      },
+      "prompt": "Create an extreme close-up still life showing the material concentration of fine fragrance. A clear glass dropper holds one dense amber perfume droplet above an uncoated MUSK scent blotter; the droplet is physically accurate, translucent and optically crisp. At the far edge, include a small recognizable portion of the exact VASA bottle glass and warm-gold collar to anchor the brand without turning this into a packshot. Use controlled raking light, macro depth of field and visible paper fibre. The composition is scientific in precision but warm in feeling, with LEATHER shadow, SAFFRON liquid and MUSK paper. No laboratory clichés, measurement graphics, numbers, splash, floating droplets or copy. Apply the relevant shared bottle fidelity wherever the bottle is visible.",
+      "references": ["Exact VASA bottle macro/detail photograph", "Official VASA palette"]
+    },
+    {
+      "id": "A07",
+      "name": "The Trace That Remains",
+      "homepage_section": "The VASA Standard — Longevity",
+      "fragrance": "House-level",
+      "purpose": "Express longevity as memory left on material rather than as a clock or numerical claim.",
+      "desktop": {
+        "aspect_ratio": "16:10",
+        "subject_position": "Perfumed silk and wooden cap occupy right 58%; a long shadow and fading reflected light move left.",
+        "safe_zone": "Reserve left 32% for live copy; outer 8% clear; keep material folds below top navigation zone."
+      },
+      "mobile": {
+        "aspect_ratio": "4:5",
+        "subject_position": "Wood cap and edge of bottle rest on folded SILK textile in lower half; luminous trace leads upward.",
+        "safe_zone": "Keep top 18% low-detail; full visible bottle fragment and cap within central 76% width; outer 9% clear."
+      },
+      "prompt": "Photograph a restrained metaphor for fragrance longevity: a length of deep SILK burgundy textile lies across a warm BIRCH surface, holding the exact VASA wooden cap and the lower edge of a real VASA bottle. Late light travels across the textile and slowly fades into LEATHER shadow, leaving a long controlled reflection like a remembered trace. Material detail is paramount: natural cap grain, woven silk, glass edge, fine dust and a soft contact imprint in the fabric. The frame feels quiet, sensual and enduring. Do not depict clocks, timelines, smoke figures, footprints, glowing trails, typography or fantasy effects. Apply the shared bottle and cap fidelity lock to all visible product parts.",
+      "references": ["Exact VASA bottle and cap photograph", "Official VASA palette"]
+    },
+    {
+      "id": "A08",
+      "name": "Hands That Know",
+      "homepage_section": "The VASA Standard — Family-rooted expertise",
+      "fragrance": "House-level",
+      "purpose": "Represent knowledge passed between generations through a believable working gesture.",
+      "desktop": {
+        "aspect_ratio": "3:2",
+        "subject_position": "Two adult pairs of hands and blotters occupy right two-thirds; open ledger and partial bottle form a diagonal.",
+        "safe_zone": "Reserve left 30% for live copy; keep all fingers and bottle edges inside central 84% frame; outer 8% clear."
+      },
+      "mobile": {
+        "aspect_ratio": "4:5",
+        "subject_position": "Hands meet near center over the ledger; partial bottle rests fully within lower third.",
+        "safe_zone": "Keep top 13% low-detail; all hands complete and anatomically visible; do not crop wrists at joints; outer 8% clear."
+      },
+      "prompt": "Create a documentary-style atelier still showing expertise passed between two adult generations without showing faces. One older pair of natural, experienced hands and one younger pair compare two scent blotters above an open formula ledger with abstract, non-readable marks. The exact VASA bottle rests nearby with its wooden cap removed and placed beside the gold collar. The setting is a real working table in dark wood, linen and uncoated paper, lit by soft north-window light. Skin texture, nails and gestures are natural and respectful; the action feels observed rather than posed. Use PINE, BIRCH, MUSK and a small SAFFRON highlight. No costumes, palace décor, fake historical props, legible formula claims, gloves, laboratory glassware wall or over-stylized hands. Apply the shared bottle fidelity lock.",
+      "references": ["Exact VASA bottle photograph", "Official VASA logomark artwork for optional paper embossing in post"]
+    },
+    {
+      "id": "A09",
+      "name": "Four Presences",
+      "homepage_section": "Discovery ritual and collection transition",
+      "fragrance": "All four fragrances",
+      "purpose": "Show the range as one coherent house while preserving each scent identity.",
+      "desktop": {
+        "aspect_ratio": "16:9",
+        "subject_position": "Four bottles in one measured line across middle 64% width, alternating subtle depths by no more than 4%.",
+        "safe_zone": "Keep top 12% and bottom 12% clear; no bottle overlaps another; all labels fully frontal; outer 8% clear."
+      },
+      "mobile": {
+        "aspect_ratio": "4:5",
+        "subject_position": "Four bottles arranged as a shallow two-by-two composition with equal visual weight, not a pyramid.",
+        "safe_zone": "Keep outer 8% clear and at least 4% separation between bottle silhouettes; every cap and base visible."
+      },
+      "prompt": "Create a precise house portrait of all four exact VASA 50 ml bottles—The Sweetest Stranger, Rebel in Velvet, Silent Storm and The Night Lingers—on a continuous MUSK limestone plane. Each bottle retains its correct liquid color and official label while sharing identical size, perspective, cap geometry and light direction. Behind each bottle, use only a soft vertical field of its color family: blush, dusty lavender, mineral blue and whiskey amber, blended through real translucent scrims rather than digital gradients. One broad top light and subtle side bounce reveal the common glass architecture and wooden caps. The group feels calm, collectible and unified. No stepped podiums, hierarchy, overlapping products, ingredient scatter, mirrored floor, copy or interface elements. Apply the shared bottle and label fidelity lock independently to all four bottles.",
+      "references": ["Exact front photograph of each of the four VASA bottles", "Official label artwork for all four fragrances"]
+    },
+    {
+      "id": "A10",
+      "name": "Memory in Motion",
+      "homepage_section": "Our Story",
+      "fragrance": "House-level, product secondary",
+      "purpose": "Connect modern Indian craft, fragrance and the fluid-whisp mark without costume or cliché.",
+      "desktop": {
+        "aspect_ratio": "16:10",
+        "subject_position": "Hand-drawn curved linework and paper occupy left 55%; bottle and brass tool sit low right.",
+        "safe_zone": "Keep upper right 30% as live-copy space; outer 8% clear; no linework intersects bottle label."
+      },
+      "mobile": {
+        "aspect_ratio": "4:5",
+        "subject_position": "Paper, hand and a single curved stroke occupy upper half; full bottle sits lower center-right.",
+        "safe_zone": "Keep top 10% and lower 12% clear; linework stays at least 6% away from bottle silhouette and label."
+      },
+      "prompt": "Create an editorial still life about VASA's idea of scent as memory in motion. On a warm MUSK handmade paper surface, an artisan hand draws one fluid abstract curve in diluted SAFFRON pigment, inspired by movement and Indian ornamental line work but not reproducing the logo. Nearby sit a small brass tool, one dark wood fragment and the exact VASA bottle, complete and physically grounded. Soft angled daylight creates long disciplined shadows; paper fibre, pigment pooling, brass patina, wood grain and glass refraction are visible. The result feels contemporary, culturally rooted and globally refined, with no folk-costume styling or literal heritage tableau. Do not draw a competitor symbol, invented crest, mandala, paisley field, ornate border or baked copy. Apply the shared bottle and label fidelity lock.",
+      "references": ["Exact VASA bottle photograph", "VASA logo meaning board for conceptual reference only", "Official wordmark for post-production only"]
+    },
+    {
+      "id": "A11",
+      "name": "The Considered Gift",
+      "homepage_section": "Gifting",
+      "fragrance": "The Sweetest Stranger or buyer-selected fragrance",
+      "purpose": "Show an intimate wrapping ritual with premium material credibility.",
+      "desktop": {
+        "aspect_ratio": "3:2",
+        "subject_position": "Open gift box and bottle occupy left 62%; one pair of hands ties ribbon from lower left; right third calm.",
+        "safe_zone": "Reserve right 30% for live copy; keep all fingers, ribbon ends, bottle and box within central 86% frame; outer 7% clear."
+      },
+      "mobile": {
+        "aspect_ratio": "4:5",
+        "subject_position": "Gift box centered lower, bottle fully visible inside, hands enter from sides without covering label.",
+        "safe_zone": "Keep top 16% low-detail for heading; hands must remain complete; minimum 6% air below box."
+      },
+      "prompt": "Photograph a refined gifting ritual on a BIRCH stone table. A pair of natural adult hands ties a deep SILK grosgrain ribbon around an open rigid MUSK paper box containing the exact VASA bottle in a fitted uncoated-paper insert. Add one blank textured note card and a small SAFFRON foil VASA wordmark only if supplied as official artwork for post-production. Warm side daylight and soft shadow reveal paper grain, ribbon weave, glass, gold collar and wooden cap. The moment feels personal and quiet, like the final gesture before giving. No jewellery styling, festive confetti, flowers covering the product, bows larger than the box, invented copy, ornate pattern or excessive props. Apply the shared bottle and label fidelity lock.",
+      "references": ["Exact selected VASA bottle photograph", "Official VASA wordmark", "Existing VASA carton references if supplied"]
+    },
+    {
+      "id": "A12",
+      "name": "A Presence Left Behind",
+      "homepage_section": "Closing campaign, newsletter and social gateway",
+      "fragrance": "House-level; use Silent Storm or The Night Lingers bottle",
+      "purpose": "End the page emotionally with human presence implied, not performed.",
+      "desktop": {
+        "aspect_ratio": "16:9",
+        "subject_position": "Bottle and folded dark coat occupy right 44%; an open window and shifting curtain create movement at center; left third quiet.",
+        "safe_zone": "Reserve left 32% as live-copy and email-field space; keep top 9% and bottom 10% low-detail; bottle fully inside central 74% height."
+      },
+      "mobile": {
+        "aspect_ratio": "9:16",
+        "subject_position": "Bottle on window ledge in lower middle; linen curtain arcs behind it; distant mountain light in upper half.",
+        "safe_zone": "Keep top 14% clear, bottom 18% low-detail and product within central 70% width; curtain never crosses label or cap."
+      },
+      "prompt": "Create a cinematic closing still in a quiet modern room at first light. The exact VASA bottle rests on a dark timber window ledge beside a folded LEATHER-black coat; a sheer MUSK linen curtain moves gently through the open window, revealing a distant cool mountain horizon. No person is visible, yet the room holds the trace of someone who has just left. One soft shaft of dawn catches the bottle glass, wood cap and warm-gold collar while the rest remains calm and textural. Grade with LEATHER, PINE, MUSK and a restrained SILK undertone. The image should feel emotionally specific, realistic and unforced. No luxury apartment spectacle, city skyline, bed, jewellery, smoke, floating fabric impossible physics, dramatic lens flare or baked typography. Apply the shared bottle and label fidelity lock.",
+      "references": ["Exact selected VASA bottle photograph", "Approved A01 image as color and realism reference"]
+    }
+  ]
+}

@@ -65,9 +65,9 @@ function initParticleText(){
   sample.width=width;sample.height=height;
   const size=Math.min(height*.72,width*.205);
   sampleContext.font=`500 ${size}px Manrope, Arial, sans-serif`;sampleContext.textAlign='center';sampleContext.textBaseline='middle';sampleContext.fillStyle='#fff';sampleContext.fillText('VASA',width/2,height/2);
-  const pixels=sampleContext.getImageData(0,0,width,height).data,targets=[],step=width<600?7:5;
+  const pixels=sampleContext.getImageData(0,0,width,height).data,targets=[],step=width<600?5:4;
   for(let y=0;y<height;y+=step)for(let x=0;x<width;x+=step)if(pixels[(y*width+x)*4+3]>80)targets.push({x,y});
-  const stride=Math.max(1,Math.ceil(targets.length/1700));
+  const stride=Math.max(1,Math.ceil(targets.length/2600));
   particles=targets.filter((_,index)=>index%stride===0).map((target,index)=>{
    const seed=((index*9301+49297)%233280)/233280,angle=seed*Math.PI*2,distance=reduced.matches?0:80+seed*160;
    return {tx:target.x,ty:target.y,x:target.x+Math.cos(angle)*distance,y:target.y+Math.sin(angle)*distance,seed};
@@ -85,9 +85,10 @@ function initParticleText(){
    if(progress<1){particle.x+=(particle.tx-particle.x)*(.025+.11*ease);particle.y+=(particle.ty-particle.y)*(.025+.11*ease);}else{particle.x+=(targetX-particle.x)*.14;particle.y+=(targetY-particle.y)*.14;}
    const gold=.25+.75*(particle.tx/Math.max(1,width)),lightTheme=document.documentElement.dataset.theme==='light';
    context.fillStyle=lightTheme
-    ?`rgba(${Math.round(82-18*gold)},${Math.round(48-12*gold)},${Math.round(45-7*gold)},.9)`
-    :`rgba(${Math.round(239-52*gold)},${Math.round(233-76*gold)},${Math.round(225-108*gold)},.94)`;
-   context.fillRect(particle.x,particle.y,1.35,1.35);
+    ?`rgba(${Math.round(72-14*gold)},${Math.round(42-8*gold)},${Math.round(39-6*gold)},.98)`
+    :`rgba(${Math.round(248-42*gold)},${Math.round(241-58*gold)},${Math.round(232-88*gold)},1)`;
+   const particleSize=width<600?1.65:1.9;
+   context.fillRect(particle.x,particle.y,particleSize,particleSize);
   });
   frame=requestAnimationFrame(render);
  };
@@ -120,6 +121,15 @@ function initTopography(){
  new ResizeObserver(resize).observe(footer);observer.observe(footer);resize();
 }
 
+function initCraftCards(){
+ const cards=[...document.querySelectorAll('.craft-card')];
+ if(!cards.length||reduced.matches)return;
+ gsap.fromTo(cards,
+  {rotateY:index=>index%2?-720:720,xPercent:index=>(index-1)*24,y:48,opacity:0,transformPerspective:1300,transformOrigin:'50% 50%'},
+  {rotateY:0,xPercent:0,y:0,opacity:1,duration:1.55,stagger:.13,ease:'power3.out',clearProps:'transform,opacity',scrollTrigger:{trigger:'.craft-principles',start:'top 84%',once:true}}
+ );
+}
+
 export function animatePanelContent(kind){
  if(reduced.matches)return;
  const selector=kind==='menu'?'.menu-links>*':'.search-result';
@@ -133,6 +143,7 @@ export function initBitsEffects(){
  initCurvedLoop();
  initPointerLighting();
  initGallery();
+ initCraftCards();
  // Click sparks were removed after review: the interaction competed with the
  // product photography and made ordinary controls feel noisy.
  initParticleText();

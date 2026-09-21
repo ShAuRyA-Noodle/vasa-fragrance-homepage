@@ -4,6 +4,7 @@ import {createBag} from './cart.js';
 import {initExperience} from './experience.js';
 import {initBitsEffects,animatePanelContent} from './bits-effects.js';
 import {initFragranceTheatre} from './fragrance-theatre.js';
+import {initFestivalCarousel} from './festival-carousel.js';
 const lenis=smoothScroll();
 let storage;try{storage=window.localStorage}catch{storage={getItem:()=>null,setItem:()=>{}}}
 const themeKey='vasa-theme',themeMedia=matchMedia('(prefers-color-scheme: dark)'),themeToggle=document.querySelector('.theme-toggle'),themeIcon=themeToggle?.querySelector('.theme-toggle-icon'),themeMeta=document.querySelector('meta[name="theme-color"]');
@@ -27,8 +28,16 @@ let opener,activePanel='',toastTimer,schedule;
 const escapeText=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const imageMarkup=(p,cls='',loading='lazy')=>`<img class="${cls}" src="${photo(p)}" alt="${p.name}, full 50 ml bottle concept" loading="${loading}" width="1122" height="1402">`;
 document.querySelector('#year').textContent=new Date().getFullYear();
+document.querySelector('.footer-subscribe')?.addEventListener('submit',event=>{event.preventDefault();const field=event.currentTarget.querySelector('input');if(!field?.value.trim()){field?.focus();return;}toast('Thank you. VASA notes will arrive here.');event.currentTarget.reset()});
 document.querySelector('#product-grid').innerHTML=catalog.map(p=>`<article class="product-card" style="--scent:${p.color}"><button class="product-image" data-product="${p.id}" aria-label="Discover ${p.name}"><img class="product-world" src="/media/campaign/${p.world}.webp" alt="" loading="lazy" width="1200" height="960"><img class="product-reveal" src="${p.hoverImage}" alt="${p.name} presented in its fragrance world" loading="lazy" width="1600" height="1840"></button><div class="product-info"><h3><button data-product="${p.id}" style="padding:0;text-align:left">${p.name}</button></h3><p>${p.family}</p><div class="product-meta"><span>50 ml</span><span>Price announced at launch</span></div><button class="add-button" data-add="${p.id}" aria-label="Add ${p.name} to bag"><span>ADD TO BAG</span><span>+</span></button></div></article>`).join('');
-document.querySelector('#mood-gallery').innerHTML=catalog.map((p,i)=>`<button class="mood-gallery-panel${i===0?' is-active':''}" data-product="${p.id}" aria-label="Discover ${p.name}"><img src="/media/campaign/${p.world}.webp" alt="" loading="lazy" width="1200" height="960"><span class="mood-gallery-shade"></span><span class="mood-gallery-copy"><small>0${i+1} / ${p.family}</small><strong>${p.name}</strong><em>${p.line}</em></span></button>`).join('');
+const giftIdeas=[
+ {title:'For celebrations',label:'01 / FESTIVE GIFTING',line:'A fragrant keepsake for the moments everyone remembers.',image:'/media/campaign/festival/diwali-signature.webp'},
+ {title:'For someone close',label:'02 / PERSONAL GESTURES',line:'Chosen for them. Remembered as part of their story.',image:'/media/campaign/festival/indian-gifting.webp'},
+ {title:'For the host',label:'03 / CONSIDERED THANK-YOUS',line:'A quiet expression of gratitude, wrapped with intention.',image:'/media/campaign/festival/weekend-ritual.webp'},
+ {title:'For discovery',label:'04 / THE VASA SET',line:'Four expressions, ready to be worn and understood.',image:'/media/campaign/gifting-presentation-v2.webp'}
+];
+const giftingGallery=document.querySelector('#gifting-gallery');
+if(giftingGallery)giftingGallery.innerHTML=giftIdeas.map((gift,i)=>`<a class="mood-gallery-panel gift-gallery-panel${i===0?' is-active':''}" href="#collection" aria-label="Explore ${gift.title.toLowerCase()}"><img src="${gift.image}" alt="" loading="lazy" width="1600" height="1000"><span class="mood-gallery-shade"></span><span class="mood-gallery-copy"><small>${gift.label}</small><strong>${gift.title}</strong><em>${gift.line}</em><span class="gift-gallery-link">EXPLORE GIFTS <b aria-hidden="true">↗</b></span></span></a>`).join('');
 const storySlides=document.querySelector('#story-slides'),storyTabs=document.querySelector('.story-tabs');
 if(storySlides&&storyTabs){
  storySlides.innerHTML=catalog.map((p,i)=>`<article class="story-slide" ${i?'hidden inert':''} aria-label="${i+1} of 4: ${p.name}" style="--scent:${p.color}"><div class="story-photo"><span class="story-number">0${i+1} / THE COLLECTION</span>${imageMarkup(p,'','eager')}</div><div class="story-copy"><p class="kicker">${p.family}</p><h3>${p.name}</h3><p class="story-line">${p.line}</p><p>${p.description}</p><button class="text-link" data-product="${p.id}">DISCOVER THE FRAGRANCE <span>↗</span></button></div></article>`).join('');
@@ -122,6 +131,7 @@ if(siteHeader){
 }
 initBitsEffects();
 initFragranceTheatre();
+initFestivalCarousel();
 document.fonts.ready.then(()=>{const heroTitle=document.querySelector('#hero-title');if(!reduced.matches&&heroTitle){const split=SplitText.create(heroTitle,{type:'lines',linesClass:'hero-title-line',aria:'auto'});gsap.fromTo(heroTitle,{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)',duration:1.35,ease:'power4.inOut',delay:.04,clearProps:'clipPath'});gsap.from(split.lines,{yPercent:108,opacity:0,duration:1.15,stagger:.13,ease:'power4.out',delay:.12});gsap.from('.hero-copy>.kicker,.hero-copy>.button',{opacity:0,y:12,duration:.8,stagger:.12,delay:.3});}initExperience();ScrollTrigger.refresh()});
 const filmSources={desktop:'/media/campaign/vasa-red-memory-hero-desktop.mp4',mobile:null};
 const film=document.querySelector('#brand-film');
