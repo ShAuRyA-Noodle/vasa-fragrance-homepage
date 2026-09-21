@@ -133,7 +133,16 @@ initBitsEffects();
 initFragranceTheatre();
 initFestivalCarousel();
 document.fonts.ready.then(()=>{const heroTitle=document.querySelector('#hero-title');if(!reduced.matches&&heroTitle){const split=SplitText.create(heroTitle,{type:'lines',linesClass:'hero-title-line',aria:'auto'});gsap.fromTo(heroTitle,{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)',duration:1.35,ease:'power4.inOut',delay:.04,clearProps:'clipPath'});gsap.from(split.lines,{yPercent:108,opacity:0,duration:1.15,stagger:.13,ease:'power4.out',delay:.12});gsap.from('.hero-copy>.kicker,.hero-copy>.button',{opacity:0,y:12,duration:.8,stagger:.12,delay:.3});}initExperience();ScrollTrigger.refresh()});
-const filmSources={desktop:'/media/campaign/vasa-red-memory-hero-desktop.mp4',mobile:null};
 const film=document.querySelector('#brand-film');
-const filmURL=matchMedia('(max-width:820px)').matches?filmSources.mobile:filmSources.desktop;
-if(filmURL){film.src=filmURL;film.addEventListener('playing',()=>document.querySelector('.hero').classList.add('has-film'));film.addEventListener('error',()=>document.querySelector('.hero').classList.remove('has-film'));if(!reduced.matches)film.play().catch(()=>{});}
+if(film){
+ const hero=document.querySelector('.hero');
+ const showFilm=()=>hero?.classList.add('has-film');
+ const showPoster=()=>hero?.classList.remove('has-film');
+ film.muted=true;
+ film.defaultMuted=true;
+ film.addEventListener('playing',showFilm);
+ film.addEventListener('loadeddata',showFilm,{once:true});
+ film.addEventListener('error',showPoster);
+ const playback=film.play();
+ playback?.catch(showPoster);
+}
