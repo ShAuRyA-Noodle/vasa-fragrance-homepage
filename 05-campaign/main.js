@@ -118,10 +118,13 @@ new IntersectionObserver(entries=>{inView=entries[0].isIntersecting;schedule()},
 const siteHeader=document.querySelector('.site-header');
 if(siteHeader){
  const hero=document.querySelector('.hero');
+ const promo=document.querySelector('.promo-marquee');
  const updateHeaderState=()=>{
   const pastHero=hero?hero.getBoundingClientRect().bottom<=siteHeader.offsetHeight:false;
+  const isScrolled=scrollY>20;
   siteHeader.classList.toggle('past-hero',pastHero);
-  siteHeader.classList.toggle('scrolled',scrollY>20);
+  siteHeader.classList.toggle('scrolled',isScrolled);
+  promo?.classList.toggle('is-hidden',isScrolled);
  };
  ScrollTrigger.create({trigger:hero||document.body,start:'top top',end:'max',onUpdate:updateHeaderState});
  addEventListener('scroll',updateHeaderState,{passive:true});
