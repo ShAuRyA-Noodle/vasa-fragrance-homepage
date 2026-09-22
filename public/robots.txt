@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://08-homepage-variations.vercel.app/sitemap.xml

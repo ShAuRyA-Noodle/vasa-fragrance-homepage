@@ -1,0 +1,41 @@
+const root = document.documentElement;
+const themeButton = document.querySelector('.theme-toggle');
+const themeLabel = document.querySelector('.theme-label');
+const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+function setTheme(theme) {
+  root.dataset.theme = theme;
+  const dark = theme === 'dark';
+  themeButton.setAttribute('aria-pressed', String(dark));
+  themeButton.setAttribute('aria-label', `Use ${dark ? 'light' : 'dark'} theme`);
+  themeLabel.textContent = dark ? 'Light' : 'Dark';
+  themeMeta.content = dark ? '#141312' : '#f3f0e9';
+  try { localStorage.setItem('vasa-theme', theme); } catch (error) { /* storage is optional */ }
+}
+setTheme(root.dataset.theme === 'dark' ? 'dark' : 'light');
+themeButton.addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+
+const menuButton = document.querySelector('.menu-toggle');
+const mobileMenu = document.querySelector('#mobile-menu');
+menuButton.addEventListener('click', () => {
+  const open = menuButton.getAttribute('aria-expanded') === 'true';
+  menuButton.setAttribute('aria-expanded', String(!open));
+  mobileMenu.hidden = open;
+});
+mobileMenu.addEventListener('click', event => { if (event.target.closest('a')) { mobileMenu.hidden = true; menuButton.setAttribute('aria-expanded', 'false'); } });
+
+const filters = [...document.querySelectorAll('.filter')];
+const cards = [...document.querySelectorAll('.product-card')];
+const count = document.querySelector('#result-count');
+filters.forEach(button => button.addEventListener('click', () => {
+  const value = button.dataset.filter;
+  filters.forEach(item => { const active = item === button; item.classList.toggle('is-active', active); item.setAttribute('aria-pressed', String(active)); });
+  let visible = 0;
+  cards.forEach(card => { const show = value === 'all' || card.dataset.families.split(' ').includes(value); card.classList.toggle('is-hidden', !show); if (show) visible += 1; });
+  count.textContent = String(visible).padStart(2, '0');
+}));
+
+if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } }), { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(item => observer.observe(item));
+} else document.querySelectorAll('.reveal').forEach(item => item.classList.add('is-visible'));
