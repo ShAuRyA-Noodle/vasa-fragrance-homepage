@@ -1,0 +1,481 @@
+/* VASA — Find Your Stranger. Original composition. */
+
+:root {
+  --ink: #0c0a09;
+  --umber: #1a1410;
+  --velvet: #2a1620;
+  --gold: #c8a86a;
+  --gold-hi: #ecd9a8;
+  --cream: #efe6d6;
+  --mist: #8a8f8c;
+  --ease: cubic-bezier(.22,.68,.16,1);
+  --ease-elastic: cubic-bezier(.2,1.4,.4,1);
+  --dur-step: 1.05s;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: 'Manrope', sans-serif;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  cursor: none;
+}
+body.touch-input, body.touch-input * { cursor: auto !important; }
+
+::selection { background: var(--gold); color: var(--ink); }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: fixed; top: -100%; left: 1rem; z-index: 999;
+  background: var(--gold); color: var(--ink); padding: .6rem 1rem;
+  font: 600 12px Manrope, sans-serif; text-decoration: none;
+}
+.skip-link:focus { top: 1rem; }
+
+/* ---------------------------------------------------------------- canvas */
+#scene-canvas {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  z-index: 0; display: block; background: var(--ink);
+}
+#scene-fallback {
+  /* Hidden by default: only the local stub scene shows this (display:block),
+     so it never composites underneath/behind the real WebGL canvas. */
+  display: none;
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(60% 50% at 50% 8%, rgba(236,217,168,.16), transparent 60%),
+    radial-gradient(120% 90% at 50% 110%, var(--velvet), var(--ink) 65%);
+  transition: background 1.2s var(--ease);
+}
+
+/* ---------------------------------------------------------------- cursor */
+#cursor { position: fixed; inset: 0; pointer-events: none; z-index: 1000; }
+.cursor-dot, .cursor-ring {
+  position: fixed; top: 0; left: 0; pointer-events: none;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+.cursor-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--gold-hi);
+  transition: opacity .2s;
+}
+.cursor-ring {
+  /* Fixed box at the largest (active) size; the smaller "resting" look is a
+     transform:scale-down applied (and lerped) from JS alongside position, so
+     it never animates width/height (perf pass — those are layout
+     properties; scale is composite-only). See ui/cursor.js. */
+  width: 84px; height: 84px; border-radius: 50%;
+  border: 1px solid rgba(200,168,106,.55);
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color .28s, background .28s;
+}
+.cursor-ring.is-active {
+  background: rgba(200,168,106,.08);
+  border-color: var(--gold-hi);
+}
+.cursor-label {
+  font: 600 10px/1 Manrope, sans-serif; letter-spacing: .18em; color: var(--gold-hi);
+  opacity: 0; transform: scale(.8); transition: opacity .2s, transform .2s; text-align: center;
+}
+.cursor-ring.is-active .cursor-label { opacity: 1; transform: scale(1); }
+body.touch-input #cursor { display: none; }
+body.cursor-hidden #cursor { opacity: 0; }
+
+/* ---------------------------------------------------------------- chrome */
+.dg-chrome {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.6rem clamp(1.2rem, 4vw, 2.6rem);
+  opacity: 0; transform: translateY(-8px);
+  transition: opacity .6s var(--ease), transform .6s var(--ease);
+  pointer-events: none;
+}
+.dg-chrome[data-visible="true"] { opacity: 1; transform: translateY(0); pointer-events: none; }
+.dg-chrome[data-visible="true"] .chrome-btn,
+.dg-chrome[data-visible="true"] .chrome-logo { pointer-events: auto; }
+.chrome-btn {
+  background: none; border: none; color: var(--cream); display: flex; align-items: center; gap: .5rem;
+  font: 600 11px Manrope, sans-serif; letter-spacing: .22em; cursor: none; padding: .4rem;
+}
+.chrome-menu-bars { display: flex; flex-direction: column; gap: 4px; width: 18px; }
+.chrome-menu-bars i { display: block; height: 1px; background: var(--gold); width: 100%; }
+.chrome-menu-bars i:last-child { width: 60%; }
+.chrome-sound-icon { width: 14px; height: 14px; border: 1px solid var(--gold); border-radius: 50%; position: relative; }
+.chrome-sound-icon::after {
+  content: ""; position: absolute; inset: 3px; border-radius: 50%; background: transparent;
+  transition: background .3s;
+}
+.chrome-sound[aria-pressed="true"] .chrome-sound-icon::after { background: var(--gold); }
+.chrome-logo { display: block; opacity: .9; transition: opacity .3s; }
+.chrome-logo img { display: block; height: 34px; width: auto; }
+body[data-stage="hub"] .chrome-logo img,
+body[data-stage="q1"] .chrome-logo img,
+body[data-stage="q2"] .chrome-logo img,
+body[data-stage="q3"] .chrome-logo img,
+body[data-stage="result"] .chrome-logo img { height: 26px; }
+
+/* ---------------------------------------------------------------- stages */
+#stage-root { position: relative; z-index: 5; height: 100vh; width: 100vw; }
+.stage {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  padding: 6rem 1.5rem 8rem;
+}
+.stage[hidden] { display: none; }
+
+/* ---------------------------------------------------------------- loader */
+#stage-loader { justify-content: center; gap: 1.6rem; background: var(--ink); z-index: 20; }
+.loader-mark { position: relative; width: min(70vw, 320px); }
+.loader-svg { width: 100%; height: auto; overflow: visible; }
+.loader-wordmark {
+  font: 400 40px 'Cormorant Garamond', serif; letter-spacing: .3em;
+  fill: none; stroke: var(--gold); stroke-width: 1;
+  stroke-dasharray: 620; stroke-dashoffset: 620;
+  animation: draw-mark 2.2s var(--ease) forwards;
+}
+@keyframes draw-mark { to { stroke-dashoffset: 0; fill: var(--gold-hi); } }
+.loader-hairline {
+  position: absolute; top: 50%; height: 1px; width: 90px; background: var(--gold);
+  transform: translateY(-50%) scaleX(0);
+  animation: grow-line 1.8s var(--ease) .3s forwards;
+}
+.loader-hairline--l { right: 100%; margin-right: 14px; transform-origin: right center; }
+.loader-hairline--r { left: 100%; margin-left: 14px; transform-origin: left center; }
+@keyframes grow-line { to { transform: translateY(-50%) scaleX(1); } }
+.loader-count {
+  font: 300 15vw/1 'Cormorant Garamond', serif; color: var(--gold);
+  opacity: .8; font-variant-numeric: tabular-nums;
+}
+#stage-loader .loader-count { font-size: clamp(2.4rem, 8vw, 4rem); }
+.loader-caption { font: 600 10px Manrope, sans-serif; letter-spacing: .3em; color: var(--mist); }
+#stage-loader.is-leaving { animation: loader-out .7s var(--ease) forwards; }
+@keyframes loader-out { to { opacity: 0; transform: scale(1.04); } }
+
+/* ---------------------------------------------------------------- intro */
+.intro-copy { max-width: 46rem; }
+.mask-lines { margin: 0; font: 300 clamp(2rem, 6vw, 4.4rem)/1.18 'Cormorant Garamond', serif; }
+.mask-line { display: block; overflow: hidden; }
+.mask-inner { display: inline-block; transform: translateY(110%); }
+.intro-sub {
+  margin: 1.6rem 0 0; font: 500 12px Manrope, sans-serif; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--gold-hi);
+}
+.mask-fade { opacity: 0; transform: translateY(10px); }
+.intro-hint {
+  position: absolute; bottom: clamp(2.5rem, 8vh, 5rem); left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: .7rem;
+  opacity: 0; transition: opacity .6s var(--ease) .3s;
+}
+#stage-intro.is-ready .intro-hint { opacity: 1; }
+.intro-hint-line { position: relative; width: 1px; height: 46px; background: rgba(200,168,106,.25); overflow: hidden; }
+.intro-hint-line i {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: var(--gold-hi);
+  transform: scaleY(0); transform-origin: bottom; will-change: transform;
+}
+.intro-hint-text { font: 600 10px Manrope, sans-serif; letter-spacing: .3em; color: var(--mist); }
+#stage-intro.is-progressing .intro-hint-text { color: var(--gold-hi); }
+
+/* ---------------------------------------------------------------- hub */
+.hub-caption {
+  position: absolute; top: clamp(5rem, 12vh, 7rem); left: 50%; transform: translateX(-50%);
+  font: 600 11px Manrope, sans-serif; letter-spacing: .3em; color: var(--mist);
+}
+.hub-doors {
+  position: absolute; bottom: clamp(3rem, 9vh, 5.5rem); left: 0; right: 0;
+  display: flex; justify-content: space-between; padding: 0 clamp(1.2rem, 6vw, 4.5rem);
+}
+.door {
+  background: none; border: none; color: var(--cream); text-align: left; cursor: none;
+  display: flex; flex-direction: column; gap: .4rem; padding: 1.1rem 0;
+  border-top: 1px solid rgba(200,168,106,.35); width: clamp(9.5rem, 22vw, 15rem);
+  position: relative; transition: border-color .3s;
+}
+.door:hover, .door:focus-visible { border-color: var(--gold-hi); }
+.door::before {
+  content: ""; position: absolute; top: -1px; left: 0; height: 1px; width: 100%; background: var(--gold-hi);
+  transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease);
+}
+.door--right::before { transform-origin: right; }
+.door:hover::before, .door:focus-visible::before { transform: scaleX(1); }
+.door--right { text-align: right; align-items: flex-end; }
+.door-index { font: 500 11px Manrope, sans-serif; letter-spacing: .2em; color: var(--gold); }
+.door-title { font: 400 clamp(1.1rem, 2.4vw, 1.5rem) 'Cormorant Garamond', serif; letter-spacing: .04em; }
+.door-sub { font: 500 10px Manrope, sans-serif; letter-spacing: .18em; color: var(--mist); text-transform: uppercase; }
+.door-seal {
+  font: 600 9px Manrope, sans-serif; letter-spacing: .2em; color: var(--gold);
+  border: 1px solid var(--gold); border-radius: 999px; padding: .3rem .7rem; margin-top: .1rem;
+}
+.hub-hover-label {
+  /* Positioned via transform:translate3d from JS (see ui/hub.js), not
+     left/top — the scene can report a hover position every frame while a
+     bottle is hovered, so this must stay a compositor-only update. */
+  position: fixed; top: 0; left: 0; z-index: 40; pointer-events: none;
+  font: 400 italic 18px 'Cormorant Garamond', serif; color: var(--gold-hi);
+  opacity: 0; transform: translate3d(-50%, -160%, 0); transition: opacity .25s;
+  white-space: nowrap; will-change: transform;
+}
+.hub-hover-label.is-visible { opacity: 1; }
+
+/* ---------------------------------------------------------------- quiz shared */
+.stage-quiz { padding-bottom: 9rem; }
+.quiz-kicker {
+  position: absolute; top: clamp(5.5rem, 13vh, 7.5rem); left: 0; right: 0; text-align: center;
+  font: 600 12px Manrope, sans-serif; letter-spacing: .3em; color: var(--gold);
+  white-space: nowrap;
+}
+.quiz-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 55;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem clamp(1.2rem, 4vw, 3rem);
+}
+.quiz-nav::before, .quiz-nav::after {
+  content: ""; position: absolute; left: clamp(1.2rem, 4vw, 3rem); right: clamp(1.2rem, 4vw, 3rem);
+  height: 1px; background: rgba(200,168,106,.3);
+}
+.quiz-nav::before { top: 0; }
+.quiz-nav::after { top: 5px; }
+.quiz-nav[hidden] { display: none; }
+.quiz-nav-btn {
+  background: none; border: none; color: var(--cream); font: 600 11px Manrope, sans-serif;
+  letter-spacing: .25em; cursor: none; padding: .6rem 1rem; opacity: .55; transition: opacity .3s, color .3s;
+}
+.quiz-nav-btn:disabled { opacity: .2; pointer-events: none; }
+.quiz-nav-btn--next { opacity: 1; color: var(--gold-hi); }
+.quiz-dots { display: flex; gap: 1.4rem; font: 500 10px Manrope, sans-serif; letter-spacing: .2em; color: var(--mist); }
+.quiz-dots span { position: relative; padding-bottom: .5rem; }
+.quiz-dots span::after {
+  content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: var(--gold);
+  transform: scaleX(0); transform-origin: left; transition: transform .4s var(--ease);
+}
+.quiz-dots span.is-active { color: var(--gold-hi); }
+.quiz-dots span.is-active::after, .quiz-dots span.is-done::after { transform: scaleX(1); }
+
+/* ---------------------------------------------------------------- q1 */
+.q1-wrap { position: relative; width: min(52vw, 40rem); display: flex; flex-direction: column; align-items: center; gap: 2.2rem; }
+.info-pill {
+  position: absolute; top: -7rem; left: 50%; margin-left: -.95rem; width: 1.9rem; height: 1.9rem; border-radius: 50%;
+  border: 1px solid var(--gold); background: none; color: var(--gold-hi); font: 400 16px serif; cursor: none;
+  display: flex; align-items: center; justify-content: center; line-height: 1;
+}
+.q1-tooltip {
+  position: absolute; top: -1rem; right: 0; transform: translateY(-100%);
+  max-width: 16rem; background: var(--umber); border: 1px solid rgba(200,168,106,.4);
+  padding: .9rem 1.1rem; font: 400 13px/1.5 'Cormorant Garamond', serif; font-style: italic; color: var(--cream);
+  text-align: left; z-index: 30;
+}
+.q1-tooltip[hidden] { display: none; }
+.q1-track-wrap { position: relative; width: 100%; display: flex; align-items: center; }
+.q1-pole { position: absolute; top: 50%; transform: translateY(-50%); font: 400 clamp(1.3rem, 2vw, 1.75rem) 'Cormorant Garamond', serif; letter-spacing: .16em; color: var(--cream); opacity: .55; transition: opacity .4s, color .4s; white-space: nowrap; }
+.q1-pole--l { right: calc(100% + 2.8rem); }
+.q1-pole--r { left: calc(100% + 2.8rem); }
+@media (max-width: 760px) {
+  .q1-wrap { width: 82vw; }
+  .q1-pole { top: -2.6rem; transform: none; font-size: 1.1rem; }
+  .q1-pole--l { right: auto; left: 0; }
+  .q1-pole--r { left: auto; right: 0; }
+}
+.q1-pole--c { left: 50%; transform: translateX(-50%); top: -3.6rem; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15px; letter-spacing: .04em; color: var(--gold-hi); text-transform: none; opacity: 0; transition: opacity .3s; }
+.q1-pole--c.is-visible { opacity: 1; }
+.q1-track {
+  position: relative; width: 100%; height: 1px; background: rgba(200,168,106,.3);
+  touch-action: none;
+}
+.q1-notch { position: absolute; top: 50%; width: 1px; height: 10px; background: rgba(200,168,106,.5); transform: translate(-50%, -50%); }
+.q1-notch--0 { left: 0%; } .q1-notch--1 { left: 50%; } .q1-notch--2 { left: 100%; }
+.q1-orb {
+  /* Positioned entirely via JS transform:translate3d (see ui/q1.js) rather
+     than animating `left`, so dragging never triggers layout (perf pass). */
+  position: absolute; top: 50%; left: 0; width: 30px; height: 30px; margin-left: -15px; border-radius: 50%;
+  background: radial-gradient(circle at 34% 28%, #fff6dc 0, var(--gold-hi) 18%, var(--gold) 55%, #6e5530 100%);
+  box-shadow: 0 0 0 5px rgba(200,168,106,.12), 0 0 0 6px rgba(200,168,106,.45), 0 0 28px rgba(236,217,168,.45);
+  cursor: grab; will-change: transform;
+  transition: transform .5s var(--ease-elastic);
+}
+.q1-orb.is-dragging { cursor: grabbing; transition: none !important; }
+.q1-hint { font: 500 10px Manrope, sans-serif; letter-spacing: .2em; color: var(--mist); display: flex; align-items: center; gap: .5rem; transition: opacity .5s; }
+.q1-hint.is-hidden { opacity: 0; }
+
+/* ---------------------------------------------------------------- q2 */
+.q2-wrap { position: relative; width: 100%; max-width: 48rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+.q2-arrow {
+  width: 2.8rem; height: 2.8rem; border-radius: 50%; border: 1px solid var(--gold); background: none;
+  color: var(--gold-hi); font-size: 18px; cursor: none; flex: none; transition: background .3s, border-color .3s;
+}
+.q2-arrow:hover { background: rgba(200,168,106,.12); }
+.q2-stage { flex: 1; min-height: 8rem; touch-action: pan-y; user-select: none; }
+.q2-title {
+  margin: 0; font: 400 clamp(2.2rem, 6.5vw, 4rem) 'Cormorant Garamond', serif; letter-spacing: .02em;
+  text-transform: uppercase;
+}
+.q2-title .q2-word { display: inline-block; white-space: nowrap; }
+.q2-title .q2-char { display: inline-block; }
+.q2-sub { margin: .9rem 0 0; font: 400 italic 16px 'Cormorant Garamond', serif; color: var(--gold-hi); }
+.q2-dots { position: absolute; bottom: -3.4rem; left: 50%; transform: translateX(-50%); display: flex; gap: .6rem; }
+.q2-dots button { width: 6px; height: 6px; border-radius: 50%; border: 1px solid var(--gold); background: none; padding: 0; cursor: none; }
+.q2-dots button[aria-selected="true"] { background: var(--gold-hi); }
+
+/* ---------------------------------------------------------------- q3 */
+.q3-chips { position: absolute; top: clamp(7.5rem, 17vh, 9.5rem); left: 50%; transform: translateX(-50%); display: flex; gap: .6rem; min-height: 1.6rem; }
+.q3-chip {
+  font: 600 10px Manrope, sans-serif; letter-spacing: .15em; color: var(--gold-hi);
+  border: 1px solid var(--gold); border-radius: 999px; padding: .3rem .8rem;
+}
+.q3-ribbon-wrap { position: relative; width: 100vw; overflow: hidden; padding: 1rem 0 1rem 6vw; touch-action: pan-y; }
+.q3-ribbon-wrap::before, .q3-ribbon-wrap::after { content: ""; position: absolute; top: 0; bottom: 0; width: 12vw; z-index: 4; pointer-events: none; }
+.q3-ribbon-wrap::before { left: 0; background: linear-gradient(90deg, rgba(12,10,9,.92), rgba(12,10,9,0)); }
+.q3-ribbon-wrap::after { right: 0; background: linear-gradient(270deg, rgba(12,10,9,.92), rgba(12,10,9,0)); }
+.q3-ribbon { display: flex; gap: 1.1rem; will-change: transform; cursor: grab; }
+.q3-ribbon.is-dragging { cursor: grabbing; }
+.q3-card {
+  position: relative; flex: none; width: clamp(10rem, 19vw, 15.5rem); height: clamp(14.5rem, 28vw, 22rem);
+  border: 1px solid rgba(200,168,106,.22);
+  background: radial-gradient(120% 70% at 50% 58%, #2e2217 0%, #17110c 55%, #0d0a08 100%); overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-start; padding: .9rem;
+  text-align: left; color: var(--cream); cursor: none; will-change: transform;
+}
+.q3-card-name { font: 600 11px Manrope, sans-serif; letter-spacing: .16em; z-index: 2; position: relative; text-transform: uppercase; }
+.q3-card-art {
+  position: absolute; inset: 0; z-index: 1; display: flex; align-items: center; justify-content: center;
+}
+.q3-card-art img { width: 118%; height: 118%; object-fit: contain; transform: translateY(6%); }
+.q3-card::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(13,10,8,.75) 0%, rgba(13,10,8,0) 26%, rgba(13,10,8,0) 72%, rgba(13,10,8,.6) 100%); }
+.q3-card-fallback {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font: 300 italic 64px 'Cormorant Garamond', serif; opacity: .55;
+}
+.q3-card-badge {
+  position: absolute; top: .7rem; right: .7rem; width: 1.6rem; height: 1.6rem; border-radius: 50%;
+  border: 1px solid var(--gold); background: var(--ink); color: var(--gold-hi);
+  display: flex; align-items: center; justify-content: center; font: 600 11px Manrope, sans-serif;
+  opacity: 0; transform: scale(.6); transition: opacity .25s var(--ease-elastic), transform .25s var(--ease-elastic); z-index: 3;
+}
+.q3-card.is-selected { border-color: var(--gold-hi); box-shadow: inset 0 0 0 1px var(--gold-hi); }
+.q3-card.is-selected .q3-card-badge { opacity: 1; transform: scale(1); }
+.q3-card.is-shaking { animation: card-shake .4s; }
+@keyframes card-shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+
+/* ---------------------------------------------------------------- result */
+#stage-result { justify-content: flex-start; padding-top: clamp(5.5rem, 12vh, 7.5rem); gap: 0; overflow-y: auto; }
+.result-kicker { font: 600 11px Manrope, sans-serif; letter-spacing: .3em; color: var(--mist); margin: 0 0 .6rem; }
+.result-name { margin: 0; font: 300 clamp(2.4rem, 7vw, 4.6rem)/1.05 'Cormorant Garamond', serif; }
+.result-family { margin: .8rem 0 0; font: 600 11px Manrope, sans-serif; letter-spacing: .22em; color: var(--gold); text-transform: uppercase; }
+.result-line { margin: .5rem 0 0; font: 400 italic 17px 'Cormorant Garamond', serif; color: var(--cream); }
+.result-match { margin: 1.6rem 0; font-variant-numeric: tabular-nums; }
+.result-match-num { font: 300 clamp(2.6rem, 6vw, 3.6rem) 'Cormorant Garamond', serif; color: var(--gold-hi); }
+.result-match-pct { font: 600 11px Manrope, sans-serif; letter-spacing: .18em; color: var(--mist); margin-left: .4rem; }
+.result-notes { display: flex; gap: clamp(1rem, 4vw, 2.6rem); margin: .5rem 0 2rem; flex-wrap: wrap; justify-content: center; }
+.result-note { max-width: 12rem; opacity: 0; transform: translateY(10px); }
+.result-note-label { display: block; font: 600 10px Manrope, sans-serif; letter-spacing: .2em; color: var(--gold); margin-bottom: .3rem; }
+.result-note-value { font: 400 italic 14px 'Cormorant Garamond', serif; color: var(--cream); }
+.result-actions { display: flex; gap: 1.4rem; align-items: center; flex-wrap: wrap; justify-content: center; margin-bottom: 2.6rem; }
+.btn-primary {
+  background: var(--gold); color: var(--ink); text-decoration: none; border: none; cursor: none;
+  font: 600 11px Manrope, sans-serif; letter-spacing: .2em; padding: .95rem 1.8rem; display: inline-flex; gap: .4rem;
+  transition: background .3s;
+}
+.btn-primary:hover { background: var(--gold-hi); }
+.btn-ghost {
+  background: none; border: 1px solid var(--gold); color: var(--cream); cursor: none;
+  font: 600 11px Manrope, sans-serif; letter-spacing: .2em; padding: .95rem 1.8rem; transition: border-color .3s, color .3s;
+}
+.btn-ghost:hover { border-color: var(--gold-hi); color: var(--gold-hi); }
+.result-others { border-top: 1px solid rgba(200,168,106,.25); padding-top: 1.6rem; width: min(100%, 46rem); padding-bottom: 3rem; }
+.result-others-label { font: 600 10px Manrope, sans-serif; letter-spacing: .25em; color: var(--mist); margin: 0 0 1rem; }
+.result-others-list { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.result-other {
+  background: none; border: 1px solid rgba(200,168,106,.3); color: var(--cream); cursor: none;
+  padding: .9rem 1.1rem; text-align: left; width: 9.5rem; transition: border-color .3s;
+}
+.result-other:hover, .result-other.is-active { border-color: var(--gold-hi); }
+.result-other-name { display: block; font: 400 15px 'Cormorant Garamond', serif; margin-bottom: .3rem; }
+.result-other-pct { font: 600 10px Manrope, sans-serif; letter-spacing: .15em; color: var(--gold); }
+
+/* ---------------------------------------------------------------- menu overlay */
+.menu-overlay {
+  position: fixed; inset: 0; z-index: 200; background: rgba(12,10,9,.96);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+}
+.menu-overlay[hidden] { display: none; }
+.menu-close {
+  position: absolute; top: 1.6rem; right: 1.6rem; background: none; border: none; color: var(--gold-hi);
+  font: 600 11px Manrope, sans-serif; letter-spacing: .2em; cursor: none;
+}
+.menu-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1.4rem; text-align: center; }
+.menu-list a, .menu-list button {
+  font: 400 clamp(1.6rem, 4vw, 2.4rem) 'Cormorant Garamond', serif; color: var(--cream); text-decoration: none;
+  background: none; border: none; cursor: none;
+}
+.menu-list a:hover, .menu-list button:hover { color: var(--gold-hi); }
+
+/* ---------------------------------------------------------------- modal */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 220; background: rgba(12,10,9,.85);
+  display: flex; align-items: center; justify-content: center; padding: 1.5rem;
+}
+.modal-overlay[hidden] { display: none; }
+.modal-card {
+  position: relative; background: var(--umber); border: 1px solid rgba(200,168,106,.4);
+  padding: clamp(1.8rem, 5vw, 3rem); max-width: 26rem; width: 100%; text-align: center;
+}
+.modal-close { position: absolute; top: .9rem; right: .9rem; background: none; border: none; color: var(--mist); cursor: none; font-size: 16px; }
+.modal-kicker { font: 600 10px Manrope, sans-serif; letter-spacing: .25em; color: var(--gold); margin: 0 0 1rem; }
+.modal-card h3 { font: 400 1.8rem 'Cormorant Garamond', serif; margin: 0 0 .8rem; }
+.modal-copy { font: 400 italic 15px 'Cormorant Garamond', serif; color: var(--cream); margin: 0 0 1.6rem; }
+.modal-form { display: flex; flex-direction: column; gap: .8rem; }
+.modal-form input {
+  background: none; border: 1px solid rgba(200,168,106,.4); color: var(--cream); padding: .8rem 1rem;
+  font: 400 14px Manrope, sans-serif; text-align: center;
+}
+.modal-form input:focus { outline: 1px solid var(--gold-hi); }
+.modal-note { font: 600 10px Manrope, sans-serif; letter-spacing: .15em; color: var(--gold-hi); margin: .9rem 0 0; min-height: 1em; }
+
+/* ---------------------------------------------------------------- toast */
+.toast {
+  position: fixed; bottom: 6.5rem; left: 50%; transform: translateX(-50%) translateY(10px);
+  background: var(--gold); color: var(--ink); font: 600 11px Manrope, sans-serif; letter-spacing: .15em;
+  padding: .8rem 1.4rem; z-index: 300; opacity: 0; transition: opacity .3s, transform .3s; pointer-events: none;
+}
+.toast.is-visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ---------------------------------------------------------------- reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  .mask-inner { transform: none !important; }
+}
+
+/* ---------------------------------------------------------------- mobile */
+@media (max-width: 640px) {
+  .stage { padding: 5.5rem 1.1rem 7.5rem; }
+  .hub-doors { flex-direction: column; gap: 1.4rem; align-items: stretch; bottom: 2.4rem; }
+  .door { width: 100%; }
+  .door--right { text-align: left; align-items: flex-start; }
+  .q1-wrap { width: 100%; }
+  .q2-wrap { gap: .6rem; }
+  .q2-arrow { width: 2.3rem; height: 2.3rem; font-size: 14px; }
+  .result-notes { gap: 1.2rem; }
+  .result-actions { flex-direction: column; width: 100%; }
+  .btn-primary, .btn-ghost { width: 100%; justify-content: center; text-align: center; }
+  .result-other { width: 100%; }
+  #cursor { display: none; }
+}
+
+:focus { outline: none; }
+:focus-visible { outline: 1px solid var(--gold-hi); outline-offset: 5px; }
+
+/* result: bottle holds the left half (scene camera offset), story reads on the right */
+@media (min-width: 900px) {
+  #stage-result { align-items: flex-start; text-align: left; padding-left: 52vw; padding-right: 6vw; }
+  #stage-result > * { max-width: 34rem; }
+  #stage-result .result-notes, #stage-result .result-actions, #stage-result .result-match, #stage-result .result-others-list { justify-content: flex-start; text-align: left; }
+}
+@media (max-width: 899px) {
+  #stage-result { padding-top: 62vh; }
+}

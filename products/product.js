@@ -71,12 +71,12 @@ function pageMarkup() {
     <header class="site-header">
       <a class="wordmark" href="/" aria-label="VASA home"><img src="/media/campaign/logo-dark.svg" alt="VASA Fragrance" width="170" height="54"></a>
       <nav class="desktop-nav" aria-label="Primary navigation"><a href="/our-story/">Our story</a><a href="/collection/">Collection</a><a href="/gifting/">Gifts &amp; sets</a></nav>
-      <div class="header-actions"><a class="header-extra" href="/services/">Services</a><a class="header-extra" href="/contact/">Contact</a>
+      <div class="header-actions"><!-- <a class="header-extra" href="/services/">Services</a> --><a class="header-extra" href="/contact/">Contact</a>
         <button class="theme-toggle" type="button" aria-label="Use dark theme" aria-pressed="false"><span aria-hidden="true">◐</span><span class="theme-label">Dark</span></button>
         <button class="bag-button" type="button" aria-haspopup="dialog" aria-label="Shopping bag, 0 items"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 8h14l1 13H4L5 8ZM9 9V6a3 3 0 0 1 6 0v3"/></svg><span class="bag-label">Bag</span><span class="bag-count" hidden>0</span></button>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span class="sr-only">Open menu</span></button>
       </div>
-      <nav class="mobile-nav" id="mobile-menu" aria-label="Mobile navigation" hidden><a href="/collection/">Collection</a><a href="/gifting/">Gifts &amp; sets</a><a href="/our-story/">Our story</a><a href="/services/">Services</a><a href="/contact/">Contact</a><a href="/">VASA home</a></nav>
+      <nav class="mobile-nav" id="mobile-menu" aria-label="Mobile navigation" hidden><a href="/collection/">Collection</a><a href="/gifting/">Gifts &amp; sets</a><a href="/our-story/">Our story</a><!-- <a href="/services/">Services</a> --><a href="/contact/">Contact</a><a href="/">VASA home</a></nav>
     </header>
 
     <main id="product-main">
@@ -121,8 +121,8 @@ function pageMarkup() {
     <footer class="site-footer vasa-footer" id="site-footer">
       <div class="footer-masthead" aria-label="VASA"><span aria-hidden="true">VASA</span></div>
       <section class="footer-newsletter" aria-labelledby="footer-newsletter-title"><div><p class="eyebrow">PRIVATE NOTES FROM VASA</p><h2 id="footer-newsletter-title">Subscribe to our newsletter</h2></div><form class="footer-subscribe" data-footer-subscribe novalidate><label class="sr-only" for="footer-email">Email address</label><input id="footer-email" name="email" type="email" autocomplete="email" placeholder="Email address" aria-describedby="footer-newsletter-note"><button type="submit">SUBSCRIBE <span aria-hidden="true">→</span></button><p class="footer-newsletter-note" id="footer-newsletter-note" aria-live="polite">Newsletter delivery begins at launch.</p></form></section>
-      <div class="footer-main"><div><h2>Customer care</h2><a href="/contact/">Contact us</a><a href="/services/#delivery">Shipping &amp; delivery</a><a href="/services/#returns">Returns &amp; exchanges</a><a href="/services/">Client services</a></div><div><h2>Our house</h2><a href="/collection/">The collection</a><a href="/gifting/">Gifting</a><a href="/our-story/">Our story</a><a href="/contact/#stores">Find a store</a></div><div><h2>Legal area</h2><a href="/legal/#terms">Terms of use</a><a href="/legal/#privacy">Privacy policy</a><a href="/legal/#accessibility">Accessibility</a></div><div><h2>Fragrance guidance</h2><a href="/collection/">Find your fragrance</a><a href="/services/#guidance">Ask for guidance</a><a href="/gifting/">The art of gifting</a></div></div>
-      <div class="footer-causes"><a href="/our-story/">Family roots in perfumery</a><a href="/our-story/">The art of fragrance</a><a href="/services/">At your service</a></div>
+      <div class="footer-main"><div><h2>Customer care</h2><a href="/contact/">Contact us</a><!-- <a href="/services/#delivery">Shipping &amp; delivery</a> --><!-- <a href="/services/#returns">Returns &amp; exchanges</a> --><!-- <a href="/services/">Client services</a> --></div><div><h2>Our house</h2><a href="/collection/">The collection</a><a href="/gifting/">Gifting</a><a href="/our-story/">Our story</a><a href="/contact/#stores">Find a store</a></div><div><h2>Legal area</h2><a href="/legal/#terms">Terms of use</a><a href="/legal/#privacy">Privacy policy</a><a href="/legal/#accessibility">Accessibility</a></div><div><h2>Fragrance guidance</h2><a href="/collection/">Find your fragrance</a><!-- <a href="/services/#guidance">Ask for guidance</a> --><a href="/gifting/">The art of gifting</a></div></div>
+      <div class="footer-causes"><a href="/our-story/">Family roots in perfumery</a><a href="/our-story/">The art of fragrance</a><!-- <a href="/services/">At your service</a> --></div>
       <div class="footer-bottom"><span>SHOP IN: INDIA</span><span>COPYRIGHT © <span data-year>${new Date().getFullYear()}</span> VASA FRAGRANCE</span></div>
     </footer>
 

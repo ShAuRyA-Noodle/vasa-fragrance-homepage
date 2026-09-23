@@ -124,10 +124,23 @@ function initTopography(){
 function initCraftCards(){
  const cards=[...document.querySelectorAll('.craft-card')];
  if(!cards.length||reduced.matches)return;
- gsap.fromTo(cards,
-  {rotateY:index=>index%2?-720:720,xPercent:index=>(index-1)*24,y:48,opacity:0,transformPerspective:1300,transformOrigin:'50% 50%'},
-  {rotateY:0,xPercent:0,y:0,opacity:1,duration:1.55,stagger:.13,ease:'power3.out',clearProps:'transform,opacity',scrollTrigger:{trigger:'.craft-principles',start:'top 84%',once:true}}
- );
+ const grid=document.querySelector('.craft-principles');
+ const images=cards.map(card=>card.querySelector('.craft-card-image'));
+ const copy=cards.map(card=>[...card.querySelectorAll('span,h3,p')]);
+ // Curtain reveal: each card unmasks bottom-up while its photo settles from a
+ // slow zoom, then the copy lifts in. CSS transitions pause during the reveal.
+ gsap.set(cards,{clipPath:'inset(100% 0% 0% 0%)'});
+ gsap.set(images,{scale:1.22});
+ gsap.set(copy.flat(),{y:18,opacity:0});
+ const reveal=gsap.timeline({paused:true,onStart:()=>grid.classList.add('is-revealing'),onComplete:()=>{gsap.set([...cards,...images,...copy.flat()],{clearProps:'clipPath,transform,opacity'});grid.classList.remove('is-revealing')}});
+ cards.forEach((card,index)=>{
+  const at=index*.16;
+  reveal
+   .to(card,{clipPath:'inset(0% 0% 0% 0%)',duration:1.25,ease:'expo.inOut'},at)
+   .to(images[index],{scale:1.045,duration:1.8,ease:'expo.out'},at+.15)
+   .to(copy[index],{y:0,opacity:1,duration:.8,stagger:.07,ease:'power3.out'},at+.75);
+ });
+ ScrollTrigger.create({trigger:grid,start:'top 82%',once:true,onEnter:()=>reveal.play()});
 }
 
 export function animatePanelContent(kind){

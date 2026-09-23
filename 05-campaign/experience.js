@@ -11,7 +11,7 @@ function headingReveals(){
 
 function cardEntrances(){
  const cards=gsap.utils.toArray('.product-card');
- gsap.from(cards,{y:68,duration:1.05,stagger:.08,ease:'power4.out',scrollTrigger:{trigger:'.product-grid',start:'top 84%',once:true}});
+ gsap.utils.toArray('.product-grid').forEach(grid=>gsap.from(grid.querySelectorAll('.product-card'),{y:68,duration:1.05,stagger:.08,ease:'power4.out',scrollTrigger:{trigger:grid,start:'top 84%',once:true}}));
  cards.forEach(card=>{
   const world=card.querySelector('.product-world');
   gsap.fromTo(world,{scale:1.22},{scale:1.04,ease:'none',scrollTrigger:{trigger:card,start:'top bottom',end:'bottom top',scrub:1.2}});
@@ -38,9 +38,9 @@ function mediaDepth(){
 
 function pinnedPrinciples(){
  const intro=document.querySelector('.craft-intro');
- const items=gsap.utils.toArray('.craft-principles>div');
+ // The cards themselves are owned by initCraftCards (bits-effects.js); a second
+ // tween here fought the 720° spin and cleared its transform mid-rotation.
  gsap.from(intro,{y:28,opacity:0,duration:.9,ease:'power3.out',clearProps:'transform,opacity',scrollTrigger:{trigger:'.craft-strip',start:'top 82%',once:true}});
- gsap.from(items,{y:38,opacity:0,duration:1,stagger:.12,ease:'power3.out',clearProps:'transform,opacity',scrollTrigger:{trigger:'.craft-principles',start:'top 84%',once:true}});
 }
 
 export function initExperience(){

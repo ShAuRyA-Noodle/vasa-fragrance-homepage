@@ -5,6 +5,7 @@ import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 gsap.registerPlugin(ScrollTrigger,SplitText);
 export {gsap,ScrollTrigger,SplitText};
+gsap.config({nullTargetWarn:false}); // shared scripts run on pages without every homepage target
 export const reduced=matchMedia('(prefers-reduced-motion:reduce)');
 export function smoothScroll(){
  if(reduced.matches)return null;

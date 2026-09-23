@@ -4,3 +4,9 @@ dist/
 reference-library/gsap-source/
 reference-library/react-bits/
 .vercel
+
+dump/research-and-qa/reference-library/gsap-source/
+dump/research-and-qa/reference-library/react-bits/
+
+CLAUDE.local.md
+.playwright-mcp/

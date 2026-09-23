@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VASA — scene harness</title>
+<link rel="stylesheet" href="/fonts/fonts.css" />
+<style>
+  html, body { margin: 0; padding: 0; background: #0c0a09; overflow: hidden; height: 100%; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  #ui {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+    display: flex; flex-wrap: wrap; gap: 6px; padding: 10px;
+    font-family: 'Manrope', sans-serif; font-size: 11px; letter-spacing: 0.06em;
+    background: linear-gradient(to bottom, rgba(12,10,9,0.85), transparent);
+  }
+  #ui button, #ui select, #ui label {
+    background: rgba(200,168,106,0.12); color: #efe6d6; border: 1px solid rgba(200,168,106,0.5);
+    padding: 6px 10px; border-radius: 3px; cursor: pointer; text-transform: uppercase;
+  }
+  #ui button:hover { background: rgba(200,168,106,0.28); }
+  #progress { position: fixed; bottom: 10px; left: 10px; color: #efe6d6; font-family: monospace; font-size: 11px; z-index: 10; }
+  #log { position: fixed; bottom: 10px; right: 10px; max-width: 360px; max-height: 40vh; overflow: auto; color: #8a8f8c; font-family: monospace; font-size: 10px; z-index: 10; background: rgba(0,0,0,0.4); padding: 6px; }
+  .group { display:flex; gap:4px; align-items:center; border-right: 1px solid rgba(255,255,255,0.15); padding-right: 8px; margin-right: 4px; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="ui">
+  <div class="group">
+    <span style="color:#8a8f8c">STAGE</span>
+    <button data-stage="intro">Intro</button>
+    <button data-stage="hub">Hub</button>
+    <button data-stage="q1">Q1</button>
+    <button data-stage="q2">Q2</button>
+    <button data-stage="q3">Q3</button>
+    <button data-stage="result" data-product="silent-storm">Result: Silent Storm</button>
+  </div>
+  <div class="group">
+    <span style="color:#8a8f8c">INTRO</span>
+    <input id="introRange" type="range" min="0" max="1" step="0.01" value="0" />
+  </div>
+  <div class="group">
+    <span style="color:#8a8f8c">MOOD</span>
+    <button data-mood="hushed">Hushed</button>
+    <button data-mood="poised">Poised</button>
+    <button data-mood="untamed">Untamed</button>
+    <button data-mood="firstLight">First Light</button>
+    <button data-mood="longAfternoon">Long Afternoon</button>
+    <button data-mood="goldenHour">Golden Hour</button>
+    <button data-mood="afterMidnight">After Midnight</button>
+  </div>
+  <div class="group">
+    <span style="color:#8a8f8c">SPRITES</span>
+    <button data-sprites="bergamot-peel,vetiver-roots,cedar-shavings-branch">First Light set</button>
+    <button data-sprites="almonds-open-shell,tonka-beans-split-pod,tuberose-flowers">Golden Hour set</button>
+    <button id="clearSprites">Clear</button>
+  </div>
+  <div class="group">
+    <span style="color:#8a8f8c">MISC</span>
+    <button id="burstBtn">Burst @ center</button>
+    <button id="qualityToggle">Toggle quality</button>
+    <label><input type="checkbox" id="reducedMotion" /> reduced motion</label>
+  </div>
+</div>
+<div id="progress">loading…</div>
+<div id="log"></div>
+<script type="module">
+  import { createScene } from './index.js';
+
+  const canvas = document.getElementById('c');
+  const progressEl = document.getElementById('progress');
+  const logEl = document.getElementById('log');
+
+  function log(msg) {
+    const line = document.createElement('div');
+    line.textContent = msg;
+    logEl.prepend(line);
+  }
+  window.addEventListener('error', (e) => log('ERROR: ' + e.message));
+
+  const params = new URLSearchParams(location.search);
+  const reducedMotion = params.get('reducedMotion') === '1';
+  const isMobile = params.get('mobile') === '1' || window.innerWidth < 700;
+
+  let api = null;
+  createScene(canvas, {
+    onProgress: (p) => { progressEl.textContent = `loading… ${Math.round(p * 100)}%`; },
+    reducedMotion,
+    isMobile,
+  }).then((a) => {
+    api = a;
+    progressEl.textContent = 'ready';
+    api.setStage('hub');
+    api.onProductHover((id) => log('hover: ' + id));
+    api.onProductClick((id) => log('click: ' + id));
+    window.__scene = api;
+  }).catch((e) => {
+    progressEl.textContent = 'error';
+    log('createScene failed: ' + e.message);
+    console.error(e);
+  });
+
+  document.querySelectorAll('button[data-stage]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (!api) return;
+      const stage = btn.dataset.stage;
+      const productId = btn.dataset.product;
+      api.setStage(stage, productId ? { productId } : {});
+    });
+  });
+
+  document.querySelectorAll('button[data-mood]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (!api) return;
+      api.setMood(btn.dataset.mood);
+    });
+  });
+
+  document.getElementById('introRange').addEventListener('input', (e) => {
+    if (!api) return;
+    api.setIntroProgress(parseFloat(e.target.value));
+  });
+
+  document.querySelectorAll('button[data-sprites]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (!api) return;
+      api.showSprites(btn.dataset.sprites.split(','), 1);
+    });
+  });
+  document.getElementById('clearSprites').addEventListener('click', () => api && api.clearSprites());
+
+  document.getElementById('burstBtn').addEventListener('click', () => {
+    if (!api) return;
+    api.burst(window.innerWidth / 2, window.innerHeight / 2, '#c8a86a');
+  });
+
+  let q = 'high';
+  document.getElementById('qualityToggle').addEventListener('click', () => {
+    if (!api) return;
+    q = q === 'high' ? 'low' : 'high';
+    api.setQuality(q);
+    log('quality: ' + q);
+  });
+
+  document.getElementById('reducedMotion').addEventListener('change', (e) => {
+    const url = new URL(location.href);
+    url.searchParams.set('reducedMotion', e.target.checked ? '1' : '0');
+    location.href = url.toString();
+  });
+</script>
+</body>
+</html>

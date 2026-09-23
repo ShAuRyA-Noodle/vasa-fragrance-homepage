@@ -1,0 +1,27 @@
+{
+  "delivery": {
+    "folder": "08-homepage-variations/public/media/campaign/scent-elements/",
+    "format": "PNG with true alpha transparency (no fake checkerboard), then also export .webp with alpha",
+    "size": "2048x2048, subject centred, ~70% of frame, 8% empty margin, no shadow on ground, no background, no text"
+  },
+  "shared_style": {
+    "look": "luxury fragrance ingredient still life, macro product photography, subject floating in air, isolated",
+    "lighting": "single warm key light from upper left (amber, 3200K), soft cool rim light from behind right, deep specular highlights, rich micro-texture",
+    "camera": "100mm macro, f/8, tack sharp throughout, slight 3/4 angle",
+    "grade": "rich, warm, slightly desaturated, cinematic; matches existing VASA scent elements (bergamot-peel, cedar-shavings-branch, vetiver-roots, almonds-open-shell, tuberose-flowers, tonka-beans-split-pod)",
+    "negative": "background, floor, table, text, logo, watermark, hands, bottle, cartoon, CGI plastic look, oversaturation, blur, cropped subject"
+  },
+  "images": [
+    { "file": "lavender-sprigs", "prompt": "Three fresh lavender sprigs crossing loosely, violet florets with tiny dew droplets, a few loose florets drifting off, velvety stems" },
+    { "file": "pear-blossom-branch", "prompt": "A short pear blossom branch with clusters of white five-petal flowers, pink-tipped anthers, two young green leaves, one petal falling" },
+    { "file": "gardenia-bloom", "prompt": "One fully open white gardenia flower with creamy waxy petals and two glossy dark green leaves, a single water droplet on a petal" },
+    { "file": "brown-sugar-crystals", "prompt": "A loose sculptural mound of dark muscovado brown sugar crystals mid-spill, a few crystals scattering in the air, glistening amber facets" },
+    { "file": "oud-wood-chip", "prompt": "Two dark resin-rich agarwood (oud) chips, deep brown-black with glossy resin veins and fibrous grain, one slightly angled above the other" },
+    { "file": "incense-resin-smoke", "prompt": "A small cluster of golden frankincense resin tears with one glowing ember tear releasing a thin elegant ribbon of white smoke curling upward" }
+  ],
+  "optional_upgrade": {
+    "note": "Only if you want photoreal bottles instead of the procedural 3D ones. Transparent PNG, 2048x2048, one per fragrance, straight-on front view, identical framing across all four.",
+    "files": ["bottle-silent-storm", "bottle-sweetest-stranger", "bottle-rebel-in-velvet", "bottle-the-night-lingers"],
+    "prompt": "The real VASA 50ml bottle photographed straight-on on pure transparent background, studio packshot, soft even light, crisp glass edges, liquid colour true to the product"
+  }
+}

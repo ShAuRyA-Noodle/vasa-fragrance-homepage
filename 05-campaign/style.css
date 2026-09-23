@@ -1064,10 +1064,15 @@ html,body{overflow-x:clip}
 .craft-intro h2{font-size:clamp(40px,4.25vw,64px)!important}
 .craft-principles{perspective:1200px;gap:12px!important}
 .craft-principles>.craft-card{isolation:isolate;min-height:clamp(240px,23vw,300px)!important;padding:22px!important;overflow:hidden;background:var(--theme-surface-soft)!important;transform-style:preserve-3d;will-change:transform,opacity}
-.craft-card-image{position:absolute;z-index:-2;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;opacity:.5;filter:saturate(.86) contrast(1.08) brightness(.8);transform:scale(1.045);transition:opacity .65s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .65s ease}
+.craft-card-image{position:absolute;z-index:-2;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;opacity:1;filter:none;transform:scale(1.045);transition:opacity .65s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .65s ease}
 .craft-card-image--concentration{object-position:64% center}.craft-card-image--presence{object-position:center 48%}.craft-card-image--longevity{object-position:58% center}
-.craft-card:after{content:''!important;position:absolute!important;z-index:-1!important;inset:0!important;width:auto!important;height:auto!important;border:0!important;border-radius:0!important;background:linear-gradient(180deg,color-mix(in srgb,var(--theme-surface-soft) 4%,transparent),color-mix(in srgb,var(--theme-surface-soft) 70%,transparent) 76%)!important;opacity:1!important;transform:none!important}
-.craft-card:hover .craft-card-image{opacity:.68;filter:saturate(1) contrast(1.05) brightness(.88);transform:scale(1)}
+.craft-card:after{content:''!important;position:absolute!important;z-index:-1!important;inset:0!important;width:auto!important;height:auto!important;border:0!important;border-radius:0!important;background:none!important;opacity:1!important;transform:none!important}
+.craft-card:hover .craft-card-image{transform:scale(1)}
+.craft-principles.is-revealing>.craft-card,.craft-principles.is-revealing .craft-card-image{transition:none!important}
+/* Card copy sits on photography: always white, on a dark bottom shade (both themes). */
+.craft-principles>.craft-card:after{background:linear-gradient(180deg,rgba(8,6,5,.38) 0%,rgba(8,6,5,0) 26%,rgba(8,6,5,0) 40%,rgba(8,6,5,.62) 68%,rgba(8,6,5,.86) 100%)!important}
+.craft-principles>.craft-card>span,.craft-principles>.craft-card>h3,.craft-principles>.craft-card>p{color:#fff!important;text-shadow:0 1px 14px rgba(0,0,0,.45)}
+.craft-principles>.craft-card>p{color:rgba(255,255,255,.9)!important}
 .craft-principles>.craft-card>span,.craft-principles>.craft-card>h3,.craft-principles>.craft-card>p{z-index:2}
 .craft-principles>.craft-card>span{margin-bottom:0!important}
 .craft-principles>.craft-card>h3{left:22px!important;right:22px!important;bottom:82px!important;font-size:clamp(23px,2vw,30px)!important}
@@ -1161,3 +1166,65 @@ html,body{overflow-x:clip}
  .header-search{display:grid!important;width:36px!important;height:36px!important}
  .gift-gallery-panel.is-active{flex-grow:2.8!important}
 }
+
+/* Search panel: readable in both themes (names were locked to near-white). */
+#panel .search-label{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--theme-text)}
+#panel .panel-search{font-size:17px;padding:14px 0;color:var(--theme-heading)}
+#panel .panel-search::placeholder{color:color-mix(in srgb,var(--theme-text) 55%,transparent)}
+#panel .search-result strong{font-size:16px;font-weight:500;color:var(--theme-heading)}
+#panel .search-result small{font-size:12px;letter-spacing:.04em;color:var(--theme-text);opacity:.8}
+#panel .panel-note{font-size:14px;color:var(--theme-text)}
+
+/* Craft cards: no hover lift, no sweeping accent line. */
+.craft-principles>div:is(:hover,:focus-within){transform:none!important}
+.craft-principles>div:before{display:none!important}
+
+/* Footer country chevron: SVG, vertically centred. */
+.footer-country .footer-chevron{display:block;flex:none;transform:translateY(1px)}
+
+/* Collection (Dior-style): chips, grouped rows of 4, campaign banners between groups. */
+.collection-chips{display:flex;justify-content:center;gap:clamp(18px,3vw,44px);margin:0 0 clamp(40px,5vw,64px)}
+.collection-chip{display:grid;justify-items:center;gap:12px;color:var(--theme-text);font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+.collection-chip-media{display:block;width:clamp(64px,6vw,84px);aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--theme-surface-soft);border:1px solid var(--theme-border);transition:border-color .4s ease}
+.collection-chip-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.02);transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.collection-chip:is(:hover,:focus-visible) .collection-chip-media{border-color:var(--theme-accent)}
+.collection-chip:is(:hover,:focus-visible) .collection-chip-media img{transform:scale(1.1)}
+.collection-group{scroll-margin-top:120px}
+.collection-group+.collection-group,.collection-banner+.collection-group{margin-top:clamp(56px,6vw,96px)}
+.collection-group-title{margin:0 0 clamp(22px,2.4vw,34px);text-align:center;font-weight:400;font-size:clamp(26px,2.4vw,36px);letter-spacing:-.035em;color:var(--theme-heading)}
+.collection-banner{position:relative;height:min(58svh,540px);margin:clamp(56px,6vw,96px) 0 0;overflow:hidden;background:#0b0908}
+.collection-banner img{width:100%;height:100%;object-fit:cover}
+.collection-banner:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,6,5,0) 45%,rgba(8,6,5,.66) 100%)}
+.collection-banner figcaption{position:absolute;z-index:1;left:clamp(22px,4vw,56px);bottom:clamp(22px,4vw,48px);display:grid;gap:10px;color:#f8f1e8}
+.collection-banner small{font-size:12px;letter-spacing:.2em;color:#e3c592}
+.collection-banner strong{font-weight:400;font-size:clamp(24px,2.6vw,40px);letter-spacing:-.035em;line-height:1.1}
+@media(max-width:760px){.collection-chips{justify-content:flex-start;overflow-x:auto;padding-bottom:6px;gap:18px}.collection-chip{flex:none;font-size:11px}.collection-banner{height:min(46svh,380px)}}
+/* Search field: clean underline field, no boxed focus ring, no browser clear button. */
+#panel .search-label{margin-bottom:6px}
+#panel .panel-search{-webkit-appearance:none;appearance:none;padding:14px 0 14px 30px;border:0;border-bottom:1px solid color-mix(in srgb,var(--theme-heading) 35%,transparent);border-radius:0;background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23a67d45' stroke-width='1.4'%3E%3Ccircle cx='8.5' cy='8.5' r='5.5'/%3E%3Cpath d='m13 13 4 4'/%3E%3C/svg%3E") no-repeat 0 50%/18px;outline:none;transition:border-color .35s ease}
+#panel .panel-search:focus,#panel .panel-search:focus-visible{outline:none;border-bottom-color:var(--theme-accent);box-shadow:0 1px 0 var(--theme-accent)}
+#panel .panel-search::-webkit-search-cancel-button,#panel .panel-search::-webkit-search-decoration{-webkit-appearance:none;appearance:none;display:none}
+
+/* ===== Universal typography floor (all pages on the homepage chrome) =====
+   Audit found 9-12px labels and thin weights; nothing readable sits below 12px now. */
+.kicker,.festival-carousel__eyebrow,.eyebrow{font-size:13px!important;font-weight:600!important;letter-spacing:.18em!important}
+.promo-marquee__track>span{font-size:11px!important;font-weight:700!important}
+.primary-nav-link{font-size:13px!important;font-weight:700!important}
+.button,.hero-cta,.text-link,.festival-carousel__cta,.add-button,.gift-gallery-link{font-size:13px!important;font-weight:650!important;letter-spacing:.1em}
+.mood-gallery-copy>small{font-size:12px!important;font-weight:600!important}
+.mood-gallery-copy em{font-size:15px!important}
+.product-info p,.product-meta,.product-meta>span{font-size:13px!important;font-weight:500!important}
+.collection-count,.gallery-instruction{font-size:13px!important;font-weight:500!important}
+.collection-chip{font-size:13px!important;font-weight:600!important}
+.craft-principles>.craft-card>span{font-size:13px!important;font-weight:600!important}
+.craft-principles>.craft-card>p{font-size:15px!important}
+.cartier-footer .footer-main h2,.footer-social>h2{font-size:13px!important;font-weight:750!important}
+.cartier-footer .footer-main>div>a,.cartier-footer .footer-main>div>button{font-size:14px!important;font-weight:500!important}
+.footer-subscribe button{font-size:13px!important}
+.footer-subscribe input{font-size:16px!important}
+.footer-bottom,.footer-bottom>span,.footer-country{font-size:12px!important;font-weight:600!important}
+.ct-field span,.pd-specs dt,.gf-occasion-copy small,.pd-buy span{font-size:13px!important;font-weight:600!important}
+body{font-weight:450}
+/* Four primary links: tighten spacing on narrower desktops so links never reach the logo */
+@media(max-width:1440px){.nav-primary .utility-left{gap:clamp(10px,1.1vw,18px)!important}.nav-primary .utility-left>*+*:before{margin-right:clamp(10px,1.1vw,18px)!important}.primary-nav-link{font-size:12px!important;letter-spacing:.04em}}
+@media(max-width:1180px){.primary-nav-link[href="/contact/"]{display:none!important}}

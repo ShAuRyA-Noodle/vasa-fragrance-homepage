@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="theme-color" content="#0c0a09" />
+<meta name="description" content="Find Your Stranger — a VASA fragrance journey. Four scents, one question: which one already knows you?" />
+<title>Find Your Stranger — VASA</title>
+<link rel="icon" href="/media/campaign/mark-gold.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="/fonts/fonts.css" />
+<link rel="stylesheet" href="./style.css" />
+</head>
+<body data-stage="loader">
+
+<canvas id="scene-canvas" aria-hidden="true"></canvas>
+<div id="scene-fallback" aria-hidden="true"></div>
+
+<div id="cursor" aria-hidden="true">
+  <span class="cursor-ring"><b class="cursor-label"></b></span>
+  <span class="cursor-dot"></span>
+</div>
+
+<a class="skip-link" href="#stage-root">Skip to journey</a>
+
+<header class="dg-chrome" data-visible="false">
+  <button class="chrome-btn chrome-menu" id="btn-menu" aria-haspopup="dialog" aria-expanded="false" aria-controls="menu-overlay">
+    <span class="chrome-menu-bars" aria-hidden="true"><i></i><i></i></span>
+    <span class="chrome-label">MENU</span>
+  </button>
+  <a class="chrome-logo" href="#hub" id="chrome-logo">
+    <img src="/media/campaign/logo-gold.svg" alt="VASA" width="120" height="32" />
+  </a>
+  <button class="chrome-btn chrome-sound" id="btn-sound" aria-pressed="false">
+    <span class="chrome-sound-icon" aria-hidden="true"></span>
+    <span class="chrome-label" id="sound-label">SOUND OFF</span>
+  </button>
+</header>
+
+<main id="stage-root">
+
+  <section class="stage" id="stage-loader" data-stage-name="loader">
+    <div class="loader-mark">
+      <svg viewBox="0 0 200 56" class="loader-svg" aria-hidden="true">
+        <text x="100" y="42" text-anchor="middle" class="loader-wordmark">VASA</text>
+      </svg>
+      <span class="loader-hairline loader-hairline--l"></span>
+      <span class="loader-hairline loader-hairline--r"></span>
+    </div>
+    <div class="loader-count" aria-hidden="true"><span id="loader-count">00</span></div>
+    <p class="loader-caption">GATHERING LIGHT</p>
+  </section>
+
+  <section class="stage" id="stage-intro" data-stage-name="intro" hidden>
+    <div class="intro-copy">
+      <h1 class="mask-lines" id="intro-title">
+        <span class="mask-line"><span class="mask-inner">Four strangers.</span></span>
+        <span class="mask-line"><span class="mask-inner">One of them already knows you.</span></span>
+      </h1>
+      <p class="intro-sub mask-fade">A scent is a memory you haven't met yet.</p>
+    </div>
+    <div class="intro-hint" id="intro-hint">
+      <span class="intro-hint-line" aria-hidden="true"><i id="intro-hint-fill"></i></span>
+      <span class="intro-hint-text">SCROLL OR HOLD TO ENTER</span>
+    </div>
+  </section>
+
+  <section class="stage" id="stage-hub" data-stage-name="hub" hidden>
+    <p class="hub-caption mask-fade">THE FOUR STRANGERS</p>
+    <div class="hub-hover-label" id="hub-hover-label" aria-hidden="true"></div>
+    <div class="hub-doors">
+      <button class="door door--left" id="door-quiz" data-cursor-label="ENTER">
+        <span class="door-index">01</span>
+        <span class="door-title">FIND YOUR STRANGER</span>
+        <span class="door-sub">Discover the collection</span>
+      </button>
+      <button class="door door--right" id="door-compose" data-cursor-label="SOON">
+        <span class="door-index">02</span>
+        <span class="door-title">COMPOSE YOUR OWN</span>
+        <span class="door-seal">COMING SOON</span>
+      </button>
+    </div>
+  </section>
+
+  <section class="stage stage-quiz" id="stage-q1" data-stage-name="q1" hidden>
+    <p class="quiz-kicker mask-fade">01 · I WANT MY SCENT TO FEEL</p>
+    <div class="q1-wrap">
+      <button class="info-pill" id="q1-info" aria-expanded="false" aria-describedby="q1-tooltip" data-cursor-label="INFO">+</button>
+      <div class="q1-tooltip" id="q1-tooltip" role="tooltip" hidden></div>
+      <div class="q1-track-wrap">
+        <span class="q1-pole q1-pole--l">HUSHED</span>
+        <span class="q1-pole q1-pole--c" id="q1-pole-c">POISED</span>
+        <span class="q1-pole q1-pole--r">UNTAMED</span>
+        <div class="q1-track" id="q1-track" role="slider" tabindex="0"
+             aria-label="Scent temperament" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+             aria-valuetext="Poised">
+          <span class="q1-notch q1-notch--0"></span>
+          <span class="q1-notch q1-notch--1"></span>
+          <span class="q1-notch q1-notch--2"></span>
+          <div class="q1-orb" id="q1-orb"></div>
+        </div>
+      </div>
+      <p class="q1-hint" id="q1-hint"><span class="q1-hint-icon" aria-hidden="true">↔</span> DRAG TO CHOOSE</p>
+    </div>
+  </section>
+
+  <section class="stage stage-quiz" id="stage-q2" data-stage-name="q2" hidden>
+    <p class="quiz-kicker mask-fade">02 · IT BELONGS TO</p>
+    <div class="q2-wrap" id="q2-wrap">
+      <button class="q2-arrow q2-arrow--prev" id="q2-prev" aria-label="Previous moment" data-cursor-label="DRAG"><span aria-hidden="true">←</span></button>
+      <div class="q2-stage" id="q2-stage">
+        <h2 class="q2-title" id="q2-title"></h2>
+        <p class="q2-sub" id="q2-sub"></p>
+      </div>
+      <button class="q2-arrow q2-arrow--next" id="q2-next" aria-label="Next moment" data-cursor-label="DRAG"><span aria-hidden="true">→</span></button>
+    </div>
+    <div class="q2-dots" id="q2-dots" role="tablist" aria-label="Moments"></div>
+  </section>
+
+  <section class="stage stage-quiz" id="stage-q3" data-stage-name="q3" hidden>
+    <p class="quiz-kicker mask-fade">03 · CHOOSE UP TO THREE THAT DRAW YOU IN</p>
+    <div class="q3-chips" id="q3-chips" aria-live="polite"></div>
+    <div class="q3-ribbon-wrap">
+      <div class="q3-ribbon" id="q3-ribbon"></div>
+    </div>
+  </section>
+
+  <section class="stage" id="stage-result" data-stage-name="result" hidden>
+    <p class="result-kicker mask-fade">YOUR STRANGER IS</p>
+    <h2 class="result-name mask-lines" id="result-name"></h2>
+    <p class="result-family" id="result-family"></p>
+    <p class="result-line" id="result-line"></p>
+    <div class="result-match" id="result-match">
+      <span class="result-match-num" id="result-match-num">0</span><span class="result-match-pct">% match</span>
+    </div>
+    <div class="result-notes" id="result-notes"></div>
+    <div class="result-actions">
+      <a class="btn-primary" id="result-cta" href="/collection/" data-cursor-label="DISCOVER">DISCOVER <span id="result-cta-name"></span></a>
+      <button class="btn-ghost" id="result-restart" data-cursor-label="RESTART">START AGAIN</button>
+    </div>
+    <div class="result-others">
+      <p class="result-others-label">THE OTHERS</p>
+      <div class="result-others-list" id="result-others-list"></div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="quiz-nav" id="quiz-nav" hidden aria-label="Quiz navigation">
+  <button class="quiz-nav-btn" id="quiz-back" data-cursor-label="BACK">BACK</button>
+  <div class="quiz-dots" id="quiz-dots" aria-hidden="true">
+    <span data-dot="0">01</span><span data-dot="1">02</span><span data-dot="2">03</span>
+  </div>
+  <button class="quiz-nav-btn quiz-nav-btn--next" id="quiz-next" data-cursor-label="NEXT">NEXT</button>
+</nav>
+
+<div class="menu-overlay" id="menu-overlay" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <button class="menu-close" id="menu-close" aria-label="Close menu">CLOSE</button>
+  <ul class="menu-list">
+    <li><a href="/">Home</a></li>
+    <li><a href="/collection/">Collection</a></li>
+    <li><button type="button" id="menu-restart">Restart Journey</button></li>
+  </ul>
+</div>
+
+<div class="modal-overlay" id="soon-modal" role="dialog" aria-modal="true" aria-labelledby="soon-title" hidden>
+  <div class="modal-card">
+    <button class="modal-close" id="soon-close" aria-label="Close">✕</button>
+    <p class="modal-kicker">02 · COMPOSE YOUR OWN</p>
+    <h3 id="soon-title">The atelier opens soon.</h3>
+    <p class="modal-copy">Leave your name at the door, and we'll let you in first.</p>
+    <form id="soon-form" class="modal-form">
+      <label class="sr-only" for="soon-email">Email address</label>
+      <input id="soon-email" name="email" type="email" placeholder="Email address" autocomplete="email" required />
+      <button type="submit" class="btn-primary">LEAVE MY NAME</button>
+    </form>
+    <p class="modal-note" id="soon-note" role="status" aria-live="polite"></p>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<p class="sr-only" id="step-announce" aria-live="polite"></p>
+
+<script type="module" src="./main.js"></script>
+</body>
+</html>

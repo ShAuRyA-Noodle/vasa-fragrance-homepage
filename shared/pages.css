@@ -1,0 +1,111 @@
+/* Inner pages (Gifting, Contact) on the homepage chrome (05-campaign/style.css). */
+.pg{background:var(--theme-bg);color:var(--theme-text)}
+.pg .kicker{margin:0;color:var(--theme-accent);font-size:12px;letter-spacing:.2em}
+.pg h1,.pg h2,.pg h3{margin:0;font-weight:400;color:var(--theme-heading)}
+.pg h2{font-size:clamp(38px,4.4vw,68px);line-height:1;letter-spacing:-.055em;text-wrap:balance}
+.pg-lead{margin:22px 0 0;max-width:38ch;font-size:clamp(17px,1.3vw,20px);line-height:1.6;color:var(--theme-text)}
+.pg-head{max-width:760px;margin-bottom:clamp(40px,5vw,72px)}
+.pg-head h2{margin-top:18px}
+.pg section:not(.pg-hero){padding:clamp(80px,10svh,136px) clamp(24px,6vw,96px)}
+
+/* Hero: full-bleed behind the transparent navbar, like the homepage */
+.pg-hero{position:relative;height:100svh;min-height:560px;display:flex;align-items:flex-end;overflow:hidden;background:#0b0908}
+.pg-hero--short{height:min(78svh,760px)}
+.pg-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.pg-hero:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,6,5,.62) 0%,rgba(8,6,5,.12) 18%,rgba(8,6,5,0) 34%,rgba(8,6,5,.2) 58%,rgba(8,6,5,.74) 100%)}
+.pg-hero-copy{position:relative;z-index:1;display:grid;justify-items:start;gap:0;padding:0 clamp(24px,6vw,96px) clamp(56px,9svh,110px)}
+.pg-hero .kicker{color:#e3c592}
+.pg-hero h1{margin:18px 0 30px;color:#f8f1e8;font-size:clamp(52px,7vw,118px);line-height:.92;letter-spacing:-.06em;text-shadow:0 3px 24px rgba(0,0,0,.22)}
+.pg-hero--short h1{margin-bottom:0}
+
+/* Gifting: occasions (4 tall image tiles) */
+.gf-occasion-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,1.2vw,18px)}
+.gf-occasion{position:relative;display:block;height:min(62svh,560px);overflow:hidden;background:#0b0908;color:#f8f1e8;text-decoration:none}
+.gf-occasion-media,.gf-occasion-media img{position:absolute;inset:0;width:100%;height:100%}
+.gf-occasion-media img{object-fit:cover;transform:scale(1.04);transition:transform 1.1s cubic-bezier(.16,1,.3,1)}
+.gf-occasion:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,6,5,0) 40%,rgba(8,6,5,.8) 100%)}
+.gf-occasion-copy{position:absolute;z-index:1;left:22px;right:22px;bottom:24px;display:grid;gap:8px}
+.gf-occasion-copy small{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#e3c592}
+.gf-occasion-copy strong{font-weight:400;font-size:clamp(22px,1.8vw,28px);line-height:1.1;letter-spacing:-.03em}
+.gf-occasion-copy em{font-style:normal;font-size:13px;letter-spacing:.08em;opacity:.85}
+.gf-occasion:is(:hover,:focus-visible) .gf-occasion-media img{transform:scale(1.1)}
+
+/* Gifting: discovery set split */
+.gf-set{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(40px,6vw,110px);align-items:center;border-top:1px solid var(--theme-border)}
+.gf-set-media{margin:0;height:min(70svh,640px);overflow:hidden}
+.gf-set-media img{width:100%;height:100%;object-fit:cover}
+.gf-set-copy h2{margin-top:18px}
+.gf-set-copy .button{margin-top:32px}
+
+/* Gifting: ritual band */
+.gf-ritual{background:#0d0b0a;color:#f3ede4}
+.gf-ritual h2{color:#f8f1e8;max-width:14ch}
+.gf-ritual-list{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,4vw,64px);margin:clamp(48px,6vw,88px) 0 0;padding:0}
+.gf-ritual-list li{display:grid;gap:10px;padding-top:22px;border-top:1px solid rgba(243,237,228,.22)}
+.gf-ritual-list strong{font-weight:400;font-size:clamp(22px,1.9vw,30px);letter-spacing:-.03em;color:#f8f1e8}
+.gf-ritual-list span{font-size:16px;line-height:1.55;color:#e6dccd}
+
+/* Gifting: FAQ */
+.gf-faq{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(40px,6vw,110px);align-items:start}
+.gf-faq .pg-head{margin:0}
+.gf-faq-list details{border-bottom:1px solid var(--theme-border)}
+.gf-faq-list details:first-child{border-top:1px solid var(--theme-border)}
+.gf-faq-list summary{display:flex;justify-content:space-between;gap:20px;padding:24px 0;cursor:pointer;list-style:none;font-size:clamp(18px,1.4vw,22px);color:var(--theme-heading)}
+.gf-faq-list summary::-webkit-details-marker{display:none}
+.gf-faq-list summary:after{content:'+';color:var(--theme-accent);transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.gf-faq-list details[open] summary:after{transform:rotate(45deg)}
+.gf-faq-list p{margin:0 0 24px;max-width:52ch;font-size:16px;line-height:1.6;color:var(--theme-text)}
+.gf-faq-list a{color:var(--theme-accent)}
+
+/* Contact: three routes */
+.ct-routes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;padding-block:0!important;border-bottom:1px solid var(--theme-border)}
+.ct-route{position:relative;display:grid;gap:10px;justify-items:start;padding:clamp(32px,4vw,56px) clamp(20px,2.4vw,40px);border:0;border-left:1px solid var(--theme-border);background:transparent;text-align:left;cursor:pointer;color:var(--theme-text);transition:background-color .45s ease}
+.ct-route:first-child{border-left:0;padding-left:0}
+.ct-route strong{font-weight:400;font-size:clamp(22px,1.9vw,30px);letter-spacing:-.03em;color:var(--theme-heading)}
+.ct-route span{font-size:16px;line-height:1.5}
+.ct-route em{position:absolute;top:clamp(32px,4vw,56px);right:clamp(20px,2.4vw,40px);font-style:normal;color:var(--theme-accent);transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.ct-route:is(:hover,:focus-visible) em{transform:translate(4px,-4px)}
+
+/* Contact: form */
+.ct-form-wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(40px,6vw,110px);align-items:start;scroll-margin-top:90px}
+.ct-form-head h2{margin-top:18px}
+.ct-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 32px}
+.ct-field{display:grid;gap:8px}
+.ct-field--full,.ct-error,.ct-submit{grid-column:1/-1}
+.ct-field span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--theme-text)}
+.ct-field :is(input,select,textarea){width:100%;padding:12px 0;border:0;border-bottom:1px solid color-mix(in srgb,var(--theme-heading) 35%,transparent);border-radius:0;background:transparent;color:var(--theme-heading);font:inherit;font-size:17px;outline:none;transition:border-color .35s ease;-webkit-appearance:none;appearance:none}
+.ct-field select{background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.5 6 8.5 10 4.5' fill='none' stroke='%23a67d45' stroke-width='1.3'/%3E%3C/svg%3E") no-repeat right 2px center/12px}
+.ct-field select option{color:#151311}
+.ct-field textarea{resize:vertical;min-height:110px}
+.ct-field :is(input,select,textarea):focus{border-bottom-color:var(--theme-accent);box-shadow:0 1px 0 var(--theme-accent)}
+.ct-field.is-invalid :is(input,select,textarea){border-bottom-color:#b3413a}
+.ct-error{margin:0;color:#b3413a;font-size:14px}
+.ct-submit{justify-self:start;margin-top:8px}
+
+/* Contact: store band */
+.ct-store{position:relative;display:grid;place-items:center;min-height:min(60svh,560px);text-align:center;background:#0d0b0a}
+.ct-store>div{display:grid;justify-items:center}
+.ct-store h2{color:#f8f1e8}
+.ct-store .pg-lead{color:#e6dccd}
+.ct-store .button{margin-top:30px}
+
+@media(max-width:900px){
+ .gf-occasion-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .gf-occasion{height:min(48svh,420px)}
+ .gf-set,.gf-faq,.ct-form-wrap{grid-template-columns:1fr}
+ .gf-set-media{height:min(52svh,460px)}
+ .gf-ritual-list,.ct-routes{grid-template-columns:1fr}
+ .ct-route,.ct-route:first-child{padding:28px 0;border-left:0;border-top:1px solid var(--theme-border)}
+ .ct-route em{right:0;top:28px}
+}
+@media(max-width:760px){
+ .pg section:not(.pg-hero){padding:72px 18px}
+ .ct-routes{padding-block:0!important}
+ .pg-hero-copy{padding:0 18px 64px}
+ .gf-occasion-grid{grid-template-columns:1fr}
+ .ct-form{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){.gf-occasion-media img,.ct-route em,.gf-faq-list summary:after{transition:none}}
+/* Contact hero: keep the face below the navbar line */
+.ct .pg-hero-img{object-position:62% 6%}
+@media(max-width:760px){.ct .pg-hero-img{object-position:66% 8%}}
