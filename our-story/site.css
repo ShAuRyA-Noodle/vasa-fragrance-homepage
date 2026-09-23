@@ -141,3 +141,18 @@ svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width:
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* Approved homepage scale for interior pages. */
+:root:not([data-theme="dark"]),[data-theme="light"]{--bg:#fff;--surface:#fff;--surface-strong:#f4f2ef;--heading:#111;--text:#171514;--muted:#5f5a55;--header:rgba(255,255,255,.94)}
+.display{font-family:'Manrope',Arial,sans-serif;font-size:clamp(46px,5.5vw,80px);font-weight:650;line-height:1.07;letter-spacing:-.055em}
+.display em,.section-title em{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500}
+.section-title{font-family:'Manrope',Arial,sans-serif;font-size:clamp(35px,3.9vw,58px);font-weight:650;line-height:1.08;letter-spacing:-.045em}
+.body-copy{font-size:clamp(14px,1.05vw,16px);line-height:1.7}
+.section-shell{padding-block:clamp(48px,5.5vw,82px)}
+.eyebrow{font-size:10px;font-weight:750}
+.nav-link{font-size:12px;font-weight:750;letter-spacing:.03em}
+.reveal{transform:translateY(8px);transition:opacity .5s ease,transform .5s ease}
+.newsletter{padding-block:48px}.newsletter h2{font:600 clamp(30px,3.5vw,50px)/1.1 'Manrope',sans-serif;letter-spacing:-.04em}
+.site-footer{padding-top:48px}.footer-grid{padding-bottom:45px;gap:30px}
+@media(max-width:900px){.section-shell{padding-block:55px}}
+@media(max-width:560px){.display{font-size:clamp(42px,11vw,59px)}.section-title{font-size:clamp(31px,8.5vw,43px)}.section-shell{padding-block:43px}.newsletter{padding:42px 20px}.site-footer{padding-top:42px}}

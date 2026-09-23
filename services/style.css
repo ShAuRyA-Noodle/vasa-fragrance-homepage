@@ -53,3 +53,14 @@
   .guidance-copy { padding: 68px 20px; }
   .guidance-actions { align-items: flex-start; flex-direction: column; }
 }
+
+.services-hero{min-height:0;height:clamp(430px,56svh,600px)}
+.services-hero-copy{padding:clamp(40px,5vw,70px)}
+.services-hero-image{min-height:0}.services-hero-image img{object-fit:contain;background:var(--surface-strong)}
+.service-index a{min-height:55px;font-size:10px;font-weight:700}
+.ledger-item{gap:clamp(24px,4vw,60px);padding:clamp(36px,4.5vw,65px) clamp(24px,5vw,80px)}
+.ledger-item h2{font:600 clamp(33px,3.4vw,52px)/1.08 'Manrope',sans-serif;letter-spacing:-.045em}
+.guidance-image img{min-height:0;height:clamp(350px,40vw,550px);object-fit:contain;background:var(--surface-strong)}
+.guidance-copy{padding:clamp(40px,5vw,70px)}
+@media(max-width:900px){.services-hero{height:auto}.services-hero-image img{aspect-ratio:16/10}.guidance-image img{height:auto;aspect-ratio:16/10}}
+@media(max-width:560px){.services-hero-copy{padding:38px 20px}.services-hero-image img{aspect-ratio:4/3}.ledger-item{padding:36px 20px}.ledger-item h2{font-size:34px}.guidance-copy{padding:40px 20px}}

@@ -1,3 +1,5 @@
+import { initFooter } from '../shared/inner-footer.js';
+
 const BAG_KEY = 'vasa:campaign:bag:v1';
 const THEME_KEY = 'vasa-theme';
 
@@ -66,15 +68,15 @@ function pageMarkup() {
   const related = Object.entries(fragrances).filter(([id]) => id !== productId).slice(0, 3);
   return `
     <a class="skip-link" href="#product-main">Skip to product details</a>
-    <div class="announcement">THE VASA COLLECTION · FOUR FRAGRANCES · 50 ML</div>
     <header class="site-header">
-      <nav aria-label="Primary navigation">
-        <button class="nav-menu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">${icon('menu')}<span>Menu</span></button>
-        <div class="nav-links nav-links--left"><a href="/our-story/">Our story</a><a href="/collection/">Collection</a></div>
-        <a class="brand" href="/" aria-label="VASA Fragrance home"><img src="/media/campaign/logo-dark.svg" alt="VASA Fragrance" width="220" height="70"></a>
-        <div class="nav-links nav-links--right"><a href="/gifting/">Gifting</a><button class="theme-toggle" type="button" aria-label="Switch colour theme" aria-pressed="false"><span aria-hidden="true">◐</span></button><button class="bag-button" type="button" aria-haspopup="dialog">Bag <span class="bag-count" hidden>0</span></button></div>
-      </nav>
-      <div class="mobile-nav" id="mobile-nav" hidden><a href="/collection/">Collection</a><a href="/gifting/">Gifting</a><a href="/our-story/">Our story</a></div>
+      <a class="wordmark" href="/" aria-label="VASA home"><img src="/media/campaign/logo-dark.svg" alt="VASA Fragrance" width="170" height="54"></a>
+      <nav class="desktop-nav" aria-label="Primary navigation"><a href="/our-story/">Our story</a><a href="/collection/">Collection</a><a href="/gifting/">Gifts &amp; sets</a></nav>
+      <div class="header-actions"><a class="header-extra" href="/services/">Services</a><a class="header-extra" href="/contact/">Contact</a>
+        <button class="theme-toggle" type="button" aria-label="Use dark theme" aria-pressed="false"><span aria-hidden="true">◐</span><span class="theme-label">Dark</span></button>
+        <button class="bag-button" type="button" aria-haspopup="dialog" aria-label="Shopping bag, 0 items"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 8h14l1 13H4L5 8ZM9 9V6a3 3 0 0 1 6 0v3"/></svg><span class="bag-label">Bag</span><span class="bag-count" hidden>0</span></button>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span class="sr-only">Open menu</span></button>
+      </div>
+      <nav class="mobile-nav" id="mobile-menu" aria-label="Mobile navigation" hidden><a href="/collection/">Collection</a><a href="/gifting/">Gifts &amp; sets</a><a href="/our-story/">Our story</a><a href="/services/">Services</a><a href="/contact/">Contact</a><a href="/">VASA home</a></nav>
     </header>
 
     <main id="product-main">
@@ -112,14 +114,16 @@ function pageMarkup() {
 
       <section class="complements section-light" aria-labelledby="complements-title">
         <div class="section-heading reveal"><p class="eyebrow">Continue the collection</p><h2 id="complements-title">Other expressions.</h2></div>
-        <div class="related-grid">${related.map(([id, item]) => `<a class="related-card reveal" href="${productPath(id)}" style="--card-accent:${item.accent}"><div class="related-image"><img src="${media('collection', id)}" alt="${item.name} 50 ml fragrance bottle" width="1122" height="1402" loading="lazy"></div><span>${item.family}</span><h3>${item.name}</h3><p>Discover the fragrance ${icon('arrow')}</p></a>`).join('')}</div>
+        <div class="related-grid">${related.map(([id, item]) => `<a class="related-card reveal" href="${productPath(id)}"><div class="related-image"><img src="/media/campaign/hover-${id}.webp" alt="${item.name} 50 ml fragrance bottle in its scent world" width="1169" height="1345" loading="lazy"></div><span>${item.family}</span><h3>${item.name}</h3><p>Discover the fragrance ${icon('arrow')}</p></a>`).join('')}</div>
       </section>
     </main>
 
-    <footer class="site-footer">
-      <div class="footer-mark"><img src="/media/campaign/logo-light.svg" alt="VASA Fragrance" width="260" height="84"></div>
-      <div class="footer-grid"><div><p class="eyebrow">Fragrance that resides in you.</p><p>Four personal compositions, rooted in a family’s knowledge of perfumery.</p></div><nav aria-label="Footer navigation"><a href="/">Home</a><a href="/collection/">Collection</a><a href="/gifting/">Gifting</a><a href="/our-story/">Our story</a></nav><div><p class="eyebrow">The collection</p>${Object.entries(fragrances).map(([id, item]) => `<a href="${productPath(id)}">${item.name}</a>`).join('')}</div></div>
-      <div class="footer-bottom"><span>Shop in: India</span><span>© ${new Date().getFullYear()} VASA Fragrance</span></div>
+    <footer class="site-footer vasa-footer" id="site-footer">
+      <div class="footer-masthead" aria-label="VASA"><span aria-hidden="true">VASA</span></div>
+      <section class="footer-newsletter" aria-labelledby="footer-newsletter-title"><div><p class="eyebrow">PRIVATE NOTES FROM VASA</p><h2 id="footer-newsletter-title">Subscribe to our newsletter</h2></div><form class="footer-subscribe" data-footer-subscribe novalidate><label class="sr-only" for="footer-email">Email address</label><input id="footer-email" name="email" type="email" autocomplete="email" placeholder="Email address" aria-describedby="footer-newsletter-note"><button type="submit">SUBSCRIBE <span aria-hidden="true">→</span></button><p class="footer-newsletter-note" id="footer-newsletter-note" aria-live="polite">Newsletter delivery begins at launch.</p></form></section>
+      <div class="footer-main"><div><h2>Customer care</h2><a href="/contact/">Contact us</a><a href="/services/#delivery">Shipping &amp; delivery</a><a href="/services/#returns">Returns &amp; exchanges</a><a href="/services/">Client services</a></div><div><h2>Our house</h2><a href="/collection/">The collection</a><a href="/gifting/">Gifting</a><a href="/our-story/">Our story</a><a href="/contact/#stores">Find a store</a></div><div><h2>Legal area</h2><a href="/legal/#terms">Terms of use</a><a href="/legal/#privacy">Privacy policy</a><a href="/legal/#accessibility">Accessibility</a></div><div><h2>Fragrance guidance</h2><a href="/collection/">Find your fragrance</a><a href="/services/#guidance">Ask for guidance</a><a href="/gifting/">The art of gifting</a></div></div>
+      <div class="footer-causes"><a href="/our-story/">Family roots in perfumery</a><a href="/our-story/">The art of fragrance</a><a href="/services/">At your service</a></div>
+      <div class="footer-bottom"><span>SHOP IN: INDIA</span><span>COPYRIGHT © <span data-year>${new Date().getFullYear()}</span> VASA FRAGRANCE</span></div>
     </footer>
 
     <dialog class="bag-dialog" aria-labelledby="bag-title"><div class="bag-head"><h2 id="bag-title">Your bag</h2><button type="button" class="bag-close" aria-label="Close bag">${icon('close')}</button></div><div class="bag-content"></div></dialog>
@@ -127,6 +131,7 @@ function pageMarkup() {
 }
 
 document.querySelector('#app').innerHTML = pageMarkup();
+initFooter();
 
 const bagDialog = document.querySelector('.bag-dialog');
 const bagContent = document.querySelector('.bag-content');
@@ -169,8 +174,8 @@ document.addEventListener('click', (event) => {
     bag = bag.filter((entry) => entry.quantity > 0); writeBag(); updateBag();
   } else if (target.matches('[data-remove]')) {
     bag = bag.filter((entry) => entry.id !== target.dataset.remove); writeBag(); updateBag();
-  } else if (target.matches('.nav-menu')) {
-    const menu = document.querySelector('#mobile-nav'); const open = menu.hidden;
+  } else if (target.matches('.menu-toggle')) {
+    const menu = document.querySelector('#mobile-menu'); const open = menu.hidden;
     menu.hidden = !open; target.setAttribute('aria-expanded', String(open));
   } else if (target.matches('.theme-toggle')) {
     applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark', true);
@@ -184,8 +189,8 @@ function applyTheme(theme, persist = false) {
   document.documentElement.dataset.theme = theme;
   document.documentElement.style.colorScheme = theme;
   const toggle = document.querySelector('.theme-toggle');
-  if (toggle) { toggle.setAttribute('aria-pressed', String(theme === 'dark')); toggle.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`); }
-  document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#0b0b0b' : '#f5f1ea';
+  if (toggle) { toggle.setAttribute('aria-pressed', String(theme === 'dark')); toggle.setAttribute('aria-label', `Use ${theme === 'dark' ? 'light' : 'dark'} theme`); toggle.querySelector('.theme-label').textContent = theme === 'dark' ? 'Light' : 'Dark'; }
+  document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#141312' : '#ffffff';
   if (persist) safeWrite(THEME_KEY, theme);
 }
 
@@ -199,6 +204,6 @@ addEventListener('scroll', updateHeader, { passive: true }); updateHeader();
 
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (!reducedMotion && 'IntersectionObserver' in window) {
-  const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } }), { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+  const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } }), { threshold: 0.01, rootMargin: '0px 0px 100px 0px' });
   document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
 } else document.querySelectorAll('.reveal').forEach((element) => element.classList.add('is-visible'));

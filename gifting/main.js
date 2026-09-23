@@ -8,7 +8,7 @@ function setTheme(theme) {
   themeButton.setAttribute('aria-pressed', String(dark));
   themeButton.setAttribute('aria-label', `Use ${dark ? 'light' : 'dark'} theme`);
   themeLabel.textContent = dark ? 'Light' : 'Dark';
-  themeMeta.content = dark ? '#171310' : '#f4f0e8';
+  themeMeta.content = dark ? '#171310' : '#ffffff';
   try { localStorage.setItem('vasa-theme', theme); } catch (error) { /* storage is optional */ }
 }
 setTheme(root.dataset.theme === 'light' ? 'light' : 'dark');
@@ -26,6 +26,6 @@ document.querySelectorAll('.faq-item button').forEach(button => button.addEventL
 }));
 
 if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } }), { threshold: .12 });
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } }), { threshold: .01, rootMargin: '0px 0px 100px 0px' });
   document.querySelectorAll('.reveal').forEach(item => observer.observe(item));
 } else document.querySelectorAll('.reveal').forEach(item => item.classList.add('is-visible'));

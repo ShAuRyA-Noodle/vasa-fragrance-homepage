@@ -36,6 +36,6 @@ filters.forEach(button => button.addEventListener('click', () => {
 }));
 
 if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } }), { threshold: .12 });
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } }), { threshold: .01, rootMargin: '0px 0px 100px 0px' });
   document.querySelectorAll('.reveal').forEach(item => observer.observe(item));
 } else document.querySelectorAll('.reveal').forEach(item => item.classList.add('is-visible'));

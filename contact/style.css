@@ -45,3 +45,12 @@
   .contact-aside, .contact-form, .store-copy { padding: 66px 20px; }
   .field-row { grid-template-columns: 1fr; gap: 0; }
 }
+
+.contact-intro{padding-block:clamp(45px,5vw,72px)}
+.contact-aside,.contact-form{padding:clamp(38px,4.5vw,64px)}
+.contact-aside h2{margin:12px 0 26px;font:600 clamp(31px,3.3vw,50px)/1.08 'Manrope',sans-serif;letter-spacing:-.04em}
+.category-list a{padding:13px 0}.category-list strong{font-size:13px;font-weight:650}.category-list small{font-size:11px}
+.store-section{min-height:0}.store-image img{height:clamp(380px,40vw,550px);object-fit:contain;background:var(--surface-strong)}
+.store-copy{padding:clamp(40px,5vw,70px)}
+@media(max-width:900px){.store-image img{height:auto;aspect-ratio:16/10}}
+@media(max-width:560px){.contact-intro{padding-block:40px}.contact-aside,.contact-form,.store-copy{padding:38px 20px}.store-image img{aspect-ratio:4/3}}

@@ -12,3 +12,29 @@
 @media(max-width:980px){.product-hero{grid-template-columns:1fr 1fr}.hero-copy{padding:55px 5vw}.hero-visual{min-height:620px}.olfactive-section{grid-template-columns:1fr;gap:60px}.material-story,.ritual{min-height:650px}.material-copy,.ritual-copy{padding:65px 6vw}.note{grid-template-columns:60px 110px 1fr}.site-header nav{grid-template-columns:1fr 170px 1fr}.nav-links{gap:15px}}
 @media(max-width:720px){.announcement{font-size:6.5px;letter-spacing:.16em}.site-header nav{height:70px;grid-template-columns:1fr 130px 1fr;padding:0 18px}.brand img{width:130px}.nav-links--left,.nav-links--right>a{display:none}.nav-links--right{gap:7px}.nav-menu{display:flex;align-items:center;gap:8px;justify-self:start}.nav-menu svg{width:20px;height:20px;stroke:currentColor}.nav-menu span{display:none}.mobile-nav{padding:8px 22px 24px;border-top:1px solid var(--line);background:var(--bg)}.mobile-nav:not([hidden]){display:flex;flex-direction:column}.mobile-nav a{padding:12px 0;border-bottom:1px solid var(--line);font:500 25px/1.2 'Cormorant Garamond',serif}.product-hero{min-height:0;grid-template-columns:1fr}.hero-visual{min-height:0;aspect-ratio:1/1.12}.hero-copy{padding:46px 24px 65px}.breadcrumb{margin-bottom:52px}.hero-copy h1{font-size:clamp(55px,18vw,78px)}.product-meta{margin-top:35px}.olfactive-section{padding:85px 24px}.section-intro h2,.material-copy h2,.ritual-copy h2,.section-heading h2{font-size:52px}.note{min-height:155px;grid-template-columns:45px 1fr;gap:8px 15px}.note>p:first-of-type{grid-column:2}.note h3{grid-column:2;font-size:34px}.note>p:last-child{grid-column:2}.material-story,.ritual{grid-template-columns:1fr;min-height:0}.material-image,.ritual-image{aspect-ratio:1}.material-copy,.ritual-copy{padding:75px 24px}.ritual-image{grid-row:1}.material-copy dl>div{grid-template-columns:1fr;gap:8px}.complements{padding:80px 22px}.related-grid{grid-template-columns:1fr;gap:55px}.section-heading{display:block;margin-bottom:35px}.related-card h3{font-size:37px}.footer-grid{grid-template-columns:1fr 1fr;gap:48px 25px}.footer-grid>div:first-child{grid-column:1/-1}.bag-content{padding:15px 21px}.bag-head{padding:20px 21px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal,.hero-visual.reveal{opacity:1;transform:none;clip-path:none;transition:none!important}.related-image img,.toast,.add-to-bag:before{transition:none!important}}
+
+/* PDP density aligned with the approved homepage. */
+.product-hero{min-height:0;grid-template-columns:minmax(0,1fr) minmax(390px,1fr)}
+.hero-visual{min-height:0;height:clamp(430px,49vw,630px);background:var(--surface)}
+.hero-visual img{mix-blend-mode:normal}
+.hero-copy{padding:clamp(40px,5vw,74px)}
+.breadcrumb{margin-bottom:clamp(24px,4vw,48px)}
+.hero-copy h1{max-width:11ch;font:650 clamp(44px,4.5vw,70px)/1.04 'Manrope',sans-serif;letter-spacing:-.055em}
+.hero-line{font-size:clamp(21px,1.9vw,27px);margin-bottom:16px}
+.description{font-size:15px;line-height:1.65}
+.product-meta{margin:25px 0 11px}
+.olfactive-section{gap:clamp(35px,5vw,80px);padding:clamp(50px,5.5vw,85px) 5vw}
+.section-intro h2,.material-copy h2,.ritual-copy h2,.section-heading h2{font:650 clamp(35px,3.9vw,59px)/1.08 'Manrope',sans-serif;letter-spacing:-.045em;margin:13px 0 20px}
+.section-intro h2 em,.material-copy h2 em,.ritual-copy h2 em{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500}
+.note{min-height:125px;gap:10px}.note h3{font:600 clamp(23px,2.3vw,34px)/1.1 'Manrope',sans-serif}
+.material-story,.ritual{min-height:0}.material-image,.ritual-image{height:clamp(390px,43vw,570px)}
+.material-image img,.ritual-image img{object-fit:contain;background:var(--surface)}
+.material-copy,.ritual-copy{padding:clamp(38px,5vw,72px)}
+.material-copy dl{margin-top:18px}.material-copy dl>div{padding:14px 0}
+.ritual-copy ol{margin-top:24px}.ritual-copy li{padding:12px 0}
+.complements{padding:clamp(52px,5vw,80px) 4vw}.section-heading{margin-bottom:28px}
+.related-image{aspect-ratio:1.25/1}.related-image img{mix-blend-mode:normal}
+.related-card h3{font:600 clamp(22px,2vw,30px)/1.1 'Manrope',sans-serif}
+.reveal{transform:translateY(8px);transition:opacity .5s ease,transform .5s ease}
+@media(max-width:980px){.hero-visual{min-height:0;height:clamp(380px,51vw,530px)}.hero-copy{padding:36px 4vw}.material-story,.ritual{min-height:0}}
+@media(max-width:720px){.product-hero{grid-template-columns:1fr}.hero-visual{height:auto;aspect-ratio:1/1.08}.hero-copy{padding:36px 24px 44px}.breadcrumb{margin-bottom:25px}.hero-copy h1{font-size:clamp(39px,10vw,55px)}.olfactive-section{padding:48px 24px}.section-intro h2,.material-copy h2,.ritual-copy h2,.section-heading h2{font-size:clamp(31px,8vw,42px)}.note{min-height:110px}.note h3{font-size:24px}.material-image,.ritual-image{height:auto;aspect-ratio:1}.material-copy,.ritual-copy{padding:44px 24px}.complements{padding:48px 22px}.related-image{aspect-ratio:1.15/1}.related-grid{gap:33px}.related-card h3{font-size:25px}}
