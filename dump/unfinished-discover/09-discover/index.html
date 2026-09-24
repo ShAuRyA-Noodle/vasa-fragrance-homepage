@@ -22,12 +22,18 @@
 
 <a class="skip-link" href="#stage-root">Skip to journey</a>
 
+<!-- This exit remains available while the journey changes states, including
+     before the chrome has entered after the loading sequence. -->
+<a class="site-exit" href="/" aria-label="Back to the VASA homepage">
+  <span aria-hidden="true">←</span> BACK TO VASA
+</a>
+
 <header class="dg-chrome" data-visible="false">
   <button class="chrome-btn chrome-menu" id="btn-menu" aria-haspopup="dialog" aria-expanded="false" aria-controls="menu-overlay">
     <span class="chrome-menu-bars" aria-hidden="true"><i></i><i></i></span>
     <span class="chrome-label">MENU</span>
   </button>
-  <a class="chrome-logo" href="#hub" id="chrome-logo">
+  <a class="chrome-logo" href="/" id="chrome-logo" aria-label="Back to the VASA homepage">
     <img src="/media/campaign/logo-gold.svg" alt="VASA" width="120" height="32" />
   </a>
   <button class="chrome-btn chrome-sound" id="btn-sound" aria-pressed="false">

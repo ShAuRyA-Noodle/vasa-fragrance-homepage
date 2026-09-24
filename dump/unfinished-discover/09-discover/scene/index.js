@@ -143,6 +143,13 @@ export async function createScene(canvas, { onProgress, reducedMotion, isMobile 
   const clickCbs = [];
   const raycaster = new THREE.Raycaster();
   const ndc = new THREE.Vector2();
+  const mouseWorld = new THREE.Vector3();
+  // The bottle hierarchy includes mirrored meshes. Keep the actual bottle parts
+  // once, rather than traversing every group for each pointer event.
+  const raycastMeshes = bottles.flatMap((b) => b.group.children.filter((o) => o.isMesh));
+  let raycastDirty = false;
+  let raycastX = 0;
+  let raycastY = 0;
 
   function onPointerMove(e) {
     const w = width();
@@ -151,7 +158,11 @@ export async function createScene(canvas, { onProgress, reducedMotion, isMobile 
     mouse.ty = -(e.clientY / h) * 2 + 1;
     mouse.active = true;
     background.setMouseUv(e.clientX / w, 1 - e.clientY / h, true);
-    if (raycastEnabled) doRaycast(e.clientX, e.clientY);
+    if (raycastEnabled) {
+      raycastX = e.clientX;
+      raycastY = e.clientY;
+      raycastDirty = true;
+    }
   }
   function onPointerLeave() {
     mouse.active = false;
@@ -172,9 +183,7 @@ export async function createScene(canvas, { onProgress, reducedMotion, isMobile 
     const h = height();
     ndc.set((clientX / w) * 2 - 1, -(clientY / h) * 2 + 1);
     raycaster.setFromCamera(ndc, camera);
-    const meshes = [];
-    bottles.forEach((b) => b.group.traverse((o) => o.isMesh && meshes.push(o)));
-    const hits = raycaster.intersectObjects(meshes, false);
+    const hits = raycaster.intersectObjects(raycastMeshes, false);
     const id = hits.length ? hits[0].object.userData.productId : null;
     if (!isClick) {
       if (id !== hoveredId) {
@@ -279,6 +288,7 @@ export async function createScene(canvas, { onProgress, reducedMotion, isMobile 
   function setStage(stage, opts = {}) {
     currentStage = stage;
     raycastEnabled = stage === 'hub' || stage === 'result';
+    raycastDirty = false;
     // Quiz steps happen in the abstract room: bottles + plinth sink out of frame.
     const inQuiz = stage === 'q1' || stage === 'q2' || stage === 'q3';
     gsap.to([bottleGroup.position, plinthGroup.position], { y: inQuiz ? -2.4 : 0, duration: 1.6, ease: 'power3.inOut', overwrite: true });
@@ -407,8 +417,13 @@ export async function createScene(canvas, { onProgress, reducedMotion, isMobile 
   function setQuality(q) {
     quality = q;
     post.setQuality(q);
+    background.setQuality(q);
     dust.setCount(q === 'high' ? dust.maxCount : Math.floor(dust.maxCount * 0.4));
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, q === 'high' ? dprCap : 1));
+    // WebGLRenderer applies a new DPR only when its drawing buffer is resized.
+    // Without this, the automatic low-quality fallback retained the high-DPR
+    // canvas and missed one of its largest intended savings.
+    resize();
   }
   setQuality(isMobile ? 'low' : 'high');
 
@@ -455,11 +470,13 @@ export async function createScene(canvas, { onProgress, reducedMotion, isMobile 
     background.fitToCamera(camera, 30);
     background.update(dt, elapsed, renderer);
     dust.update(dt, elapsed);
-    dust.setMouseWorld(
-      new THREE.Vector3(mouse.x * 3, mouse.y * 2 + 1, 0),
-      mouse.active
-    );
+    mouseWorld.set(mouse.x * 3, mouse.y * 2 + 1, 0);
+    dust.setMouseWorld(mouseWorld, mouse.active);
     sprites.update(dt, elapsed, mouse.active ? { x: mouse.x, y: mouse.y } : null);
+    if (raycastDirty) {
+      raycastDirty = false;
+      doRaycast(raycastX, raycastY);
+    }
     post.update(dt, elapsed);
     post.render();
 

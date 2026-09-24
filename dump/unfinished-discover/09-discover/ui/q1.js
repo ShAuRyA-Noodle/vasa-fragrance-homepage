@@ -29,8 +29,8 @@ export function initQ1({ el, onChange, onFirstInteract }) {
 
   function paint(t, { snapping } = {}) {
     // Position via transform, not `left` — dragging must never trigger
-    // layout (perf pass). Orb is 20px wide, so offset by half to center.
-    const px = t * trackRect.width - 10;
+    // layout. The orb's negative margin already centres it at the origin.
+    const px = t * trackRect.width;
     orb.style.transform = `translate3d(${px}px, -50%, 0)`;
     const distToCenter = Math.abs(t - 0.5);
     poleC.classList.toggle('is-visible', distToCenter < 0.22);

@@ -3,7 +3,19 @@ import { resolve } from 'node:path';
 
 const page = (path) => resolve(import.meta.dirname, path, 'index.html');
 
+// Feel Your Fragrance is a small client-routed app: its sub-routes serve its index.html
+const feelRoutes = {
+  name: 'feel-your-fragrance-routes',
+  configureServer(server) {
+    server.middlewares.use((req, _res, next) => {
+      if (/^\/feel-your-fragrance\/(quiz(\/1)?|layering)\/?(\?.*)?$/.test(req.url)) req.url = '/feel-your-fragrance/index.html';
+      next();
+    });
+  }
+};
+
 export default defineConfig({
+  plugins: [feelRoutes],
   build: {
     rollupOptions: {
       input: {

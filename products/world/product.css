@@ -33,6 +33,18 @@
 .pd-buy{display:flex;align-items:center;gap:26px;margin-top:36px}
 .pd-buy span{font-size:12px;line-height:1.6;letter-spacing:.16em;color:rgba(248,241,232,.8)}
 
+/* The held camera move between arrival and composition.  It is deliberately
+   spare: the WebGL bottle remains the sole object in this frame. */
+.pd-reveal{position:relative;z-index:1;min-height:100svh;display:grid;align-items:end;padding:clamp(42px,8svh,96px) clamp(24px,6vw,96px);color:#f8f1e8;overflow:hidden}
+.pd-reveal:before{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(5,4,4,.58),rgba(5,4,4,.08) 58%,transparent)}
+.pd-reveal-copy{position:relative;z-index:1;max-width:min(38rem,42vw);padding-bottom:clamp(20px,6svh,76px)}
+.pd-reveal-copy .kicker{color:var(--pd-accent)}
+.pd-reveal-copy p:last-child{margin:18px 0 0;font-family:var(--font-serif,'Cormorant Garamond',serif);font-size:clamp(30px,3.4vw,58px);line-height:1.05;letter-spacing:-.04em;color:#f8f1e8}
+.pd-sticky-buy{position:fixed;z-index:40;right:clamp(20px,4vw,64px);bottom:clamp(20px,4vh,42px);display:flex;align-items:center;gap:16px;padding:10px 10px 10px 18px;border:1px solid color-mix(in srgb,var(--pd-accent) 52%,transparent);background:rgba(8,7,6,.76);box-shadow:0 12px 36px rgba(0,0,0,.22);backdrop-filter:blur(12px);color:#f8f1e8;opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .35s ease,transform .35s ease}
+.pd-sticky-buy.is-visible{opacity:1;transform:translateY(0);pointer-events:auto}
+.pd-sticky-buy span{font-size:13px;letter-spacing:.12em;white-space:nowrap}
+.pd-sticky-buy .button{min-height:42px}
+
 /* Notes journey: pinned on desktop */
 .pd-notes{position:relative;height:100svh;min-height:620px;overflow:hidden;background:radial-gradient(circle at 70% 50%,color-mix(in srgb,var(--pd-a) 80%,#fff 6%),var(--pd-b) 70%);color:#f8f1e8}
 .pd-notes-head{position:absolute;z-index:3;top:clamp(110px,15svh,150px);left:clamp(24px,6vw,96px);right:clamp(24px,6vw,96px);display:flex;align-items:center;gap:28px}
@@ -83,7 +95,8 @@
  .pd-hero{min-height:640px}
  .pd-hero-copy{left:18px;right:18px;bottom:44px;max-width:none}
  .pd-hero h1{font-size:clamp(54px,15vw,76px)}
- .pd-poster{right:50%;transform:translateX(50%);height:58%;max-width:80%;bottom:auto;top:12%}
+ /* Keep the bottle above the large, bottom-anchored mobile title and CTA. */
+ .pd-poster{right:50%;transform:translateX(50%);height:40%;max-width:80%;bottom:auto;top:8%}
  /* Notes stack on mobile, no pin */
  .pd-notes{height:auto;min-height:0;padding:96px 18px 40px}
  .pd-notes-head{position:static;margin-bottom:24px}
@@ -91,6 +104,10 @@
  .pd-note{position:static;grid-template-columns:1fr;padding:0;gap:18px}
  .pd-note-media{order:0;height:260px}
  .pd-note-copy h2{font-size:38px}
+ .pd-reveal{min-height:58svh;padding:48px 18px;align-items:end}
+ .pd-reveal-copy{max-width:28rem;padding-bottom:8px}
+ .pd-reveal-copy p:last-child{font-size:clamp(30px,10vw,48px)}
+ .pd-sticky-buy{display:none}
  .pd-mood{height:70svh}
  .pd-detail,.pd-more{padding:72px 18px}
  .pd-specs{grid-template-columns:1fr 1fr}
@@ -104,5 +121,19 @@
 @keyframes pd-grain{0%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-5%)}60%{transform:translate(-6%,-2%)}80%{transform:translate(5%,4%)}100%{transform:translate(0,0)}}
 @media(prefers-reduced-motion:reduce){.pd-grade:after{animation:none}}
 
-/* Inner pages: no hairline under the navbar while it floats over the hero */
+/* Inner pages: the Arrival navbar has no tint, gradient, or hairline over the hero. */
+.site-header.ysl-nav:not(.scrolled):before{opacity:0}
 .site-header:not(.scrolled),.site-header:not(.scrolled) .nav-primary{border-bottom-color:transparent!important;box-shadow:none!important}
+/* Notes: copy and ingredient centred in the space under the header, both vertically aligned */
+@media(min-width:761px){
+ .pd-note{padding:clamp(150px,20svh,190px) clamp(24px,6vw,96px) clamp(90px,12svh,130px);align-items:center}
+ .pd-note-media{height:min(52svh,480px);justify-self:center;align-self:center}
+ .pd-note-media img{object-position:center}
+}
+@media(min-width:761px){
+ .pd-note{grid-template-rows:1fr;align-content:center}
+ .pd-note-media{height:min(44svh,420px)}
+ .pd-note-media,.pd-note-copy{align-self:center}
+}
+@media(min-width:761px){.pd-note-media img{height:100%;width:100%;object-fit:contain}}
+@media(min-width:761px){.pd-note-media{position:relative;width:min(40vw,520px)}.pd-note-media img{position:absolute;inset:0;height:100%;width:100%;max-height:none}}

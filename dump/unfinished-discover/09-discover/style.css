@@ -40,6 +40,24 @@ body.touch-input, body.touch-input * { cursor: auto !important; }
 }
 .skip-link:focus { top: 1rem; }
 
+/* A stable exit keeps the parent VASA site one deliberate click away. It is
+   intentionally independent of the animated chrome so it is present from
+   the first loading frame through the result. */
+.site-exit {
+  position: fixed; top: clamp(4.4rem, 9vw, 5.5rem); left: clamp(1rem, 3vw, 2.5rem);
+  z-index: 80; display: inline-flex; align-items: center; gap: .55rem;
+  color: var(--gold-hi); text-decoration: none; font: 700 10px Manrope, sans-serif;
+  letter-spacing: .2em; padding: .5rem 0; opacity: .78;
+  transition: opacity .25s ease, color .25s ease;
+}
+.site-exit::after {
+  content: ""; position: absolute; left: 1.35rem; right: 0; bottom: .2rem;
+  height: 1px; background: currentColor; transform: scaleX(.38); transform-origin: left;
+  transition: transform .35s var(--ease);
+}
+.site-exit:hover, .site-exit:focus-visible { color: var(--cream); opacity: 1; }
+.site-exit:hover::after, .site-exit:focus-visible::after { transform: scaleX(1); }
+
 /* ---------------------------------------------------------------- canvas */
 #scene-canvas {
   position: fixed; inset: 0; width: 100%; height: 100%;
@@ -313,10 +331,12 @@ body[data-stage="result"] .chrome-logo img { height: 26px; }
 .q2-stage { flex: 1; min-height: 8rem; touch-action: pan-y; user-select: none; }
 .q2-title {
   margin: 0; font: 400 clamp(2.2rem, 6.5vw, 4rem) 'Cormorant Garamond', serif; letter-spacing: .02em;
-  text-transform: uppercase;
+  text-transform: uppercase; will-change: transform, opacity;
+  transition: opacity .56s ease, transform .56s var(--ease);
 }
-.q2-title .q2-word { display: inline-block; white-space: nowrap; }
-.q2-title .q2-char { display: inline-block; }
+.q2-title.is-entering { opacity: 0; }
+.q2-title.is-entering.is-from-right { transform: translate3d(0, 16px, 0); }
+.q2-title.is-entering.is-from-left { transform: translate3d(0, -16px, 0); }
 .q2-sub { margin: .9rem 0 0; font: 400 italic 16px 'Cormorant Garamond', serif; color: var(--gold-hi); }
 .q2-dots { position: absolute; bottom: -3.4rem; left: 50%; transform: translateX(-50%); display: flex; gap: .6rem; }
 .q2-dots button { width: 6px; height: 6px; border-radius: 50%; border: 1px solid var(--gold); background: none; padding: 0; cursor: none; }
@@ -454,6 +474,7 @@ body[data-stage="result"] .chrome-logo img { height: 26px; }
 /* ---------------------------------------------------------------- mobile */
 @media (max-width: 640px) {
   .stage { padding: 5.5rem 1.1rem 7.5rem; }
+  .site-exit { top: 4.35rem; font-size: 9px; letter-spacing: .16em; }
   .hub-doors { flex-direction: column; gap: 1.4rem; align-items: stretch; bottom: 2.4rem; }
   .door { width: 100%; }
   .door--right { text-align: left; align-items: flex-start; }

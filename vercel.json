@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/feel-your-fragrance/quiz", "destination": "/feel-your-fragrance/index.html" },
+    { "source": "/feel-your-fragrance/quiz/1", "destination": "/feel-your-fragrance/index.html" },
+    { "source": "/feel-your-fragrance/layering", "destination": "/feel-your-fragrance/index.html" }
+  ]
+}

@@ -13,7 +13,7 @@ if (root && cfg) {
   const stage = root.querySelector('.pd-stage');
   let world = null;
   import('./scene.js').then(({createWorld}) => {
-    world = createWorld(stage, cfg, root.dataset.name, {watch: [root.querySelector('.pd-hero'), root.querySelector('.pd-notes')]});
+    world = createWorld(stage, cfg, root.dataset.name, {watch: [root.querySelector('.pd-hero'), root.querySelector('.pd-reveal'), root.querySelector('.pd-notes')]});
     if (world) { stage.classList.add('is-live'); root.classList.add('is-live'); }
   }).catch(() => {});
 
@@ -27,28 +27,66 @@ if (root && cfg) {
       .from('.pd-hero [data-intro]', {y: 18, opacity: 0, duration: .9, stagger: .08, clearProps: 'transform,opacity'}, '-=.9');
   } else gsap.set(wipe, {yPercent: -100});
 
-  // 3. Scroll drives the bottle; hero copy drifts away
-  ScrollTrigger.create({trigger: '.pd-hero', start: 'top top', end: 'bottom top', scrub: true, onUpdate: s => world?.setProgress(s.progress)});
+  // 3. The second beat holds the bottle in place while the camera and light travel.
+  // Keep the actual ScrollTrigger on a short, dedicated section so composition begins
+  // only after the reveal has cleared the product.
+  const reveal = root.querySelector('.pd-reveal');
+  if (!reduced.matches && reveal && matchMedia('(min-width: 761px)').matches) {
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: reveal,
+        start: 'top top',
+        end: () => `+=${innerHeight * 1.5}`,
+        pin: true,
+        scrub: .8,
+        anticipatePin: 1,
+        onUpdate: s => world?.setProgress(s.progress)
+      }
+    }).fromTo(reveal.querySelector('.pd-reveal-copy'), {y: 34, autoAlpha: 0}, {y: 0, autoAlpha: 1, duration: .52}, .13)
+      .to(reveal.querySelector('.pd-reveal-copy'), {y: -28, autoAlpha: 0, duration: .3}, .72);
+  } else if (reveal) {
+    ScrollTrigger.create({trigger: reveal, start: 'top bottom', end: 'bottom top', scrub: true, onUpdate: s => world?.setProgress(s.progress)});
+  }
   if (!reduced.matches) gsap.to('.pd-hero-copy', {yPercent: -30, opacity: 0, ease: 'none', scrollTrigger: {trigger: '.pd-hero', start: 'top top', end: '70% top', scrub: true}});
 
-  // 4. Notes journey: pinned, one stage at a time
+  // 4. Composition: pinned, one stage at a time.
   const notes = root.querySelector('.pd-notes');
   const items = [...notes.querySelectorAll('.pd-note')];
   const bar = notes.querySelector('.pd-notes-progress i');
   if (!reduced.matches && matchMedia('(min-width: 761px)').matches) {
-    gsap.set(items.slice(1), {autoAlpha: 0});
-    const tl = gsap.timeline({scrollTrigger: {trigger: notes, start: 'top top', end: () => `+=${innerHeight * 2.2}`, pin: true, scrub: .8, anticipatePin: 1, onUpdate: s => { if (bar) bar.style.transform = `scaleX(${s.progress})`; world?.setJourney(s.progress); }}});
+    // A composition stage is a single, legible frame.  Do not crossfade note
+    // headlines: long names become unreadable when adjacent panels overlap.
+    let activeStage = -1;
+    const showStage = progress => {
+      const next = Math.min(items.length - 1, Math.floor(progress * items.length));
+      if (next === activeStage) return;
+      activeStage = next;
+      items.forEach((item, i) => gsap.set(item, {autoAlpha: i === next ? 1 : 0}));
+    };
+    gsap.set(items, {autoAlpha: 0});
+    showStage(0);
+    const tl = gsap.timeline({scrollTrigger: {trigger: notes, start: 'top top', end: () => `+=${innerHeight * 2.2}`, pin: true, scrub: .8, anticipatePin: 1, onUpdate: s => { showStage(s.progress); if (bar) bar.style.transform = `scaleX(${s.progress})`; world?.setJourney(s.progress); }}});
     items.forEach((item, i) => {
       const img = item.querySelector('img'), words = item.querySelectorAll('.pd-note-copy > *');
-      if (i > 0) tl.fromTo(item, {autoAlpha: 0}, {autoAlpha: 1, duration: .25}, i)
-        .fromTo(words, {y: 60, opacity: 0}, {y: 0, opacity: 1, stagger: .05, duration: .35}, i)
-        .fromTo(img, {scale: .82, rotate: -8, yPercent: 12}, {scale: 1, rotate: 0, yPercent: 0, duration: .5, ease: 'power3.out'}, i);
-      if (i < items.length - 1) tl.to(item, {autoAlpha: 0, duration: .25}, i + .75)
-        .to(img, {scale: 1.1, rotate: 6, yPercent: -10, duration: .3}, i + .7);
+      const start = i;
+      if (i > 0) tl.fromTo(words, {y: 60, opacity: 0}, {y: 0, opacity: 1, stagger: .05, duration: .35}, start)
+        .fromTo(img, {scale: .82, rotate: -8, yPercent: 12}, {scale: 1, rotate: 0, yPercent: 0, duration: .5, ease: 'power3.out'}, start);
+      if (i < items.length - 1) tl.to(img, {scale: 1.1, rotate: 6, yPercent: -10, duration: .3}, i + .7);
     });
   } else {
     // Mobile / reduced motion: no pin, the camera journey follows the section scroll
     ScrollTrigger.create({trigger: notes, start: 'top bottom', end: 'bottom top', scrub: true, onUpdate: s => world?.setJourney(s.progress)});
+  }
+  // Desktop commerce follows beat one, then gets out of the ritual section's way.
+  const stickyBuy = root.querySelector('.pd-sticky-buy');
+  if (stickyBuy && !reduced.matches && matchMedia('(min-width: 761px)').matches) {
+    ScrollTrigger.create({
+      trigger: reveal || root.querySelector('.pd-hero'),
+      start: 'bottom top',
+      endTrigger: root.querySelector('.pd-detail'),
+      end: 'top bottom',
+      onToggle: self => stickyBuy.classList.toggle('is-visible', self.isActive)
+    });
   }
   // Reveals + parallax come from /shared/page-reveal.js
 }

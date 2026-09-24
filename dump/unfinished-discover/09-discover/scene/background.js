@@ -76,6 +76,7 @@ export function createBackground(renderer) {
   mesh.renderOrder = -1000;
   mesh.frustumCulled = false;
   mesh.matrixAutoUpdate = false;
+  const cameraDirection = new THREE.Vector3();
 
   // Ping-pong render targets for the cursor smoke-parting trail.
   const trailOpts = {
@@ -108,10 +109,15 @@ export function createBackground(renderer) {
   uniforms.trail.value = trailA.texture;
 
   let mouseActive = false;
+  let quality = 'high';
+  let viewWidth = 1;
+  let viewHeight = 1;
+  let trailFramesRemaining = 0;
 
   function setMouseUv(u, v, active) {
     trailUniforms.mouseUv.value.set(u, v);
     mouseActive = active;
+    if (active) trailFramesRemaining = 100;
   }
 
   function fitToCamera(camera, distance) {
@@ -119,32 +125,47 @@ export function createBackground(renderer) {
     const height = 2 * Math.tan(vFov / 2) * distance;
     const width = height * camera.aspect;
     mesh.scale.set(width * 1.02, height * 1.02, 1);
-    const dir = new THREE.Vector3();
-    camera.getWorldDirection(dir);
-    mesh.position.copy(camera.position).addScaledVector(dir, distance);
+    camera.getWorldDirection(cameraDirection);
+    mesh.position.copy(camera.position).addScaledVector(cameraDirection, distance);
     mesh.quaternion.copy(camera.quaternion);
     mesh.updateMatrix();
   }
 
   function setSize(w, h) {
+    viewWidth = w;
+    viewHeight = h;
     uniforms.resolution.value.set(w, h);
-    const rw = Math.max(2, Math.round(w * 0.5));
-    const rh = Math.max(2, Math.round(h * 0.5));
+    resizeSmokeTarget();
+  }
+
+  function resizeSmokeTarget() {
+    const scale = quality === 'high' ? 0.5 : 0.35;
+    const rw = Math.max(2, Math.round(viewWidth * scale));
+    const rh = Math.max(2, Math.round(viewHeight * scale));
     smokeRT.setSize(rw, rh);
+  }
+
+  function setQuality(q) {
+    quality = q;
+    resizeSmokeTarget();
   }
 
   function update(dt, elapsed, rendererRef) {
     uniforms.time.value = elapsed;
     uniforms.grainSeed.value = Math.random() * 100;
 
-    trailUniforms.strength.value = mouseActive ? 0.55 : 0.0;
-    trailMaterial.uniforms.prevTrail.value = trailA.texture;
     const prevTarget = rendererRef.getRenderTarget();
-
-    rendererRef.setRenderTarget(trailB);
-    rendererRef.render(trailScene, trailCamera);
-    [trailA, trailB] = [trailB, trailA];
-    uniforms.trail.value = trailA.texture;
+    // Once the existing trail has fully faded, retaining its last all-black
+    // target is visually identical and avoids an otherwise permanent pass.
+    if (mouseActive || trailFramesRemaining > 0) {
+      trailUniforms.strength.value = mouseActive ? 0.55 : 0.0;
+      trailMaterial.uniforms.prevTrail.value = trailA.texture;
+      rendererRef.setRenderTarget(trailB);
+      rendererRef.render(trailScene, trailCamera);
+      [trailA, trailB] = [trailB, trailA];
+      uniforms.trail.value = trailA.texture;
+      if (!mouseActive) trailFramesRemaining--;
+    }
 
     rendererRef.setRenderTarget(smokeRT);
     rendererRef.render(smokeScene, quadCam);
@@ -179,6 +200,7 @@ export function createBackground(renderer) {
     setMouseUv,
     fitToCamera,
     setSize,
+    setQuality,
     update,
     setMood,
     dispose,

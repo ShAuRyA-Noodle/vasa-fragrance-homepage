@@ -44,18 +44,30 @@ export function createPost(renderer, scene, camera, width, height) {
   });
 
   let quality = 'high';
+  let viewWidth = width;
+  let viewHeight = height;
 
   function setQuality(q) {
     quality = q;
     finalUniforms.caAmt.value = q === 'high' ? 0.0022 : 0.0;
     finalUniforms.grainAmt.value = q === 'high' ? 0.035 : 0.02;
     finalUniforms.glowAmt.value = q === 'high' ? 0.32 : 0;
+    resizeTargets();
   }
 
   function setSize(w, h) {
-    sceneRT.setSize(w, h);
-    const gw = Math.max(2, Math.round(w * 0.25));
-    const gh = Math.max(2, Math.round(h * 0.25));
+    viewWidth = w;
+    viewHeight = h;
+    resizeTargets();
+  }
+
+  function resizeTargets() {
+    const sceneScale = quality === 'high' ? 1 : 0.7;
+    const sceneWidth = Math.max(2, Math.round(viewWidth * sceneScale));
+    const sceneHeight = Math.max(2, Math.round(viewHeight * sceneScale));
+    sceneRT.setSize(sceneWidth, sceneHeight);
+    const gw = Math.max(2, Math.round(sceneWidth * 0.25));
+    const gh = Math.max(2, Math.round(sceneHeight * 0.25));
     glowRT.setSize(gw, gh);
   }
   setSize(width, height);
