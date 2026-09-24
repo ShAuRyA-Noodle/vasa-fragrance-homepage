@@ -14,6 +14,8 @@
     </div>
     <a aria-label="VASA Fragrance home" class="brand" href="/"><img alt="VASA Fragrance" src="/media/campaign/logo-light.svg" width="220" height="70"/></a>
     <div class="utility-right">
+      <a class="primary-nav-link nav-soon" href="/feel-your-fragrance/">FEEL YOUR FRAGRANCE</a>
+      <a class="primary-nav-link nav-soon" href="/build-your-fragrance/">BUILD YOUR OWN</a>
       <button aria-label="Search fragrances" class="icon-button header-search" data-panel="search" title="Search" type="button"><svg aria-hidden="true"><use href="#i-search"></use></svg></button>
       <button aria-label="Switch color theme" aria-pressed="false" class="icon-button theme-toggle" title="Switch color theme" type="button"><span aria-hidden="true" class="theme-toggle-icon">☾</span></button>
       <button aria-label="Your profile" class="icon-button utility-account profile-button" data-panel="profile"><svg aria-hidden="true"><use href="#i-user"></use></svg></button>
@@ -32,7 +34,7 @@
  <form class="ct-form" novalidate data-reveal>
   <label class="ct-field"><span>Name *</span><input name="name" autocomplete="name" required/></label>
   <label class="ct-field"><span>Email *</span><input name="email" type="email" autocomplete="email" required/></label>
-  <label class="ct-field ct-field--full"><span>Subject *</span><select name="subject" required><option value="">Choose a subject</option><option>Fragrance guidance</option><option>Gifting service</option><option>Delivery and tracking</option><option>Returns and refunds</option><option>Store enquiry</option><option>Other</option></select></label>
+  <fieldset class="ct-field ct-field--full ct-subjects"><legend>Subject *</legend><div class="ct-pills"><label class="ct-pill"><input type="radio" name="subject" value="Fragrance guidance" required/><span>Fragrance guidance</span></label><label class="ct-pill"><input type="radio" name="subject" value="Gifting service" required/><span>Gifting service</span></label><label class="ct-pill"><input type="radio" name="subject" value="Delivery and tracking" required/><span>Delivery and tracking</span></label><label class="ct-pill"><input type="radio" name="subject" value="Returns and refunds" required/><span>Returns and refunds</span></label><label class="ct-pill"><input type="radio" name="subject" value="Store enquiry" required/><span>Store enquiry</span></label><label class="ct-pill"><input type="radio" name="subject" value="Other" required/><span>Other</span></label></div><label class="ct-other" hidden><span class="sr-only">Your subject</span><input name="subject_other" placeholder="Tell us your subject" autocomplete="off"/></label></fieldset>
   <label class="ct-field ct-field--full"><span>Message *</span><textarea name="message" rows="4" required></textarea></label>
   <p class="ct-error" role="alert" hidden>Please complete the highlighted fields.</p>
   <button class="button dark ct-submit" type="submit">SEND ENQUIRY</button>

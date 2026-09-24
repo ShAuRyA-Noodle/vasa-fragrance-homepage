@@ -103,3 +103,6 @@
 .pd-vignette{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 55% 50%,transparent 45%,rgba(0,0,0,calc(var(--grade-vignette,.5) * 1.1)) 100%)}
 @keyframes pd-grain{0%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-5%)}60%{transform:translate(-6%,-2%)}80%{transform:translate(5%,4%)}100%{transform:translate(0,0)}}
 @media(prefers-reduced-motion:reduce){.pd-grade:after{animation:none}}
+
+/* Inner pages: no hairline under the navbar while it floats over the hero */
+.site-header:not(.scrolled),.site-header:not(.scrolled) .nav-primary{border-bottom-color:transparent!important;box-shadow:none!important}

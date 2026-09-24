@@ -1,9 +1,9 @@
 /* Collection page: homepage chrome + the shared Dior-style groups (rendered by 05-campaign/main.js). */
 .cl{--chrome-h:118px;background:var(--theme-bg);color:var(--theme-text)}
 .cl .kicker{color:#e3c592;letter-spacing:.2em;font-size:12px;margin:0}
-.cl-hero{position:relative;margin-top:var(--chrome-h);height:min(calc(72svh - var(--chrome-h)),620px);min-height:380px;display:flex;align-items:flex-end;overflow:hidden;background:#0b0908}
-.cl-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%}
-.cl-hero:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,6,5,.7) 0%,rgba(8,6,5,.25) 55%,rgba(8,6,5,0) 80%)}
+.cl-hero{position:relative;height:min(78svh,760px);min-height:520px;display:flex;align-items:flex-end;overflow:hidden;background:#0b0908}
+.cl-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%}
+.cl-hero:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,6,5,.6) 0%,rgba(8,6,5,.1) 20%,rgba(8,6,5,0) 34%),linear-gradient(90deg,rgba(8,6,5,.7) 0%,rgba(8,6,5,.25) 55%,rgba(8,6,5,0) 80%)}
 .cl-hero-copy{position:relative;z-index:1;padding:0 clamp(24px,6vw,96px) clamp(40px,7svh,80px)}
 .cl-hero h1{margin:16px 0 0;font-weight:400;color:#f8f1e8;font-size:clamp(44px,5.6vw,92px);line-height:.95;letter-spacing:-.06em}
 .cl-shop{padding-inline:4vw!important}
@@ -12,4 +12,9 @@
 .cl-shop .collection-chips{align-items:center;padding-block:12px}
 .cl-shop .collection-chip{grid-auto-flow:column;align-items:center;gap:12px}
 .cl-shop .collection-chip-media{width:40px}
-@media(max-width:760px){.cl{--chrome-h:105px}.cl-hero{height:min(58svh,440px)}.cl-shop .collection-chips{top:calc(var(--chrome-h) - 29px);margin-inline:-4vw;padding-inline:4vw}}
+@media(max-width:760px){.cl{--chrome-h:105px}.cl-hero{height:min(70svh,560px)}.cl-shop .collection-chips{top:calc(var(--chrome-h) - 29px);margin-inline:-4vw;padding-inline:4vw}}
+
+/* Inner pages: no hairline under the navbar while it floats over the hero */
+.site-header:not(.scrolled),.site-header:not(.scrolled) .nav-primary{border-bottom-color:transparent!important;box-shadow:none!important}
+/* No campaign banners between groups on the collection page */
+.cl-shop .collection-banner{display:none}

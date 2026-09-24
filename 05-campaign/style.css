@@ -1228,3 +1228,14 @@ body{font-weight:450}
 /* Four primary links: tighten spacing on narrower desktops so links never reach the logo */
 @media(max-width:1440px){.nav-primary .utility-left{gap:clamp(10px,1.1vw,18px)!important}.nav-primary .utility-left>*+*:before{margin-right:clamp(10px,1.1vw,18px)!important}.primary-nav-link{font-size:12px!important;letter-spacing:.04em}}
 @media(max-width:1180px){.primary-nav-link[href="/contact/"]{display:none!important}}
+/* Coming-soon links sit on the right, before the icons */
+.utility-right>.nav-soon{white-space:nowrap}
+.utility-right>.nav-soon:first-child:before{display:none}
+@media(max-width:1440px){.utility-right>.nav-soon{font-size:12px!important}}
+@media(max-width:1320px){.utility-right>.nav-soon{display:none!important}}
+/* Collection chips: equal space above (from heading) and below (to first group) */
+#collection .section-head{margin-bottom:0!important}
+.collection-chips{margin:clamp(36px,4vw,56px) 0!important}
+.cl-shop .collection-chips{margin:0 -4vw clamp(36px,4vw,56px)!important}
+.panel-kicker{margin:0 0 14px;font-size:13px;font-weight:600;letter-spacing:.2em;color:var(--theme-accent)}
+.soon-note{font-size:20px!important;line-height:1.45;color:var(--theme-heading)!important}

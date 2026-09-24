@@ -13,6 +13,8 @@ export default defineConfig({
         ourStory: page('our-story'),
         // services: page('services'), // Services page retired; files kept in /services
         contact: page('contact'),
+        feelYourFragrance: page('feel-your-fragrance'),
+        buildYourFragrance: page('build-your-fragrance'),
         silentStorm: page('products/silent-storm'),
         sweetestStranger: page('products/sweetest-stranger'),
         rebelInVelvet: page('products/rebel-in-velvet'),

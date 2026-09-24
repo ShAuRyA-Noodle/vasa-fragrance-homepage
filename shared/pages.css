@@ -109,3 +109,37 @@
 /* Contact hero: keep the face below the navbar line */
 .ct .pg-hero-img{object-position:62% 6%}
 @media(max-width:760px){.ct .pg-hero-img{object-position:66% 8%}}
+/* Contact hero: the portrait is framed right to the top of the photo, so it starts under the
+   navbar and fades up into dark; the navbar sits on clean space, never across her head. */
+.ct .pg-hero--short{height:100svh;max-height:980px}
+.ct .pg-hero-img{top:96px;height:calc(100% - 96px);object-position:62% 0;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 110px);mask-image:linear-gradient(180deg,transparent 0,#000 110px)}
+@media(max-width:760px){.ct .pg-hero-img{top:84px;height:calc(100% - 84px);object-position:66% 0}}
+
+/* Inner pages: no hairline under the navbar while it floats over the hero */
+.site-header:not(.scrolled),.site-header:not(.scrolled) .nav-primary{border-bottom-color:transparent!important;box-shadow:none!important}
+
+/* Coming-soon pages */
+.soon-hero .pg-hero-copy{padding-bottom:clamp(72px,12svh,140px)}
+.soon-line{margin:0 0 32px;max-width:34ch;font-size:clamp(18px,1.5vw,22px);line-height:1.5;color:rgba(248,241,232,.9)}
+.soon-hero h1{margin-bottom:22px}
+
+/* Contact: subject as pills */
+.ct-subjects{margin:0;padding:0;border:0;min-width:0}
+.ct-subjects legend{padding:0;margin-bottom:14px;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--theme-text)}
+.ct-pills{display:flex;flex-wrap:wrap;gap:10px}
+.ct-pill{position:relative;cursor:pointer}
+.ct-pill input{position:absolute;opacity:0;pointer-events:none}
+.ct-pill span{display:inline-block;padding:12px 20px;border:1px solid color-mix(in srgb,var(--theme-heading) 28%,transparent);border-radius:999px;font-size:15px;color:var(--theme-heading);transition:background-color .3s ease,border-color .3s ease,color .3s ease}
+.ct-pill:hover span{border-color:var(--theme-accent)}
+.ct-pill input:checked+span{background:var(--theme-heading);border-color:var(--theme-heading);color:var(--theme-bg)}
+.ct-pill input:focus-visible+span{outline:2px solid var(--theme-accent);outline-offset:3px}
+.ct-subjects.is-invalid .ct-pill span{border-color:#b3413a}
+/* Stronger form outlines so fields and pills read clearly */
+.ct-pill span{border-color:color-mix(in srgb,var(--theme-heading) 55%,transparent)!important;font-weight:500}
+.ct-pill input:checked+span{border-color:var(--theme-heading)!important}
+.ct-field :is(input,textarea){border-bottom:1.5px solid color-mix(in srgb,var(--theme-heading) 55%,transparent)!important}
+.ct-field :is(input,textarea):focus{border-bottom-color:var(--theme-accent)!important}
+.ct-other{display:block;margin-top:18px}
+.ct-other[hidden]{display:none}
+.ct-other input{width:100%;padding:12px 0;border:0;border-bottom:1.5px solid var(--theme-accent);background:transparent;color:var(--theme-heading);font:inherit;font-size:17px;outline:none}
+.ct-other input::placeholder{color:color-mix(in srgb,var(--theme-text) 60%,transparent)}

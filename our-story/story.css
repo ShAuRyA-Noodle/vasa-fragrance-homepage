@@ -58,3 +58,6 @@
  .os-hero-copy{padding-bottom:64px}
   .os-origin,.os-chapters{padding:72px 18px}
 }
+
+/* Inner pages: no hairline under the navbar while it floats over the hero */
+.site-header:not(.scrolled),.site-header:not(.scrolled) .nav-primary{border-bottom-color:transparent!important;box-shadow:none!important}
