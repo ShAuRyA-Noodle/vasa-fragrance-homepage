@@ -1,16 +1,21 @@
 import * as THREE from 'three';
+
 import { createSilentStormBottle } from './model/createSilentStormBottle.js';
 
 const clamp = (n) => Math.max(0, Math.min(1, Number(n) || 0));
 const ease = (n) => n * n * (3 - 2 * n);
 const bell = (p, at, width) => ease(1 - clamp(Math.abs(p - at) / width));
+// Scroll poses. The bottle is fully 3D now, so the story can turn it: a
+// three-quarter reveal, one slow full revolution through "Stillness has
+// depth", then it settles label-forward for the notes and the close.
+const TAU = Math.PI * 2;
 const poses = [
-  { at: 0, camX: 0, camY: 0, camZ: 9.2, x: 0, y: -.08, scale: .93, yaw: -.035, roll: 0 },
-  { at: .2, camX: -.5, camY: .1, camZ: 8.6, x: .19, y: .05, scale: 1, yaw: .12, roll: -.025 },
-  { at: .4, camX: .46, camY: .48, camZ: 7.15, x: -.16, y: .08, scale: 1.04, yaw: -.14, roll: .016 },
-  { at: .6, camX: -.42, camY: -.06, camZ: 8.4, x: .2, y: .07, scale: .99, yaw: .13, roll: -.02 },
-  { at: .8, camX: .27, camY: .12, camZ: 8.7, x: -.1, y: .04, scale: .99, yaw: -.07, roll: .012 },
-  { at: 1, camX: 0, camY: 0, camZ: 9.2, x: 0, y: -.08, scale: .93, yaw: 0, roll: 0 },
+  { at: 0, camX: 0, camY: .05, camZ: 9.2, x: 0, y: -.08, scale: .95, yaw: -.32, roll: 0 },
+  { at: .2, camX: -.55, camY: .15, camZ: 8.4, x: .15, y: .05, scale: 1.02, yaw: .5, roll: -.03 },
+  { at: .42, camX: .5, camY: .5, camZ: 7.1, x: -.12, y: .1, scale: 1.08, yaw: TAU - .42, roll: .02 },
+  { at: .6, camX: -.4, camY: -.05, camZ: 8.3, x: .18, y: .06, scale: 1, yaw: TAU + .3, roll: -.02 },
+  { at: .8, camX: .3, camY: .12, camZ: 8.6, x: -.1, y: .04, scale: 1, yaw: TAU - .22, roll: .012 },
+  { at: 1, camX: 0, camY: .05, camZ: 9.2, x: 0, y: -.08, scale: .95, yaw: TAU, roll: 0 },
 ];
 
 function pose(progress, key) {
@@ -26,7 +31,7 @@ function pose(progress, key) {
 
 /** Scroll-directed 3D set with the real VASA front label always legible. */
 export function createStormAtmosphere(host, { stage } = {}) {
-  const inert = { setProgress() {}, destroy() {} };
+  const inert = { inert: true, setProgress() {}, destroy() {} };
   if (!(host instanceof HTMLElement)) return inert;
   let renderer;
   try {
@@ -41,11 +46,11 @@ export function createStormAtmosphere(host, { stage } = {}) {
 
   const mobile = matchMedia('(max-width: 700px)');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, mobile.matches ? 1.1 : 1.5));
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, mobile.matches ? 1.5 : 2));
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.45;
+  renderer.toneMappingExposure = 1.0;
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(36, 1, .1, 60);
   camera.position.set(0, 0, 9.2);
@@ -59,6 +64,31 @@ export function createStormAtmosphere(host, { stage } = {}) {
   const glint = new THREE.PointLight(0xf2c78f, 5.2, 8, 2);
   glint.position.set(-3, -1.2, 1.4);
   scene.add(glint);
+
+  // Studio environment so the glass has something to reflect and refract.
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  const envRT = pmrem.fromScene(studioEnvironment(), 0.02);
+  scene.environment = envRT.texture;
+  pmrem.dispose();
+  renderer.transmissionResolutionScale = mobile.matches ? .75 : 1;
+
+  // Storm backdrop inside the scene (camera-locked, cover-fit) so the glass
+  // transmission has real imagery to refract instead of an empty buffer.
+  const backdropTex = new THREE.TextureLoader().load('/media/campaign/world-silent-storm.webp', (t) => { fitBackdrop(); });
+  backdropTex.colorSpace = THREE.SRGBColorSpace;
+  const backdrop = new THREE.Mesh(new THREE.PlaneGeometry(1, 1),
+    new THREE.MeshBasicMaterial({ map: backdropTex, color: 0x7d8a92, toneMapped: false, depthWrite: false }));
+  backdrop.position.z = -16;
+  backdrop.renderOrder = -10;
+  camera.add(backdrop);
+  scene.add(camera);
+  function fitBackdrop() {
+    const h = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * 16 * 1.12;
+    const w = h * camera.aspect;
+    const img = backdropTex.image;
+    const ia = img ? img.width / img.height : 1.25;
+    backdrop.scale.set(Math.max(w, h * ia), Math.max(h, w / ia), 1);
+  }
 
   const bottle = createSilentStormBottle();
   scene.add(bottle.group);
@@ -77,11 +107,11 @@ export function createStormAtmosphere(host, { stage } = {}) {
     depthWrite: false,
     blending: THREE.AdditiveBlending,
     uniforms: { time: { value: 0 }, progress: { value: 0 }, strength: { value: 0 } },
-    vertexShader: `varying vec2 uv;void main(){uv=position.xy;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
-    fragmentShader: `varying vec2 uv;uniform float time;uniform float progress;uniform float strength;
+    vertexShader: `varying vec2 vUv;void main(){vUv=position.xy;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
+    fragmentShader: `varying vec2 vUv;uniform float time;uniform float progress;uniform float strength;
       float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
       float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1.,0.)),f.x),mix(h(i+vec2(0.,1.)),h(i+vec2(1.,1.)),f.x),f.y);}
-      void main(){vec2 p=uv*.43+vec2(time*.035+progress*.3,-time*.012);float mist=n(p*3.)*.62+n(p*6.)*.38;
+      void main(){vec2 p=vUv*.43+vec2(time*.035+progress*.3,-time*.012);float mist=n(p*3.)*.62+n(p*6.)*.38;
         float a=smoothstep(.48,.75,mist)*strength*.18;gl_FragColor=vec4(mix(vec3(.45,.72,.78),vec3(.9,.84,.66),progress*.5),a);}`,
   }));
   fog.position.z = -4.3;
@@ -95,11 +125,11 @@ export function createStormAtmosphere(host, { stage } = {}) {
     const material = new THREE.ShaderMaterial({
       transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
       uniforms: { alpha: { value: 0 }, warm: { value: i === 4 ? 1 : 0 } },
-      vertexShader: `varying vec2 uv;void main(){uv=position.xy+.5;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
-      fragmentShader: `varying vec2 uv;uniform float alpha;uniform float warm;void main(){
-        float feather=pow(max(0.,1.-abs(uv.x-.5)*2.),2.6);
+      vertexShader: `varying vec2 vUv;void main(){vUv=position.xy+.5;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
+      fragmentShader: `varying vec2 vUv;uniform float alpha;uniform float warm;void main(){
+        float feather=pow(max(0.,1.-abs(vUv.x-.5)*2.),2.6);
         vec3 tint=mix(vec3(.58,.85,.94),vec3(1.,.74,.42),warm);
-        gl_FragColor=vec4(tint,feather*mix(.25,1.,uv.y)*alpha*.2);}`,
+        gl_FragColor=vec4(tint,feather*mix(.25,1.,vUv.y)*alpha*.2);}`,
     });
     const mesh = new THREE.Mesh(beamGeometry, material);
     mesh.position.set(-5.3 + i * 2.55, .1 + (i % 2) * .4, -2.8);
@@ -113,6 +143,7 @@ export function createStormAtmosphere(host, { stage } = {}) {
   // and behind the product at changing z positions as scroll progresses.
   const air = new THREE.Group();
   air.position.z = -1.3;
+  air.visible = false; // curved streak lines read as artefacts across the sky
   scene.add(air);
   const trails = [];
   for (let i = 0; i < 8; i += 1) {
@@ -184,7 +215,7 @@ export function createStormAtmosphere(host, { stage } = {}) {
 
   function render() {
     if (disposed || !ready || document.hidden) return;
-    current += (target - current) * (reducedMotion.matches ? 1 : .16);
+    current += (target - current) * (reducedMotion.matches ? 1 : .1);
     if (Math.abs(target - current) < .0001) current = target;
     const p = current, seconds = clock.getElapsedTime(), small = mobile.matches;
     camera.position.set(
@@ -196,8 +227,8 @@ export function createStormAtmosphere(host, { stage } = {}) {
     const viewHeight = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z;
     const viewWidth = viewHeight * camera.aspect;
     const anchorX = small ? 0 : viewWidth * .14;
-    const anchorY = small ? viewHeight * .13 : -viewHeight * .02;
-    const scale = (small ? .61 : 1) * pose(p, 'scale');
+    const anchorY = small ? viewHeight * .1 : -viewHeight * .06;
+    const scale = (small ? .52 : .8) * pose(p, 'scale');
     bottle.group.scale.setScalar(scale);
     bottle.group.position.set(
       anchorX + pose(p, 'x') * (small ? .24 : 1),
@@ -261,14 +292,15 @@ export function createStormAtmosphere(host, { stage } = {}) {
     const width = Math.max(1, host.clientWidth), height = Math.max(1, host.clientHeight);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
-    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, mobile.matches ? 1.1 : 1.5));
+    fitBackdrop();
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, mobile.matches ? 1.5 : 2));
     renderer.setSize(width, height, false);
     render();
   }
   function tick(now) {
     frame = 0;
     if (disposed || document.hidden || !visible || !ready) return;
-    if (now - lastRender >= (mobile.matches ? 33 : 22)) { lastRender = now; render(); }
+    if (!mobile.matches || now - lastRender >= 33) { lastRender = now; render(); }
     frame = requestAnimationFrame(tick);
   }
   function schedule() {
@@ -315,7 +347,7 @@ export function createStormAtmosphere(host, { stage } = {}) {
       observer.disconnect(); resizeObserver.disconnect();
       removeEventListener('pointermove', pointerMove);
       document.removeEventListener('visibilitychange', visibilityChange);
-      bottle.dispose(); fog.geometry.dispose(); fog.material.dispose();
+      bottle.dispose(); envRT.dispose(); backdropTex.dispose(); backdrop.geometry.dispose(); backdrop.material.dispose(); fog.geometry.dispose(); fog.material.dispose();
       beamGeometry.dispose(); beams.forEach(({ material }) => material.dispose());
       trails.forEach(({ geometry, material }) => { geometry.dispose(); material.dispose(); });
       ingredients.forEach(({ texture, material }) => { texture?.dispose(); material.dispose(); });
@@ -323,4 +355,24 @@ export function createStormAtmosphere(host, { stage } = {}) {
       renderer.dispose(); canvas.remove();
     },
   };
+}
+
+// Dark studio with tall softbox strips: gives glass the crisp vertical
+// highlights of a product photograph (RoomEnvironment is too diffuse).
+function studioEnvironment() {
+  const env = new THREE.Scene();
+  env.background = new THREE.Color(0x0a0c0e);
+  const box = (w, h, x, y, z, ry, intensity, color = 0xffffff) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h),
+      new THREE.MeshBasicMaterial({ color: new THREE.Color(color).multiplyScalar(intensity), side: THREE.DoubleSide }));
+    m.position.set(x, y, z);
+    m.rotation.y = ry;
+    env.add(m);
+  };
+  box(1.4, 9, -5, 0, 2.5, Math.PI / 2.6, 9);          // key strip, left
+  box(0.7, 9, 5, 0, 1.5, -Math.PI / 2.4, 5, 0xdff3ff); // rim strip, right
+  box(6, 1.2, 0, 5, 0, 0, 3);                         // top wash
+  box(0.5, 8, -2.2, 0, -5, 0, 2.2);                   // back kicker
+  box(10, 0.4, 0, -3.5, 3, 0, 0.8, 0xffe8cc);         // warm floor bounce
+  return env;
 }

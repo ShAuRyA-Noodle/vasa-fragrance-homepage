@@ -15,6 +15,9 @@ if (page) {
   const cue = journey?.querySelector('.ss-scroll-cue');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const scene = !reducedMotion.matches && host ? createStormAtmosphere(host, { stage }) : null;
+  // The flat packshot is only a fallback for no-WebGL / reduced motion; with
+  // 3D available it stays hidden so the first frame is never a "sticker".
+  if (!scene || scene.inert) stage?.classList.add('is-3d-fallback');
   const events = new AbortController();
   let trigger;
   let choreography;
