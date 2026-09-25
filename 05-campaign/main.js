@@ -77,7 +77,6 @@ const simplePanels={
  contact:['Contact VASA','Our contact details will be available here at launch. In the meantime, explore the collection and save your favourites in your bag.'],
  profile:['Your profile','Personal accounts will open with the store. For now, your bag is saved on this device without an account.'],
  exclusive:['Online exclusives','Our online exclusives are being prepared. Explore the four fragrances in the collection while we get ready.'],
- social:['The world of VASA','Our official social channels will be linked here at launch.'],
  privacy:['Your privacy','This homepage saves your fragrance selection in local storage on your device. It does not create an account or collect payment information. You can remove saved items from your bag.']
 };
 function open(name){if(name==='bag')return bagPanel();if(name==='search'){showPanel('search','Find your fragrance','<label class="search-label" for="fragrance-search">Search by name or fragrance note</label><input class="panel-search" id="fragrance-search" type="search" placeholder="Try rose, cedar, or a fragrance name" autocomplete="off"><p class="sr-only" id="search-count" aria-live="polite"></p><div class="search-results" id="search-results"></div>');searchResults();content.querySelector('input').addEventListener('input',e=>searchResults(e.target.value));return;}
