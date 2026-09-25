@@ -1239,3 +1239,14 @@ body{font-weight:450}
 .cl-shop .collection-chips{margin:0 -4vw clamp(36px,4vw,56px)!important}
 .panel-kicker{margin:0 0 14px;font-size:13px;font-weight:600;letter-spacing:.2em;color:var(--theme-accent)}
 .soon-note{font-size:20px!important;line-height:1.45;color:var(--theme-heading)!important}
+
+/* The Diwali film fills the hero edge to edge; the product action stays centered. */
+.hero--diwali,.hero--diwali .hero-media{background:radial-gradient(ellipse at 50% 40%,#542033 0%,#2d0d1d 62%,#14070e 100%)!important}
+.hero--diwali .hero-media{height:min(100svh,calc(100vw * 9 / 16 + 130px));min-height:430px;max-height:none;aspect-ratio:auto}
+.hero--diwali .hero-media>video,.hero--diwali .hero-media>.hero-poster{object-fit:cover!important;object-position:center!important;background:transparent!important;filter:none!important}
+.hero--diwali .hero-media>.hero-poster{width:100%;height:100%}
+@media(max-width:760px){
+ .hero--diwali .hero-media{height:clamp(430px,calc(100vw * 9 / 16 + 170px),min(600px,100svh));min-height:0}
+ .hero--diwali .hero-media>video,.hero--diwali .hero-media>.hero-poster{object-fit:cover!important;object-position:center!important}
+ .hero--diwali .hero-cta{bottom:19px}
+}
