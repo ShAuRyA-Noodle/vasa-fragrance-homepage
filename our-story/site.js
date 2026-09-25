@@ -59,23 +59,4 @@ else {
   reveals.forEach(element => observer.observe(element));
 }
 
-document.querySelectorAll('[data-newsletter]').forEach(form => {
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    const input = form.querySelector('input[type="email"]');
-    const note = form.querySelector('.newsletter-note');
-    const email = input?.value.trim() || '';
-    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    if (!valid) {
-      if (note) note.textContent = email ? 'Please enter a valid email address.' : 'Please enter your email address.';
-      input?.setAttribute('aria-invalid', 'true');
-      input?.focus();
-      return;
-    }
-    input?.removeAttribute('aria-invalid');
-    if (note) note.textContent = 'Thank you. Newsletter delivery will begin when VASA launches.';
-    form.reset();
-  });
-});
-
 document.querySelectorAll('[data-year]').forEach(element => { element.textContent = new Date().getFullYear(); });
