@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { validateContact, validateNewsletter } from './validation.js';
+import { validateContact } from './validation.js';
 
 const empty = validateContact({ name: '', email: '', category: '', message: '', consent: false });
 assert.equal(empty.name, 'Please enter your name.');
@@ -27,9 +27,5 @@ const valid = validateContact({
   consent: true,
 });
 assert.deepEqual(valid, {});
-
-assert.equal(validateNewsletter(''), 'Please enter your email address.');
-assert.equal(validateNewsletter('notes@'), 'Please enter a valid email address.');
-assert.equal(validateNewsletter('notes@example.com'), '');
 
 console.log('Contact validation tests passed');

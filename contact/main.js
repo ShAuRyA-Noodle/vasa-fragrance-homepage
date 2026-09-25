@@ -1,5 +1,5 @@
 import '../our-story/site.js';
-import { validateContact, validateNewsletter } from './validation.js';
+import { validateContact } from './validation.js';
 
 const form = document.querySelector('#contact-form');
 const summary = document.querySelector('#error-summary');
@@ -48,19 +48,3 @@ form?.addEventListener('submit', event => {
 const requestedSubject = new URLSearchParams(location.search).get('subject');
 const category = document.querySelector('#category');
 if (requestedSubject && category && [...category.options].some(option => option.value === requestedSubject)) category.value = requestedSubject;
-
-const newsletter = document.querySelector('#contact-newsletter');
-newsletter?.addEventListener('submit', event => {
-  event.preventDefault();
-  const input = newsletter.elements.email;
-  const note = newsletter.querySelector('.newsletter-note');
-  const error = validateNewsletter(input.value);
-  input.setAttribute('aria-invalid', String(Boolean(error)));
-  if (error) {
-    note.textContent = error;
-    input.focus();
-    return;
-  }
-  note.textContent = 'Thank you. Newsletter delivery will begin when VASA launches.';
-  newsletter.reset();
-});

@@ -20,10 +20,3 @@ export function validateContact(values) {
 
   return errors;
 }
-
-export function validateNewsletter(value) {
-  const email = String(value ?? '').trim();
-  if (!email) return 'Please enter your email address.';
-  if (!emailPattern.test(email)) return 'Please enter a valid email address.';
-  return '';
-}

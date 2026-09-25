@@ -28,7 +28,6 @@ let opener,activePanel='',toastTimer,schedule;
 const escapeText=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const imageMarkup=(p,cls='',loading='lazy')=>`<img class="${cls}" src="${photo(p)}" alt="${p.name}, full 50 ml bottle concept" loading="${loading}" width="1122" height="1402">`;
 document.querySelector('#year').textContent=new Date().getFullYear();
-document.querySelector('.footer-subscribe')?.addEventListener('submit',event=>{event.preventDefault();const field=event.currentTarget.querySelector('input');if(!field?.value.trim()){field?.focus();return;}toast('Thank you. VASA notes will arrive here.');event.currentTarget.reset()});
 // Homepage product rows (Cartier-style: rows of 4 spread down the page).
 // Placeholder: every row shows the current catalog until the 16 products land.
 const productCard=p=>`<article class="product-card" style="--scent:${p.color}"><a class="product-image" href="/products/${p.id}/" aria-label="Discover ${p.name}"><img class="product-world" src="/media/campaign/${p.world}.webp" alt="" loading="lazy" width="1200" height="960"><img class="product-reveal" src="${p.hoverImage}" alt="${p.name} presented in its fragrance world" loading="lazy" width="1600" height="1840"></a><div class="product-info"><h3><a href="/products/${p.id}/">${p.name}</a></h3><p>${p.family}</p><div class="product-meta"><span>50 ml</span><span>Price announced at launch</span></div><button class="add-button" data-add="${p.id}" aria-label="Add ${p.name} to bag"><span>ADD TO BAG</span><span>+</span></button></div></article>`;
@@ -160,6 +159,8 @@ if(film){
  film.addEventListener('playing',showFilm);
  film.addEventListener('loadeddata',showFilm,{once:true});
  film.addEventListener('error',showPoster);
- const playback=film.play();
- playback?.catch(showPoster);
+ const playFilm=()=>{try{film.currentTime=0}catch{}const playback=film.play();playback?.catch(showPoster)};
+ const intro=document.querySelector('.vasa-preloader');
+ if(intro&&!intro.classList.contains('is-revealing'))document.addEventListener('vasa:preloader-exit',playFilm,{once:true});
+ else playFilm();
 }
