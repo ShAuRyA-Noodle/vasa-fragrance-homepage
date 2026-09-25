@@ -1,0 +1,14 @@
+{
+  "admitted": true,
+  "reasons": [],
+  "provenance": {
+    "viewpoint": "reference",
+    "sourcePath": "/Users/shauryapunj/Documents/Vasa_Client-02/08-homepage-variations/public/plates/silent-storm.png",
+    "width": 1122,
+    "height": 1402,
+    "foregroundCoverage": 0.4618,
+    "largestComponentFraction": 1.0,
+    "pHash": 13744632752428329474,
+    "duplicateOfHash": null
+  }
+}

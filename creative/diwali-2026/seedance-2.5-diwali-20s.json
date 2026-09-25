@@ -1,0 +1,107 @@
+{
+  "title": "VASA — The House Remembers | Diwali film",
+  "use": "Copy the copy_paste_prompt value into Higgsfield Seedance 2.5 Reference-to-Video; upload the references in the stated order. The other fields are a production checklist, not undocumented Higgsfield API parameters.",
+  "higgsfield_settings": {
+    "model": "Seedance 2.5 Reference-to-Video",
+    "duration_seconds": 20,
+    "aspect_ratio": "16:9",
+    "resolution": "1080p if available on your plan; otherwise 720p",
+    "generate_audio": true,
+    "reference_count": 14
+  },
+  "upload_order": [
+    {
+      "slot": 1,
+      "role": "STORY_FRAME_01",
+      "subject": "Actual opening still: UNLIT brass diya on ROSEWOOD console, The Night Lingers bottle to its right; this exact composition is the final loop frame too",
+      "file": "frames/01-the-room-before-the-light.png"
+    },
+    {
+      "slot": 2,
+      "role": "STORY_FRAME_02",
+      "subject": "Same actress entering the contemporary Indian home",
+      "file": "frames/02-her-arrival.png"
+    },
+    {
+      "slot": 3,
+      "role": "STORY_FRAME_03",
+      "subject": "Actress lighting the diya; authentic flame and hand detail",
+      "file": "frames/03-the-diya-is-lit.png"
+    },
+    {
+      "slot": 4,
+      "role": "STORY_FRAME_04",
+      "subject": "The Night Lingers bottle in Diwali room, close product frame",
+      "file": "frames/04-the-night-lingers.png"
+    },
+    {
+      "slot": 5,
+      "role": "STORY_FRAME_05",
+      "subject": "Same actress applying The Night Lingers",
+      "file": "frames/05-the-fragrance-on-skin.png"
+    },
+    {
+      "slot": 6,
+      "role": "STORY_FRAME_06",
+      "subject": "Silent Storm bottle in a cool-blue light pocket in the same home",
+      "file": "frames/06-silent-storm.png"
+    },
+    {
+      "slot": 7,
+      "role": "STORY_FRAME_07",
+      "subject": "The Sweetest Stranger bottle by the festive table",
+      "file": "frames/07-sweetest-stranger.png"
+    },
+    {
+      "slot": 8,
+      "role": "STORY_FRAME_08",
+      "subject": "Rebel in Velvet bottle in wine-red silk light",
+      "file": "frames/08-rebel-in-velvet.png"
+    },
+    {
+      "slot": 9,
+      "role": "STORY_FRAME_09",
+      "subject": "All four physical bottles together on one low table",
+      "file": "frames/09-four-fragrances-one-house.png"
+    },
+    {
+      "slot": 10,
+      "role": "CHARACTER_IDENTITY",
+      "subject": "Batra Model.jpg — one adult Indian woman; identity and facial structure only, ignore the white studio backdrop and casual clothing",
+      "file": "identity-and-product-anchors/model-identity-batra.jpg"
+    },
+    {
+      "slot": 11,
+      "role": "PRODUCT_NIGHT",
+      "subject": "Original The Night Lingers bottle packshot; exact cap, glass, label, emblem, proportions and amber liquid",
+      "file": "identity-and-product-anchors/original-the-night-lingers.png"
+    },
+    {
+      "slot": 12,
+      "role": "PRODUCT_SILENT",
+      "subject": "Original Silent Storm bottle packshot; exact cap, glass, label, emblem, proportions and mint liquid",
+      "file": "identity-and-product-anchors/original-silent-storm.png"
+    },
+    {
+      "slot": 13,
+      "role": "PRODUCT_SWEETEST",
+      "subject": "Original The Sweetest Stranger bottle packshot; exact cap, glass, label, emblem, proportions and coral liquid",
+      "file": "identity-and-product-anchors/original-the-sweetest-stranger.png"
+    },
+    {
+      "slot": 14,
+      "role": "PRODUCT_REBEL",
+      "subject": "Original Rebel in Velvet bottle packshot; exact cap, glass, label, emblem, proportions and pink-lilac liquid",
+      "file": "identity-and-product-anchors/original-rebel-in-velvet.png"
+    }
+  ],
+  "non_negotiables": [
+    "Show all four named fragrances clearly and separately before the group tableau.",
+    "Keep the same adult actress and one consistent home across the film.",
+    "Use the supplied bottle packshots as the only source of product geometry and branding; do not invent labels or alter names.",
+    "The final 0.5 second must match the opening UNLIT brass diya and Night bottle on ROSEWOOD, with identical composition and exposure; use a concealed editorial match cut, never a shot of someone extinguishing a Diwali diya.",
+    "No on-screen slogans, subtitles, prices, discounts, watermark or extra logo; only real bottle labels may be readable."
+  ],
+  "copy_paste_prompt": "GLOBAL STYLE: Create a 20.0-second, 16:9, premium VASA Diwali fragrance campaign film for a looping website hero. This is grounded live-action product cinema, not fantasy, not a music video, not an AI montage. Elegance comes from purposeful actions, physical light, real glass, and restrained cuts. One contemporary elite Indian household on Diwali evening: an architect-designed Mumbai or Delhi home with dark smoked oak, pale hand-finished lime plaster, black stone, warm brass, muted wine-red raw silk, and discreet Indian craft objects. It is intimate and lived-in, not a palace, haveli, hotel lobby, wedding stage, or generic Western mansion. The single real brass diya from STORY_FRAME_01 and a few marigold stems are enough to establish Diwali; no fireworks indoors, glitter storm, excessive ornament, or orange filter. Grade: deep ink and oxblood shadows, jewel-toned glass, saffron flame highlights, restrained cool twilight through windows. True skin texture; tactile cotton wick, silk weave, real glass refraction and liquid caustics. Fine film grain, gentle highlight halation, natural 24 fps motion. No plastic skin, no CGI-looking products, no levitating objects, no impossible camera movement.\n\nREFERENCE MAP: STORY_FRAME_01 through STORY_FRAME_09 define the shot compositions, story progression, set continuity and lighting. CHARACTER_IDENTITY defines the one adult Indian woman's face, build, hair, natural expression and identity; ignore its white studio backdrop and casual outfit. Dress her consistently in a tailored deep wine or black silk sari with a simple sleeveless blouse, small antique gold earrings and natural makeup. She is an original non-celebrity character, not a recognizable actress. PRODUCT_NIGHT, PRODUCT_SILENT, PRODUCT_SWEETEST and PRODUCT_REBEL are exact physical product specifications. Reproduce each real VASA bottle's rectangular clear glass geometry, rounded wood cap, narrow gold neck, cream paper label, emblem, spelled name, 50 ml mark and liquid color from its specific packshot. Never borrow one bottle's label or color for another. HIERARCHY: in any conflict, the CHARACTER_IDENTITY and four original PRODUCT references always override the nine storyboard images; storyboard images are composition/lighting/action guides only. If generated storyboard bottles differ from the original packshots, discard the storyboard bottle design. Exact typography cannot be guaranteed by video generation, so keep label surfaces as close to the original packshots as possible and leave clean areas for later post-production correction. Products stand on physical surfaces and cast plausible contact shadows.\n\nSCENE AND MOTIVATION: She arrives home just before guests. As she lights one diya, the tiny flame reveals four distinct VASA fragrances positioned in four believable details of this same room, like four moods of one evening. She chooses and applies one, then all four become a considered gift-ready collection. The advertisement has the emotional rhythm of preparing a home and oneself for a meaningful celebration. No spoken dialogue, no sales copy.\n\nFIRST FRAME / LOOP ANCHOR: STORY_FRAME_01 is the literal first-frame composition and must not be redesigned: an UNLIT brass diya with visible dark wick on a ROSEWOOD console; The Night Lingers bottle stands to its right, exactly as photographed. Match the actual still's camera angle, crop, object spacing, lens perspective, exposure and background. No flame yet. A faint thread of smoke from another nearby ritual source may cross the frame, but do not imply the diya is already burning. Recreate this same unlit brass diya and Night bottle arrangement at 00:19.5–00:20.0, with the exact camera position and matching exposure, for the website loop. Use a foreground silk or smoke occlusion as a concealed editorial match cut to return from the group tableau; do not depict anyone blowing out or snuffing a Diwali diya. Keep audio room tone continuous at the seam.\n\nSHOT 1, 00:00.0–00:02.0, STORY_FRAME_01: Begin on the unlit brass diya on rosewood with the exact The Night Lingers bottle immediately to its right. Both are physically present from frame one; bottle geometry, amber liquid and label come from PRODUCT_NIGHT, while position and environment come from STORY_FRAME_01. Hold this calm, darker pre-light scene for a beat, then make a very slow 20 cm lateral dolly that reveals the elegant room beyond. 50 mm lens, low camera. Do not crop the bottle. Cut on the woman's approaching hand/soft foreground movement.\n\nSHOT 2, 00:02.0–00:04.0, STORY_FRAME_02: Same woman from CHARACTER_IDENTITY enters from screen right in the same silk sari. Medium-wide 35 mm, shoulder-height dolly left. She sets down a small elegant, unbranded gift envelope, pauses at the console, and looks toward the diya. Her movement is poised and natural; her face remains recognizably identical to the reference. No extra people. Cut on her hand approaching the wick.\n\nSHOT 3, 00:04.0–00:05.5, STORY_FRAME_03: Tight practical macro of her hand lighting the same unlit brass diya wick with a slender taper. Flame catches with believable ignition; warm light ripples over her gold earring and the rosewood console. Camera fixed; 85 mm macro. The light sweep becomes the visual bridge into the products. Cut on the moving light reflection, not a digital flash.\n\nSHOT 4, 00:05.5–00:08.0, STORY_FRAME_04 plus PRODUCT_NIGHT: The Night Lingers receives the first full hero reveal, physically standing on the same rosewood console near the now-lit brass diya. A measured 20 cm camera arc reveals clear rectangular edges, wood cap, amber liquid and the entire correctly spelled front label, sharp and facing camera. The bottle occupies 36–42% of frame height and remains wholly inside safe margins. Flame skims the glass once; no sparkle VFX. Hold a clean legible product view for at least one full second. Warm amber memory. Cut on a real specular highlight traversing the cap.\n\nSHOT 5, 00:08.0–00:10.0, STORY_FRAME_05: Same woman applies a single spray of The Night Lingers to her wrist. Use the exact Night bottle and cap system; never morph into another product. Three-quarter close-up, 65 mm, restrained slow push. Perfume mist is fine and natural, visible only in a single warm shaft. Her expression: private anticipation, barely a smile, not a performed glamour pose. Match cut from the dissipating mist to a cool silk curtain moving in the same direction.\n\nSHOT 6, 00:10.0–00:12.0, STORY_FRAME_06 plus PRODUCT_SILENT: Silent Storm on the same room's windowside marble ledge, with cool Himalayan blue twilight through the glass and diya warmth still reflected faintly in the bottle. 65 mm, slow lateral slide from left to right. Show the whole exact mint-liquid bottle, wood cap and readable SILENT STORM label, unobstructed for at least one full second. No mountains appear inside the home. Transition through a passing cool reflection, not an abrupt color wipe.\n\nSHOT 7, 00:12.0–00:14.0, STORY_FRAME_07 plus PRODUCT_SWEETEST: The Sweetest Stranger on the dining console beside a small folded silk napkin and one marigold bloom, not surrounded by food. 65 mm, slow downward tilt of less than ten degrees. Coral liquid and correct label visible, entire bottle within frame, front face sharp for at least one full second. Gentle rose-copper bounce light, no pink fog. A real reflection along the glass edge cues the next cut.\n\nSHOT 8, 00:14.0–00:16.0, STORY_FRAME_08 plus PRODUCT_REBEL: Rebel in Velvet stands against a fold of deep wine raw silk on a walnut shelf in the same room. 65 mm, slow short push-in; one delicate silk movement in background. Exact pink-lilac bottle, cap and REBEL IN VELVET label visible and sharp for at least one full second. The room's diya makes one warm glint on gold neck; preserve neutral whites on the label. No floating petal or ornamental CG particle.\n\nSHOT 9, 00:16.0–00:18.5, STORY_FRAME_09: A deliberate four-bottle tableau on the rosewood console, all four bottles fully in frame, symmetrical equal spacing, exact colors and labels from PRODUCT_NIGHT, PRODUCT_SILENT, PRODUCT_SWEETEST and PRODUCT_REBEL. The woman passes behind the arrangement in soft focus and picks up the little gift envelope; no hand covers the bottles. Camera performs a slow 30 cm lateral track. Hold a composition where each bottle can be counted and its silhouette distinguished. Brass diya glows in the front-left foreground. This is the campaign's emotional and product payoff, never an e-commerce packshot grid.\n\nSHOT 10 / LOOP RETURN, 00:18.5–00:20.0: A moving fold of wine silk or a thin real smoke curl briefly occludes the lens, hiding an editorial match cut back to STORY_FRAME_01. By 00:19.5 the frame exactly repeats its initial unlit brass diya on rosewood, The Night Lingers bottle on the right, same object spacing, wick, camera angle, focus, color and exposure. Hold near-identical composition through 00:20.0 and hard-loop to 00:00.0. Do not show a hand extinguishing the Diwali diya, no fade to black, no title card, no logo animation, no digital wipe. The concealed match cut and static end composition carry the loop.\n\nCAMERA AND OPTICS: 24 fps, 180-degree shutter, 16:9 1920x1080 if available, lenses 35/50/65/85 mm as assigned. Slow physically plausible dolly, slider and short arc moves; no drone or wild whip pans. Product labels require enough depth of field to remain legible, approximately f/5.6 on bottle shots; backgrounds may fall softly away. No extreme shallow focus that blurs the product, no fisheye, no crop of cap or base. Keep desktop hero's central 70% image area safe for responsive crops.\n\nLIGHTING AND PHYSICS: Practical diya flame is the visible warm source, supported by a motivated soft 3200K key from frame left and subtle cool 5500K twilight from window right. Glass refracts and reflects consistently; liquid does not slosh without touch. Silk and hair have real weight. The brass diya stays unlit until 00:04, then the flame flickers subtly and physically while visible. Spritz is realistic aerosol, not smoke. No fire hazard action. Preserve the same floorplan and lighting direction across every cut.\n\nAUDIO: One continuous seamless 20-second loop of low, elegant instrumental ambience inspired by Indian classical texture: a barely audible tanpura-like sustained note, sparse soft santoor plucks, room tone and a delicate wick ignition at 00:04.6. No familiar song, no melody quotation, no vocals, no dialogue, no crowd cheers, no fireworks, no loud percussion. The end of the sustained tone matches the beginning in pitch, level and phase so the audio loop does not click. For a silent website hero, the picture must tell the story completely without sound.\n\nABSOLUTE NEGATIVES: No celebrity likeness. No extra bottles or duplicated limbs. No changing actress face, hairstyle or outfit. No misspelled brand/product labels, no invented slogan, no generic perfume bottle, no floating bottle, no sticker-like cutout edges, no exaggerated volumetric beams, no animation graphics, no glitter, no synthetic particle storms, no fake palace, no outdoors, no brand other than VASA, no people other than the one actress, no text overlay, no end card, no black frames, no product or model clipping. If exact small label lettering cannot be reproduced, preserve the supplied packshot's visible label area clean and neutral instead of inventing letters.",
+  "reference_priority": "When any storyboard frame conflicts with the five anchors, CHARACTER_IDENTITY wins for the actress; the four original PRODUCT references win for bottle geometry, colors and printed label. Storyboard frames guide only composition, action, environment and lighting."
+}

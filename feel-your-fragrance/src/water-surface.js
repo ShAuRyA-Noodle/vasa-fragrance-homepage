@@ -3,10 +3,10 @@ import * as THREE from 'three';
 // Kept separate from the GLSL so the visual direction and the scene-facing
 // uniform contract are easy to inspect without reading a shader string.
 export const WATER_PALETTE=Object.freeze({
- deep:'#1a2736',
- reflection:'#4a5663',
- horizon:'#2e3c4c',
- champagne:'#bfae84'
+ deep:'#182635',
+ reflection:'#647282',
+ horizon:'#314359',
+ champagne:'#d8c4a0'
 });
 
 export function createRippleSlots(){

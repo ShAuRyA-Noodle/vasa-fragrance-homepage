@@ -38,10 +38,18 @@ export function makeWater(){
   vec2 p=vWorld.xz;float h=height(p);float hx=height(p+vec2(.085,0.))-h;float hy=height(p+vec2(0.,.085))-h;
   vec3 normal=normalize(vec3(-hx*5.4,1.,-hy*5.4));vec3 eye=normalize(cameraPosition-vWorld);float facing=max(dot(normal,eye),0.);float fresnel=.025+.975*pow(1.-facing,5.);
   float distanceToEye=length(cameraPosition-vWorld);vec2 uv=vMirror.xy/vMirror.w;vec2 distortion=normal.xz*(.0012+1./max(distanceToEye,1.))*distortionScale;uv=clamp(uv+distortion,.002,.998);
-  vec3 reflected=texture2D(tDiffuse,uv).rgb;vec3 ref=mix(reflected,reflectionTint,.28);
-  vec3 col=mix(deepColor,ref,.34+fresnel*.45);
-  vec3 key=normalize(vec3(-.42,.79,-.45));float glint=pow(max(dot(reflect(-key,normal),eye),0.),110.);col+=champagne*glint*.11;
-  float textureBreak=fbm(p*.36+vec2(time*.012,-time*.009));col+=reflectionTint*(textureBreak-.5)*.022;
+  vec3 reflected=texture2D(tDiffuse,uv).rgb;vec3 ref=mix(reflected,reflectionTint,.2);
+  vec3 col=mix(deepColor,ref,.42+fresnel*.49);
+  vec3 key=normalize(vec3(-.42,.79,-.45));float glint=pow(max(dot(reflect(-key,normal),eye),0.),82.);col+=champagne*glint*.16;
+  float textureBreak=fbm(p*.36+vec2(time*.012,-time*.009));col+=reflectionTint*(textureBreak-.5)*.035;
+  // Long, broken highlights give the plane a reflective liquid surface rather
+  // than an evenly lit floor. They drift slowly and never cover bottle labels.
+  float ribbon=exp(-pow((p.y-3.2-sin(p.x*.23+time*.12)*.34)*.9,2.));
+  float glimmer=pow(max(sin(p.y*.89+p.x*.26-time*.2+textureBreak*1.8),0.),25.);
+  float breakup=.35+.65*fbm(p*1.2+vec2(time*.025,-time*.018));
+  col+=champagne*(ribbon*.048+glimmer*breakup*.095)*(1.-smoothstep(12.,38.,length(p)));
+  float sheen=exp(-pow((p.x+1.4+sin(p.y*.15+time*.08)*.7)*.14,2.))*exp(-pow((p.y-3.)*.12,2.));
+  col+=reflectionTint*sheen*.068;
   float haze=smoothstep(7.,48.,length(p));col=mix(col,horizonTint,haze*.42);
   gl_FragColor=vec4(col,presence);
  }`};

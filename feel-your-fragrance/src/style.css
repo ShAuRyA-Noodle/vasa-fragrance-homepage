@@ -49,6 +49,15 @@ dialog{color:#eadaba;border-color:rgba(222,199,154,.38);background:linear-gradie
 .screen:not([hidden]) .step-nav,
 .screen:not([hidden]) .gallery-caption,
 .screen:not([hidden]) .collection-action{animation-name:vasa-fade}
+
+/* The experience now fills the viewport; the redundant utility footer is gone. */
+#stage,.screen-shade,.screen{inset:0}
+.scene-tools{bottom:3.25vh}
+.home-caption{bottom:4.5%;font-size:clamp(11px,1.1vw,15px);font-weight:700;letter-spacing:.22em;color:#f0dfbd;opacity:.92;text-shadow:0 2px 20px rgba(0,0,0,.55)}
+@media(max-width:760px){
+ .scene-tools{bottom:2vh}
+ .home-caption{bottom:5%;padding-inline:14px;font-size:12px;letter-spacing:.09em}
+}
 .list-view .gallery-caption{display:none}
 
 @media(min-width:761px){

@@ -1,0 +1,83 @@
+{
+  "campaign": "VASA Diwali 2026 — The Light We Carry",
+  "format": "20 seconds, 16:9, seamless loop",
+  "source_of_truth": "The five original anchors are authoritative for face identity, bottle geometry, cap, liquid colour, labels and wordmarks. Generated storyboards establish only framing, action, mood and lighting.",
+  "frames": [
+    {
+      "source": "/Users/shauryapunj/.codex/generated_images/01a0b368-cb76-7660-a5b0-bffb40d909b5/exec-75a9f78e-448f-45e6-a5dc-57c9a31ee9ed.png",
+      "slug": "the-room-before-the-light",
+      "title": "The room before the light",
+      "note": "Opening and closing loop anchor"
+    },
+    {
+      "source": "/Users/shauryapunj/.codex/generated_images/01a0b368-cb76-7660-a5b0-bffb40d909b5/exec-d8962513-5dee-4322-a023-071a97952409.png",
+      "slug": "her-arrival",
+      "title": "Her arrival",
+      "note": "Use model sheet for facial continuity"
+    },
+    {
+      "source": "/Users/shauryapunj/.codex/generated_images/01a0b368-cb76-7660-a5b0-bffb40d909b5/exec-56b88c7e-4bb3-413d-9445-f319e8b8678e.png",
+      "slug": "the-diya-is-lit",
+      "title": "The diya is lit",
+      "note": "A single flame starts the visual rhythm"
+    },
+    {
+      "source": "/Users/shauryapunj/.codex/generated_images/01a0b368-cb76-7660-a5b0-bffb40d909b5/exec-c5339911-f61b-48d1-b86a-3a28daf7faff.png",
+      "slug": "the-night-lingers",
+      "title": "The Night Lingers",
+      "note": "Amber bottle; original packshot is authoritative"
+    },
+    {
+      "source": "/Users/shauryapunj/.codex/generated_images/01a0b368-cb76-7660-a5b0-bffb40d909b5/exec-0d7678a9-104a-4455-b994-de8a5f9514a7.png",
+      "slug": "the-fragrance-on-skin",
+      "title": "The fragrance on skin",
+      "note": "Human ritual, no exaggerated spray effect"
+    },
+    {
+      "source": "/Users/shauryapunj/.codex/generated_images/01a0b368-cb76-7660-a5b0-bffb40d909b5/exec-8305bb82-ebc8-43e5-a046-f34a1cb5557c.png",
+      "slug": "silent-storm",
+      "title": "Silent Storm",
+      "note": "Cool mint glass, botanical detail"
+    },
+    {
+      "source": "/Users/shauryapunj/.codex/generated_images/01a0b368-cb76-7660-a5b0-bffb40d909b5/exec-39190823-3a50-414e-b443-0e999dcf1845.png",
+      "slug": "sweetest-stranger",
+      "title": "The Sweetest Stranger",
+      "note": "Rose glass and soft floral note"
+    },
+    {
+      "source": "/Users/shauryapunj/.codex/generated_images/01a0b368-cb76-7660-a5b0-bffb40d909b5/exec-a92356dd-da1f-458b-9617-1d1afd3126d3.png",
+      "slug": "rebel-in-velvet",
+      "title": "Rebel in Velvet",
+      "note": "Velvet and glass, controlled highlights"
+    },
+    {
+      "source": "/Users/shauryapunj/.codex/generated_images/01a0b368-cb76-7660-a5b0-bffb40d909b5/exec-4f648f68-9f72-4670-9e61-de82f97d878b.png",
+      "slug": "four-fragrances-one-house",
+      "title": "Four fragrances, one house",
+      "note": "All four bottles distinct and uncropped"
+    }
+  ],
+  "anchors": [
+    {
+      "source": "/Users/shauryapunj/Downloads/Batra Model.jpg",
+      "slug": "model-identity-batra"
+    },
+    {
+      "source": "/var/folders/qh/qbhxj5pn60d5kr4wm440s5pc0000gn/T/codex-clipboard-c75d4d47-5f5d-49d6-9712-584e793dee20.png",
+      "slug": "original-the-night-lingers"
+    },
+    {
+      "source": "/var/folders/qh/qbhxj5pn60d5kr4wm440s5pc0000gn/T/codex-clipboard-b2d8ae6a-99fc-4276-87de-a52eab8181dc.png",
+      "slug": "original-silent-storm"
+    },
+    {
+      "source": "/var/folders/qh/qbhxj5pn60d5kr4wm440s5pc0000gn/T/codex-clipboard-8b66d6a0-9aaa-48fc-af2e-3d5d470d247d.png",
+      "slug": "original-the-sweetest-stranger"
+    },
+    {
+      "source": "/var/folders/qh/qbhxj5pn60d5kr4wm440s5pc0000gn/T/codex-clipboard-b41a71ad-681d-40eb-8556-da204233d511.png",
+      "slug": "original-rebel-in-velvet"
+    }
+  ]
+}

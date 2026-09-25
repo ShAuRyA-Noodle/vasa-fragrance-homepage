@@ -1,0 +1,55 @@
+{
+  "version": "2.0 — locked product continuity",
+  "purpose": "Single-generation 20-second looping VASA website film with four bottles continuously visible",
+  "why_this_replaces_v1": "The prior ten-shot prompt repeatedly reconstructed products and the room, which let bottles disappear, labels drift, and unrelated scenes appear. This version is one locked shot with immutable product positions.",
+  "higgsfield": {
+    "model": "Seedance 2.5 Reference-to-Video",
+    "duration_seconds": 20,
+    "aspect_ratio": "16:9",
+    "resolution": "720p or the highest available setting",
+    "audio": "off for the website master; add licensed audio separately if needed",
+    "reference_upload_order": [
+      "1: frames/09-four-fragrances-one-house.png — ONLY environment, composition, camera and starting-frame reference",
+      "2: identity-and-product-anchors/original-silent-storm.png — authoritative Silent Storm bottle",
+      "3: identity-and-product-anchors/original-the-sweetest-stranger.png — authoritative The Sweetest Stranger bottle",
+      "4: identity-and-product-anchors/original-rebel-in-velvet.png — authoritative Rebel in Velvet bottle",
+      "5: identity-and-product-anchors/original-the-night-lingers.png — authoritative The Night Lingers bottle",
+      "6: identity-and-product-anchors/model-identity-batra.jpg — authoritative actress face and hair; ignore studio background and clothing"
+    ]
+  },
+  "immutable_scene_contract": {
+    "camera": "One static waist-height tripod camera, 50 mm equivalent lens, horizontal 16:9; no cut, zoom, pan, orbit, dolly, crop change, reframe, transition or second location.",
+    "set": "One contemporary affluent Indian household at Diwali blue hour, exactly the rosewood console, carved walnut screen, dusk-blue window, warm brass diya and restrained marigolds shown in frame 09.",
+    "product_count": 4,
+    "product_order_left_to_right": [
+      "Silent Storm — pale mint liquid, blue-bordered original label",
+      "The Sweetest Stranger — coral-pink liquid, pink-bordered original label",
+      "Rebel in Velvet — plum-rose liquid, violet-bordered original label",
+      "The Night Lingers — amber liquid, ochre-bordered original label"
+    ],
+    "product_positions_percent_of_frame_width": [32, 45, 59, 74],
+    "product_geometry": "All four bottles are identical authentic VASA 50 ml heavy rectangular clear glass with original square shoulders, carved bowl-shaped wooden cap, narrow gold collar, ivory VASA label and name from their matching original packshot.",
+    "continuity": "From frame 000 through the final frame, all four bottles remain physically present, upright, stationary, fully inside frame, unobstructed, on the same rosewood surface and in the same left-to-right order. No bottle appears, disappears, swaps places, rotates, morphs, changes size, changes label, changes liquid, or leaves frame.",
+    "actress": "Only the same adult Indian woman from the supplied contact sheet, in a deep wine silk sari, may appear softly in the BACKGROUND between the window and carved screen. She never touches, crosses in front of, or occludes any bottle. Background movement begins after 2 seconds and ends before 17 seconds; she is absent in the first and last 2 seconds.",
+    "loop": "At 00:00 and 20:00 the same still frame is visible: identical four bottles, lit diya, room, exposure, camera, focus and light. No ending card or fade. The film is silent so audio cannot click at the seam."
+  },
+  "timeline": [
+    {"time": "00.0–02.0", "visual": "Hold exact frame 09 tableau. Four bottles countable and readable. All four product labels face camera. Warm brass diya glows at left. No actress in frame. Everything static except minimal natural flame flicker."},
+    {"time": "02.0–05.0", "visual": "Rack focus gently toward Silent Storm on far left while ALL four bottles remain visible and physically unchanged. Cool dusk-blue reflection briefly travels across Silent Storm glass only. Actress enters deep background behind bottle row, never occluding products."},
+    {"time": "05.0–08.0", "visual": "Focus slowly settles on The Sweetest Stranger, second from left. Subtle real coral silk bounce brightens its glass. The other three bottles still stand at their original fixed positions, visible and unchanged."},
+    {"time": "08.0–11.0", "visual": "Focus slowly settles on Rebel in Velvet, third from left. Its plum glass catches one understated wine-toned reflection. Same single camera frame, same four physical bottles. Actress passes only in the far background."},
+    {"time": "11.0–14.0", "visual": "Focus slowly settles on The Night Lingers at far right. Amber diya reflection crosses its real glass and original label remains facing camera. Silent Storm, Sweetest Stranger and Rebel in Velvet remain visible and unmoved."},
+    {"time": "14.0–17.0", "visual": "Bring all four labels into balanced focus together. Actress exits the deep background by 17 seconds, with no hand entering the bottle plane. Hold the elegant four-bottle gift-like tableau; no extra props appear."},
+    {"time": "17.0–20.0", "visual": "Return light, focus, flame size, bokeh and exposure to the exact 00.0 composition. Keep all four bottles and the same left-to-right positions. Last 0.5 seconds is visually as close as possible to first 0.5 seconds for a clean loop."}
+  ],
+  "negative_constraints": [
+    "NO cuts, shot changes, scene changes, macro insert shots or montage",
+    "NO bottle disappearance, appearance, replacement, levitation, duplication, melting, morphing, swapping, spinning or cropping",
+    "NO fifth bottle, tester, packaging, floating petal, sparkle particles, fireworks, palace, mountain or outdoor scene",
+    "NO text overlay, slogan, subtitles, end card, watermark or invented logo",
+    "NO actress hand touching or passing in front of products",
+    "NO shallow-focus blur on all four labels simultaneously; avoid labels warping into gibberish",
+    "NO generic CGI look, orange global filter, plastic skin or excessive motion"
+  ],
+  "copy_paste_prompt": "CREATE A SINGLE UNINTERRUPTED 20.0-SECOND 16:9 LOOPING VASA DIWALI PRODUCT FILM. DO NOT MAKE A MONTAGE. ONE CAMERA, ONE LOCATION, FOUR IMMUTABLE BOTTLES. Use uploaded reference 1 (09-four-fragrances-one-house.png) as the exact opening composition: static 50 mm waist-height tripod looking at a rosewood console in a contemporary affluent Indian household at blue hour, carved walnut screen, dusk-blue window, softly glowing brass diya at left, very restrained marigolds. Use references 2–5 as the ONLY authoritative designs for the four real VASA 50 ml bottles. Use reference 6 only for the adult Indian woman's facial identity. Place exactly four authentic, upright, stationary bottles on the console at fixed horizontal centers x=32%, 45%, 59%, 74% of the 16:9 frame, in this exact left-to-right order: (1) SILENT STORM, pale mint liquid and blue-bordered label; (2) THE SWEETEST STRANGER, coral liquid and pink-bordered label; (3) REBEL IN VELVET, plum-rose liquid and violet-bordered label; (4) THE NIGHT LINGERS, amber liquid and ochre-bordered label. Each bottle has the same genuine VASA square heavy clear-glass body, carved bowl-shaped wooden cap, narrow gold collar, and its OWN original ivory VASA label from its matching product photo. ALL FOUR BOTTLES MUST REMAIN PHYSICALLY PRESENT, VISIBLE, UPRIGHT, UNOBSTRUCTED, SAME SIZE, SAME ORDER AND SAME LOCATION IN EVERY SINGLE FRAME FROM 00.0 THROUGH 20.0. They never appear, disappear, morph, rotate, move, swap, or change labels. No fifth product. Keep all cap tops and glass bases within safe frame margins. Camera is absolutely locked: NO pan, zoom, dolly, orbit, reframing, cuts, wipes, transitions, new shot, new room or product insert. Drama comes ONLY from slow controlled focus and real moving reflections. EXACT TIMELINE: 00.0–02.0 hold all four in balanced focus, no actress visible; 02.0–05.0 gentle focus emphasis on Silent Storm, cool blue glass reflection, actress enters far background only; 05.0–08.0 gentle focus emphasis on Sweetest Stranger, warm coral reflection; 08.0–11.0 gentle focus emphasis on Rebel in Velvet, wine-red reflection; 11.0–14.0 gentle focus emphasis on The Night Lingers, amber diya reflection; 14.0–17.0 focus all four labels together, actress exits far background without ever crossing in front of products; 17.0–20.0 return precisely to the 00.0 balanced-focus composition and exposure. The actress wears an elegant deep-wine silk sari, stays far behind the product plane, never touches or blocks a bottle, and is absent in first and last two seconds. Maintain one real luxury Indian household, real contact shadows, coherent glass refraction, true skin and silk texture, warm 3200K practical diya against cool dusk-blue window, ink/wine/amber palette, subtle 35mm grain. NO text overlays, slogan, subtitles, fake packaging, floating objects, glitter, fireworks, palace, outdoor scenery, CGI sheen, bottle replacement, malformed hands, label redesign, or another person. SILENT PICTURE MASTER: generate without audio. FIRST FRAME AND LAST FRAME must show exactly the same four bottles, diya, focus, lighting and room for the website hard loop."
+}

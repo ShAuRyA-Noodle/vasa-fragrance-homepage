@@ -88,6 +88,100 @@ if (root && cfg) {
       onToggle: self => stickyBuy.classList.toggle('is-visible', self.isActive)
     });
   }
+
+  // SPYLT reference clips: a seven-card pile that resolves into a full-width row.
+  // Each video is opt-in and pauses immediately when the section leaves view.
+  const spyltReviews = root.querySelector('[data-spylt-reviews]');
+  if (spyltReviews) {
+    const cards = [...spyltReviews.querySelectorAll('.pd-spylt-card')];
+    let reviewsVisible = false;
+    let activeCard = null;
+    const pauseCard = card => {
+      card._spyltPlaybackToken = (card._spyltPlaybackToken || 0) + 1;
+      card.querySelector('[data-spylt-video]')?.pause();
+      card.classList.remove('is-playing');
+      card.querySelector('button')?.setAttribute('aria-pressed', 'false');
+    };
+    const pauseAll = () => cards.forEach(pauseCard);
+    const playCard = card => {
+      activeCard = card;
+      if (!reviewsVisible || document.hidden || reduced.matches) return;
+      cards.forEach(other => { if (other !== card) pauseCard(other); });
+      const video = card.querySelector('[data-spylt-video]');
+      const token = (card._spyltPlaybackToken || 0) + 1;
+      card._spyltPlaybackToken = token;
+      video?.play().then(() => {
+        if (card._spyltPlaybackToken === token && activeCard === card && reviewsVisible && !document.hidden && !video.paused) {
+          card.classList.add('is-playing');
+          card.querySelector('button')?.setAttribute('aria-pressed', 'true');
+        }
+      }).catch(() => {
+        if (card._spyltPlaybackToken === token) pauseCard(card);
+      });
+    };
+    const focusCard = card => {
+      cards.forEach(other => {
+        other.classList.toggle('is-muted', other !== card);
+        gsap.to(other, {scale: other === card ? 1.15 : 1, duration: .25, overwrite: 'auto'});
+        if (other === card) other.style.zIndex = '200';
+      });
+    };
+    const clearFocus = () => {
+      cards.forEach(card => { card.classList.remove('is-muted'); gsap.to(card, {scale: 1, duration: .25, overwrite: 'auto'}); card.style.zIndex = ''; });
+    };
+    cards.forEach(card => {
+      const button = card.querySelector('button');
+      card.addEventListener('pointerenter', () => {
+        if (!matchMedia('(min-width: 1025px) and (hover: hover) and (pointer: fine)').matches) return;
+        focusCard(card);
+        playCard(card);
+      });
+      card.addEventListener('pointerleave', () => { if (activeCard === card) pauseCard(card); clearFocus(); });
+      card.addEventListener('focusin', () => { focusCard(card); });
+      card.addEventListener('focusout', event => { if (!card.contains(event.relatedTarget)) { if (activeCard === card) pauseCard(card); clearFocus(); } });
+      button?.addEventListener('click', () => {
+        const video = card.querySelector('[data-spylt-video]');
+        if (video?.paused) playCard(card);
+        else pauseCard(card);
+      });
+    });
+    const observer = new IntersectionObserver(entries => {
+      reviewsVisible = entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= .3);
+      if (reviewsVisible && activeCard) playCard(activeCard);
+      else if (!reviewsVisible) pauseAll();
+    }, {threshold: [.3]});
+    observer.observe(spyltReviews);
+    document.addEventListener('visibilitychange', () => { if (document.hidden) pauseAll(); else if (reviewsVisible && activeCard) playCard(activeCard); });
+
+    if (!reduced.matches && matchMedia('(min-width: 1025px)').matches) {
+      const words = [...spyltReviews.querySelectorAll('.pd-spylt-words span')];
+      const rowGap = 10;
+      gsap.set(cards, {xPercent: -50, yPercent: -50, autoAlpha: i => i < 3 ? 1 : 0, y: i => 64 + i * 8, rotate: i => (i - 3) * 5});
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: spyltReviews,
+          start: 'top top',
+          end: () => `+=${cards.length * 340 + 800}`,
+          pin: true,
+          scrub: 1.6,
+          anticipatePin: 1,
+          invalidateOnRefresh: true
+        }
+      });
+      timeline.to(words[0], {xPercent: -24, duration: 1.2, ease: 'none'}, 0)
+        .to(words[1], {xPercent: 20, duration: 1.2, ease: 'none'}, 0)
+        .to(words[2], {xPercent: -15, duration: 1.2, ease: 'none'}, 0)
+        .to(cards, {
+          autoAlpha: 1,
+          y: 0,
+          rotate: 0,
+          x: i => (i - (cards.length - 1) / 2) * (cards[i].offsetWidth + rowGap),
+          duration: 1,
+          stagger: .12,
+          ease: 'power2.out'
+        }, .08);
+    }
+  }
   // Reveals + parallax come from /shared/page-reveal.js
 }
 

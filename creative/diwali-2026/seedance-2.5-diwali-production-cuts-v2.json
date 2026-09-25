@@ -1,0 +1,54 @@
+{
+  "version": "2.0 — reliable assembly",
+  "recommendation": "Use this five-generation edit when a single 20-second Seedance pass removes bottles, invents labels, or changes rooms. Each product generation contains ONE locked bottle and TWO visual references; a fifth clip shows the actress without a bottle. Assemble the five clips with the same original quartet still at both ends. This is more controllable than asking one generative pass to switch four products.",
+  "higgsfield_model": "Seedance 2.5 Reference-to-Video",
+  "generation_settings_for_each_clip": {
+    "duration_seconds": 5,
+    "aspect_ratio": "16:9",
+    "resolution": "720p or highest available",
+    "audio": "off",
+    "frame_rate": "24 fps if selectable"
+  },
+  "global_non_negotiables": "In EACH 5-second source clip there is exactly ONE real physical VASA bottle from its specific original product photograph. The bottle is on the same rosewood console in the same Diwali household for every frame. Static camera; bottle cannot appear, disappear, morph, spin, float, change label or change shape. The original product photograph wins over the generated storyboard if they conflict. Do not add a second perfume, text overlay, end card, other brands or a new room.",
+  "clips": [
+    {
+      "id": "A_silent_storm",
+      "references": ["frames/06-silent-storm.png", "identity-and-product-anchors/original-silent-storm.png"],
+      "prompt": "SINGLE CONTINUOUS 5.0-SECOND LIVE-ACTION PRODUCT SHOT. Use reference 1 ONLY for the luxurious contemporary Indian Diwali home, rosewood console, carved walnut screen, blue dusk window and brass diya. Use reference 2 as the EXACT unchanging VASA SILENT STORM 50 ml bottle: heavy square clear glass, mint-green liquid, carved wood bowl cap, gold collar, blue-bordered cream VASA SILENT STORM label. Exactly ONE bottle, already upright on the console at frame 000; it remains in the same position, fully visible and front-facing through frame 120. Static waist-height 65 mm tripod, no pan, zoom or cut. 00.0–01.0 hold the exact bottle sharply. 01.0–03.5 let one subtle cool blue window reflection travel across its glass, with warm diya edge light. 03.5–05.0 return to the opening light and focus. Preserve original label shape and spelling. No actress, no second bottle, no bottle movement, no magic particles, no text, no change of location, no disappearance, no logo invention. Real contact shadow and glass refraction, quiet premium cinema. Silent video."
+    },
+    {
+      "id": "B_sweetest_stranger",
+      "references": ["frames/07-sweetest-stranger.png", "identity-and-product-anchors/original-the-sweetest-stranger.png"],
+      "prompt": "SINGLE CONTINUOUS 5.0-SECOND LIVE-ACTION PRODUCT SHOT. Use reference 1 ONLY for the same luxurious contemporary Indian Diwali home, rosewood console, carved walnut screen, blue dusk window and brass diya. Use reference 2 as the EXACT unchanging VASA THE SWEETEST STRANGER 50 ml bottle: heavy square clear glass, coral-pink liquid, carved wood bowl cap, gold collar, pink-bordered cream VASA THE SWEETEST STRANGER label. Exactly ONE bottle, already upright on the console at frame 000; it remains in the same position, fully visible and front-facing through frame 120. Static waist-height 65 mm tripod, no pan, zoom or cut. 00.0–01.0 hold the exact bottle sharply. 01.0–03.5 let one faint rose-silk bounce reflection travel across its glass; gardenia stays still beside it. 03.5–05.0 return to opening light and focus. Preserve original label shape and spelling. No actress, no second bottle, no bottle movement, no magic particles, no text, no change of location, no disappearance, no logo invention. Real contact shadow and glass refraction, quiet premium cinema. Silent video."
+    },
+    {
+      "id": "C_rebel_in_velvet",
+      "references": ["frames/08-rebel-in-velvet.png", "identity-and-product-anchors/original-rebel-in-velvet.png"],
+      "prompt": "SINGLE CONTINUOUS 5.0-SECOND LIVE-ACTION PRODUCT SHOT. Use reference 1 ONLY for the same luxurious contemporary Indian Diwali home, rosewood console, carved walnut screen, blue dusk window, wine silk and brass diya. Use reference 2 as the EXACT unchanging VASA REBEL IN VELVET 50 ml bottle: heavy square clear glass, plum-rose liquid, carved wood bowl cap, gold collar, violet-bordered cream VASA REBEL IN VELVET label. Exactly ONE bottle, already upright on the console at frame 000; it remains in the same position, fully visible and front-facing through frame 120. Static waist-height 65 mm tripod, no pan, zoom or cut. 00.0–01.0 hold the exact bottle sharply. 01.0–03.5 allow a subtle real wine-silk reflection to cross its glass while the physical cloth barely moves behind it. 03.5–05.0 return to opening light and focus. Preserve original label shape and spelling. No actress, no second bottle, no bottle movement, no magic particles, no text, no change of location, no disappearance, no logo invention. Real contact shadow and glass refraction, quiet premium cinema. Silent video."
+    },
+    {
+      "id": "D_the_night_lingers",
+      "references": ["frames/04-the-night-lingers.png", "identity-and-product-anchors/original-the-night-lingers.png"],
+      "prompt": "SINGLE CONTINUOUS 5.0-SECOND LIVE-ACTION PRODUCT SHOT. Use reference 1 ONLY for the same luxurious contemporary Indian Diwali home, rosewood console, carved walnut screen, blue dusk window and brass diya. Use reference 2 as the EXACT unchanging VASA THE NIGHT LINGERS 50 ml bottle: heavy square clear glass, amber liquid, carved wood bowl cap, gold collar, ochre-bordered cream VASA THE NIGHT LINGERS label. Exactly ONE bottle, already upright on the console at frame 000; it remains in the same position, fully visible and front-facing through frame 120. Static waist-height 65 mm tripod, no pan, zoom or cut. 00.0–01.0 hold the exact bottle sharply. 01.0–03.5 allow one restrained amber diya reflection to travel across its real glass; flame remains far from the product. 03.5–05.0 return to opening light and focus. Preserve original label shape and spelling. No actress, no second bottle, no bottle movement, no magic particles, no text, no change of location, no disappearance, no logo invention. Real contact shadow and glass refraction, quiet premium cinema. Silent video."
+    },
+    {
+      "id": "E_human_ritual",
+      "references": ["frames/02-her-arrival.png", "identity-and-product-anchors/model-identity-batra.jpg"],
+      "prompt": "SINGLE CONTINUOUS 5.0-SECOND LIVE-ACTION HUMAN SHOT. Use reference 1 ONLY for the same contemporary affluent Indian Diwali home: rosewood console, carved walnut screen, blue-hour window, one unlit brass diya and deep wine silk. Use reference 2 ONLY as the exact face, build and dark hair of the one adult Indian woman; ignore the white studio background and casual clothing. She wears an elegant deep-wine silk sari with subtle woven border and small gold earrings. At frame 000 she stands beside the console. 00.0–01.0 she gazes at the diya. 01.0–03.0 she lights its cotton wick with a small match, one physically believable amber flame; 03.0–05.0 she lowers her hand and looks at the light with a subtle private expression. Fixed 50 mm medium framing, no camera movement, no cuts, no other people, no perfume bottle or blank label in this shot, no fireworks or fantasy particles, no words. Preserve exact identity, natural hands, realistic flame and skin, quiet premium Indian household film. Silent video."
+    }
+  ],
+  "assembly": {
+    "total_duration_seconds": 20,
+    "segments": [
+      {"final_time": "00.0–00.8", "source": "frames/09-four-fragrances-one-house.png", "method": "hold exact still, no motion or AI interpolation"},
+      {"final_time": "00.8–04.6", "source": "A_silent_storm", "source_in_out": "00.6–04.4", "method": "straight cut"},
+      {"final_time": "04.6–08.4", "source": "B_sweetest_stranger", "source_in_out": "00.6–04.4", "method": "straight cut"},
+      {"final_time": "08.4–12.2", "source": "C_rebel_in_velvet", "source_in_out": "00.6–04.4", "method": "straight cut"},
+      {"final_time": "12.2–16.0", "source": "D_the_night_lingers", "source_in_out": "00.6–04.4", "method": "straight cut"},
+      {"final_time": "16.0–19.2", "source": "E_human_ritual", "source_in_out": "00.9–04.1", "method": "straight cut; the human shot deliberately contains no bottle"},
+      {"final_time": "19.2–20.0", "source": "frames/09-four-fragrances-one-house.png", "method": "hold THE EXACT SAME still as 00.0–00.8, no motion or AI interpolation"}
+    ],
+    "loop_rule": "The first and last 0.8 seconds use identical source pixels, guaranteeing a visually clean 20.0-to-00.0 loop boundary. Do not crossfade between different bottle identities; straight cuts preserve product clarity.",
+    "label_rule": "If any generated bottle label is misspelled or changes between frames, composite its exact original packshot label in the edit. Prompt wording cannot guarantee pixel-perfect typography."
+  }
+}
