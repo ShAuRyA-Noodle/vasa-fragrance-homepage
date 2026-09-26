@@ -1,0 +1,30 @@
+{
+ "silent-storm": {
+  "width": 610,
+  "height": 1200,
+  "baseY": 0.96667,
+  "topY": 0.03333,
+  "aspect": 0.50833
+ },
+ "sweetest-stranger": {
+  "width": 622,
+  "height": 1200,
+  "baseY": 0.96667,
+  "topY": 0.03333,
+  "aspect": 0.51833
+ },
+ "rebel-in-velvet": {
+  "width": 610,
+  "height": 1200,
+  "baseY": 0.96667,
+  "topY": 0.03333,
+  "aspect": 0.50833
+ },
+ "the-night-lingers": {
+  "width": 606,
+  "height": 1200,
+  "baseY": 0.96667,
+  "topY": 0.03333,
+  "aspect": 0.505
+ }
+}
