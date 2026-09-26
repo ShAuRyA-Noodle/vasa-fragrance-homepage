@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="300" viewBox="0 0 200 300">
+  <defs>
+    <!-- right half of the main medallion; mirrored for the left half -->
+    <g id="h">
+      <!-- central pomegranate bud -->
+      <path d="M100 86 C106 99 117 111 119 129 C121 148 112 163 100 172 Z"/>
+      <!-- sweeping leaf from the bud base, curling up and back -->
+      <path d="M101 168 C123 176 149 168 156 145 C161 127 152 110 136 109 C124 108 117 118 122 127 C126 133 136 132 137 124 C141 137 131 150 116 155 C108 158 103 161 101 168 Z"/>
+      <!-- upper scroll rising from the bud -->
+      <path d="M101 84 C104 68 117 55 133 55 C147 55 154 67 149 76 C145 83 134 81 135 73 C129 77 131 86 141 88 C128 94 112 90 104 86 Z"/>
+      <!-- serrated leaf tips on the upper scroll -->
+      <path d="M141 88 C150 91 160 88 165 80 C161 90 162 98 170 103 C160 104 150 99 146 93 Z"/>
+      <!-- lower stem with a turned leaf -->
+      <path d="M100 172 C102 188 107 201 116 209 C125 217 141 219 148 209 C137 211 126 205 121 194 C117 185 112 177 104 171 Z"/>
+      <path d="M148 209 C156 199 168 199 172 206 C166 206 160 211 158 217 C155 213 151 211 148 209 Z"/>
+      <!-- finial above the medallion -->
+      <path d="M100 30 C104 38 107 46 105 56 C104 61 102 65 100 67 Z"/>
+      <path d="M100 58 C106 50 115 47 121 50 C115 52 110 57 107 63 Z"/>
+      <!-- drop below the medallion -->
+      <path d="M100 222 C104 230 106 238 104 246 C103 250 101 253 100 254 Z"/>
+      <circle cx="128" cy="98" r="2.4"/>
+      <circle cx="146" cy="186" r="2.2"/>
+      <circle cx="126" cy="236" r="2"/>
+    </g>
+    <!-- small rosette for the half-drop between medallions -->
+    <g id="r">
+      <ellipse cx="0" cy="-15" rx="6" ry="13"/>
+      <ellipse cx="0" cy="15" rx="6" ry="13"/>
+      <ellipse cx="-15" cy="0" rx="13" ry="6"/>
+      <ellipse cx="15" cy="0" rx="13" ry="6"/>
+      <path d="M0 -40 C4 -34 5 -28 0 -22 C-5 -28 -4 -34 0 -40 Z"/>
+      <path d="M0 40 C4 34 5 28 0 22 C-5 28 -4 34 0 40 Z"/>
+      <path d="M-40 0 C-34 4 -28 5 -22 0 C-28 -5 -34 -4 -40 0 Z"/>
+      <path d="M40 0 C34 4 28 5 22 0 C28 -5 34 -4 40 0 Z"/>
+      <path d="M12 12 C22 14 30 22 30 30 C22 30 14 22 12 12 Z"/>
+      <path d="M-12 12 C-22 14 -30 22 -30 30 C-22 30 -14 22 -12 12 Z"/>
+      <path d="M12 -12 C22 -14 30 -22 30 -30 C22 -30 14 -22 12 -12 Z"/>
+      <path d="M-12 -12 C-22 -14 -30 -22 -30 -30 C-22 -30 -14 -22 -12 -12 Z"/>
+    </g>
+  </defs>
+  <g fill="#ffd9c4" fill-opacity=".075">
+    <use xlink:href="#h"/>
+    <use xlink:href="#h" transform="translate(200 0) scale(-1 1)"/>
+    <use xlink:href="#r" transform="translate(0 0)"/>
+    <use xlink:href="#r" transform="translate(200 0)"/>
+    <use xlink:href="#r" transform="translate(0 300)"/>
+    <use xlink:href="#r" transform="translate(200 300)"/>
+  </g>
+  <!-- ogee lattice of fine vines linking medallions and rosettes -->
+  <g fill="none" stroke="#ffd9c4" stroke-opacity=".07" stroke-width="2.2" stroke-linecap="round">
+    <path d="M100 26 C82 22 66 8 58 -8"/>
+    <path d="M100 26 C118 22 134 8 142 -8"/>
+    <path d="M100 258 C82 262 66 280 60 306"/>
+    <path d="M100 258 C118 262 134 280 140 306"/>
+    <path d="M42 0 C30 26 12 38 -2 44"/>
+    <path d="M158 0 C170 26 188 38 202 44"/>
+    <path d="M42 300 C30 274 12 262 -2 256"/>
+    <path d="M158 300 C170 274 188 262 202 256"/>
+  </g>
+  <g fill="#ffd9c4" fill-opacity=".07">
+    <path d="M70 12 C64 4 64 -4 70 -8 C72 0 74 6 70 12 Z"/>
+    <path d="M130 12 C136 4 136 -4 130 -8 C128 0 126 6 130 12 Z"/>
+    <path d="M72 284 C66 292 66 300 72 304 C74 296 76 290 72 284 Z"/>
+    <path d="M128 284 C134 292 134 300 128 304 C126 296 124 290 128 284 Z"/>
+    <path d="M20 36 C12 30 4 32 0 38 C8 40 14 40 20 36 Z"/>
+    <path d="M180 36 C188 30 196 32 200 38 C192 40 186 40 180 36 Z"/>
+    <path d="M20 264 C12 270 4 268 0 262 C8 260 14 260 20 264 Z"/>
+    <path d="M180 264 C188 270 196 268 200 262 C192 260 186 260 180 264 Z"/>
+  </g>
+  <g fill="none" stroke="#ffd9c4" stroke-opacity=".05" stroke-width=".8">
+    <path d="M100 118 C104 124 106 132 104 140 C103 146 101 150 100 152 C99 150 97 146 96 140 C94 132 96 124 100 118 Z"/>
+    <circle cx="0" cy="0" r="5"/><circle cx="200" cy="0" r="5"/><circle cx="0" cy="300" r="5"/><circle cx="200" cy="300" r="5"/>
+  </g>
+</svg>
