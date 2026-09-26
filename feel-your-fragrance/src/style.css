@@ -83,3 +83,10 @@ dialog{color:#eadaba;border-color:rgba(222,199,154,.38);background:linear-gradie
   .collection-action{font-size:10px;font-weight:600;letter-spacing:.12em}
   .step-nav button{font-size:11px;font-weight:600}
 }
+/* Vignette + film grain, formerly a WebGL post pass; composited by the browser for free. */
+.screen-shade::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 86% 100% at 50% 50%,transparent 36%,rgba(0,0,0,.22) 78%,rgba(0,0,0,.38) 100%)}
+.screen-shade::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.07}
+.screen-shade{z-index:0}
+/* The orb stays fully on the track at both ends (it used to overhang the screen edge on phones). */
+.range-orb{left:clamp(24px,var(--position),calc(100% - 24px))}
+@media(max-width:760px){.intensity-control{left:10%;width:80%}.range-wrap{margin:0 6% 29px}}

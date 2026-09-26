@@ -66,13 +66,16 @@ export function createCelestialArc(camera) {
   geometry.setAttribute('aProgress', new THREE.Float32BufferAttribute(progress, 1));
   geometry.setAttribute('aFlow', new THREE.Float32BufferAttribute(flows, 1));
   geometry.setAttribute('aOffset', new THREE.Float32BufferAttribute(offsets, 1));
+  // Per-fragrance sky: tintMix 0 keeps the rainbow arc, 1 washes it in `tint`.
+  const tint = {value: new THREE.Color('#ffffff')}, tintMix = {value: 0}, fade = {value: 1};
   const material = new THREE.ShaderMaterial({
     transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-    uniforms: {time: {value: 0}, pixelScale: {value: 1}},
+    uniforms: {time: {value: 0}, pixelScale: {value: 1}, tint, tintMix, fade},
     vertexShader: `
       attribute float aSize, aPhase, aAlpha, aProgress, aFlow, aOffset;
       attribute vec3 aColor;
-      uniform float time, pixelScale;
+      uniform float time, pixelScale, tintMix, fade;
+      uniform vec3 tint;
       varying vec3 vColor;
       varying float vAlpha, vHero;
       void main(){
@@ -86,8 +89,8 @@ export function createCelestialArc(camera) {
         gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.);
         float twinkle=.72+.28*sin(time*(.8+fract(aPhase)*.7)+aPhase);
         float sweep=pow(max(sin(time*1.13-aProgress*16.),0.),19.);
-        vAlpha=aAlpha*(twinkle+sweep*.7);
-        vColor=aColor;
+        vAlpha=aAlpha*(twinkle+sweep*.7)*fade;
+        vColor=mix(aColor,tint*(.85+.3*fract(aPhase)),tintMix);
         vHero=step(6.,aSize);
         gl_PointSize=aSize*(1.+sweep*.65)*pixelScale;
       }`,
@@ -102,17 +105,20 @@ export function createCelestialArc(camera) {
         float cross=(exp(-abs(p.x)*38.)*exp(-abs(p.y)*6.)+exp(-abs(p.y)*38.)*exp(-abs(p.x)*6.))*vHero;
         float light=halo*.29+core*.9+cross*.23;
         gl_FragColor=vec4(vColor*light,vAlpha);
+  #include <tonemapping_fragment>
+  #include <colorspace_fragment>
       }`,
   });
   const group = new THREE.Group();
   const hazeMaterial = new THREE.ShaderMaterial({
     transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-    uniforms: {time: {value: 0}},
+    uniforms: {time: {value: 0}, tint, tintMix, fade},
     vertexShader: 'varying vec2 vUv; void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
     fragmentShader: `
       precision highp float;
       varying vec2 vUv;
-      uniform float time;
+      uniform float time, tintMix, fade;
+      uniform vec3 tint;
       void main(){
         vec2 uv=vUv;
         float arch=.075+.83*pow(max(sin(3.14159265*uv.x),0.),.88);
@@ -125,9 +131,12 @@ export function createCelestialArc(camera) {
         vec3 gold=vec3(.82,.62,.39),blue=vec3(.49,.64,.89),rose=vec3(.82,.53,.63);
         vec3 color=mix(gold,blue,smoothstep(.17,.53,uv.x));
         color=mix(color,rose,smoothstep(.58,.90,uv.x));
+        color=mix(color,tint,tintMix);
         float edge=smoothstep(.015,.14,uv.x)*(1.-smoothstep(.86,.985,uv.x));
         float glow=veil*shoulder*glint*edge;
-        gl_FragColor=vec4(color*glow,.19);
+        gl_FragColor=vec4(color*glow*fade,.19);
+  #include <tonemapping_fragment>
+  #include <colorspace_fragment>
       }`,
   });
   const haze = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), hazeMaterial);
@@ -145,5 +154,5 @@ export function createCelestialArc(camera) {
     group.scale.set(extent * aspect, extent, 1);
     material.uniforms.pixelScale.value = Math.min(pixelRatio, 1.25);
   };
-  return {group, material, hazeMaterial, resize};
+  return {group, material, hazeMaterial, resize, tint: tint.value, tintMix, fade};
 }

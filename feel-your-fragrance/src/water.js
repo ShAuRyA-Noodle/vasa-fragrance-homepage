@@ -8,12 +8,14 @@ export function makeWater(){
  vertexShader:`uniform mat4 textureMatrix;varying vec4 vMirror;varying vec3 vWorld;void main(){vMirror=textureMatrix*vec4(position,1.);vWorld=(modelMatrix*vec4(position,1.)).xyz;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
  fragmentShader:`
  precision highp float;
- uniform sampler2D tDiffuse;uniform float time;uniform float presence;uniform float distortionScale;uniform vec3 deepColor;uniform vec3 reflectionTint;uniform vec3 horizonTint;uniform vec3 champagne;uniform vec4 ripples[8];varying vec4 vMirror;varying vec3 vWorld;
- float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453123);}
- float noise(vec2 p){vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1.,0.)),u.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),u.x),u.y);}
- float fbm(vec2 p){float n=0.,a=.5;for(int i=0;i<4;i++){n+=a*noise(p);p=p*2.03+vec2(17.13,9.21);a*=.5;}return n;}
- float swell(vec2 p){
-  vec2 warp=vec2(fbm(p*.18+vec2(time*.018,-time*.011)),fbm(p*.18+vec2(8.4,-3.7)))-.5;
+ uniform sampler2D tDiffuse;uniform float time;uniform float presence;uniform float distortionScale;uniform vec3 deepColor;uniform vec3 reflectionTint;uniform vec3 horizonTint;uniform vec3 champagne;uniform float horizonFog;uniform vec4 ripples[8];varying vec4 vMirror;varying vec3 vWorld;
+ uniform sampler2D noiseTex;
+ // Smoothstep-shaped lookup into the bilinear noise tile (same value-noise character).
+ float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return texture2D(noiseTex,(i+f+.5)/256.).r;}
+ float fbm(vec2 p){float n=0.,a=.5;for(int i=0;i<3;i++){n+=a*noise(p);p=p*2.03+vec2(17.13,9.21);a*=.5;}return n;}
+ // The large-scale warp barely changes across the 0.085 normal-sampling offset,
+ // so it is computed once per pixel and shared by all three height samples.
+ float swell(vec2 p,vec2 warp){
   p+=warp*2.4;
   float h=sin(dot(p,normalize(vec2(.84,.54)))*.55+time*.22+warp.x*2.1)*.026;
   h+=sin(dot(p,normalize(vec2(-.41,.91)))*.91-time*.17+warp.y*2.4)*.014;
@@ -28,14 +30,15 @@ export function makeWater(){
     float d=length(p-ripples[i].xy),front=age*1.52;
     float ring=exp(-pow((d-front)*2.25,2.))*exp(-age*1.18);
     float inner=exp(-d*d*2.6)*exp(-age*2.7);
-    h+=(sin((d-front)*13.5-age*2.1)*ring*.026+inner*.008)*ripples[i].w;
+    h+=(sin((d-front)*13.5-age*2.1)*ring*.042+inner*.01)*ripples[i].w;
    }
   }
   return h;
  }
- float height(vec2 p){return swell(p)+pointerWake(p);}
+ float height(vec2 p,vec2 warp){return swell(p,warp)+pointerWake(p);}
  void main(){
-  vec2 p=vWorld.xz;float h=height(p);float hx=height(p+vec2(.085,0.))-h;float hy=height(p+vec2(0.,.085))-h;
+  vec2 p=vWorld.xz;vec2 warp=vec2(fbm(p*.18+vec2(time*.018,-time*.011)),fbm(p*.18+vec2(8.4,-3.7)))-.5;
+  float h=height(p,warp);float hx=height(p+vec2(.085,0.),warp)-h;float hy=height(p+vec2(0.,.085),warp)-h;
   vec3 normal=normalize(vec3(-hx*5.4,1.,-hy*5.4));vec3 eye=normalize(cameraPosition-vWorld);float facing=max(dot(normal,eye),0.);float fresnel=.025+.975*pow(1.-facing,5.);
   float distanceToEye=length(cameraPosition-vWorld);vec2 uv=vMirror.xy/vMirror.w;vec2 distortion=normal.xz*(.0012+1./max(distanceToEye,1.))*distortionScale;uv=clamp(uv+distortion,.002,.998);
   vec3 reflected=texture2D(tDiffuse,uv).rgb;vec3 ref=mix(reflected,reflectionTint,.2);
@@ -51,10 +54,14 @@ export function makeWater(){
   float sheen=exp(-pow((p.x+1.4+sin(p.y*.15+time*.08)*.7)*.14,2.))*exp(-pow((p.y-3.)*.12,2.));
   col+=reflectionTint*sheen*.068;
   float haze=smoothstep(7.,48.,length(p));col=mix(col,horizonTint,haze*.42);
+  // Collection backdrops: far water melts into the scenery colour at the horizon.
+  col=mix(col,horizonTint,smoothstep(14.,33.,distanceToEye)*horizonFog);
   gl_FragColor=vec4(col,presence);
+  #include <tonemapping_fragment>
+  #include <colorspace_fragment>
  }`};
  // The water's procedural breakup softens this reflection substantially. A
  // 512px single-sample target retains that look while avoiding a second
  // high-resolution multisampled scene render every frame.
- const water=new Reflector(new THREE.PlaneGeometry(160,160),{textureWidth:512,textureHeight:512,clipBias:.004,shader,multisample:0});water.material.transparent=true;water.rotation.x=-Math.PI/2;water.position.y=-.015;return water;
+ const water=new Reflector(new THREE.PlaneGeometry(160,160),{textureWidth:384,textureHeight:384,clipBias:.004,shader,multisample:0});water.material.transparent=true;water.rotation.x=-Math.PI/2;water.position.y=-.015;return water;
 }

@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import {products} from './catalog.js';
 const loader=new THREE.TextureLoader();
 export async function loadProductPlates(){
- const textures=await Promise.all(products.map(async p=>{const t=await loader.loadAsync(`/plates/${p.id}.png`);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=4;return t;}));
+ const textures=await Promise.all(products.map(async p=>{const t=await loader.loadAsync(`/plates/${p.id}.png`);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=16;return t;}));
  return textures;
 }
 // Photographic products stay front-facing in the 3D stage. The mild analytic
@@ -13,7 +13,7 @@ export function createProductPlate(product,texture){
   uniforms:{image:{value:texture},light:{value:new THREE.Vector2()},time:{value:0},brightness:{value:.68}},
   vertexShader:`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
   fragmentShader:`precision highp float;uniform sampler2D image;uniform vec2 light;uniform float time;uniform float brightness;varying vec2 vUv;
-  void main(){vec4 tex=texture2D(image,vUv);if(tex.a<.06)discard;
+  void main(){vec4 tex=texture2D(image,vUv,-.5);if(tex.a<.06)discard;
   vec2 uv=vUv;vec3 normal=normalize(vec3((uv.x-.5)*2.2,(uv.y-.48)*.2,1.));vec3 L=normalize(vec3(light.x*.5-.5,light.y*.3+.5,1.));
   float facing=max(dot(normal,L),0.);float lum=dot(tex.rgb,vec3(.2126,.7152,.0722));float edge=smoothstep(.18,.30,abs(uv.x-.5));float gloss=pow(facing,28.)*edge*.10;
   // The source is a photographic plate. This is deliberately restrained
