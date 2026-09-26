@@ -5,6 +5,8 @@ import {initExperience} from './experience.js';
 import {initBitsEffects,animatePanelContent} from './bits-effects.js';
 import {initFragranceTheatre} from './fragrance-theatre.js';
 import {initFestivalCarousel} from './festival-carousel.js';
+import {initVasaExtras} from '../shared/vasa-extras.js';
+import '../shared/site-footer.css';
 const lenis=smoothScroll();
 let storage;try{storage=window.localStorage}catch{storage={getItem:()=>null,setItem:()=>{}}}
 const themeKey='vasa-theme',themeMedia=matchMedia('(prefers-color-scheme: dark)'),themeToggle=document.querySelector('.theme-toggle'),themeIcon=themeToggle?.querySelector('.theme-toggle-icon'),themeMeta=document.querySelector('meta[name="theme-color"]');
@@ -29,19 +31,17 @@ const escapeText=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>'
 const imageMarkup=(p,cls='',loading='lazy')=>`<img class="${cls}" src="${photo(p)}" alt="${p.name}, full 50 ml bottle concept" loading="${loading}" width="1122" height="1402">`;
 document.querySelector('#year').textContent=new Date().getFullYear();
 // Homepage product rows (Cartier-style: rows of 4 spread down the page).
-// Placeholder: every row shows the current catalog until the 16 products land.
-const productCard=p=>`<article class="product-card" style="--scent:${p.color}"><a class="product-image" href="/products/${p.id}/" aria-label="Discover ${p.name}"><img class="product-world" src="/media/campaign/${p.world}.webp" alt="" loading="lazy" width="1200" height="960"><img class="product-reveal" src="${p.hoverImage}" alt="${p.name} presented in its fragrance world" loading="lazy" width="1600" height="1840"></a><div class="product-info"><h3><a href="/products/${p.id}/">${p.name}</a></h3><p>${p.family}</p><div class="product-meta"><span>50 ml</span><span>Price announced at launch</span></div><button class="add-button" data-add="${p.id}" aria-label="Add ${p.name} to bag"><span>ADD TO BAG</span><span>+</span></button></div></article>`;
-// Dior-style collection: jump chips, then groups of 4 with campaign banners between.
-// Placeholder: each group repeats the current catalog until the real 16 products land.
+const productCard=p=>`<article class="product-card" style="--scent:${p.color}"><div class="product-media vx-ql-host"><a class="product-image" href="/products/${p.id}/" aria-label="Discover ${p.name}"><img class="product-world" src="/media/campaign/${p.world}.webp" alt="" loading="lazy" width="1200" height="960"><img class="product-reveal" src="${p.hoverImage}" alt="${p.name} presented in its fragrance world" loading="lazy" width="1600" height="1840"></a><button class="vx-quicklook" type="button" data-quicklook="${p.id}" aria-label="Quick look: ${p.name}">QUICK LOOK</button></div><div class="product-info"><h3><a href="/products/${p.id}/">${p.name}</a></h3><p>${p.family}</p><div class="product-meta"><span>50 ml</span><span>Price announced at launch</span></div><button class="add-button" data-add="${p.id}" aria-label="Add ${p.name} to bag"><span>ADD TO BAG</span><span>+</span></button></div></article>`;
+// Dior-style collection: jump chips, then three groups of 4 (12 cards) with campaign banners between.
+// Placeholder: Gift Sets and Discovery Kit repeat the four fragrances until their own SKUs land.
 const collectionGroups=[
- {id:'signatures',title:'Signatures',products:catalog,banner:{image:'/media/campaign/perfume-study.webp',kicker:'THE VASA STUDY',line:'Composed slowly. Worn for a lifetime.'}},
- {id:'intense',title:'Intense',products:catalog},
- {id:'florals',title:'Florals',products:catalog,banner:{image:'/media/campaign/festival/weekend-ritual.webp',kicker:'THE RITUAL',line:'A fragrance for the hours that matter.'}},
- {id:'gift-sets',title:'Gift Sets',products:catalog}
+ {id:'signature',title:'Signature',products:catalog,banner:{image:'/media/campaign/perfume-study.webp',kicker:'THE VASA STUDY',line:'Composed slowly. Worn for a lifetime.'}},
+ {id:'gift-sets',title:'Gift Sets',chip:'/media/campaign/gifting-presentation-v2.webp',products:catalog,banner:{image:'/media/campaign/festival/weekend-ritual.webp',kicker:'THE RITUAL',line:'A fragrance for the hours that matter.'}},
+ {id:'discovery-kit',title:'Discovery Kit',chip:'/media/campaign/perfume-study.webp',products:catalog}
 ];
 const chips=document.querySelector('#collection-chips'),groups=document.querySelector('#collection-groups');
 if(chips&&groups){
- chips.innerHTML=collectionGroups.map(g=>`<a class="collection-chip" href="#group-${g.id}"><span class="collection-chip-media"><img src="${photo(g.products[0])}" alt="" loading="lazy" width="1122" height="1402"></span><span>${g.title}</span></a>`).join('');
+ chips.innerHTML=collectionGroups.map(g=>`<a class="collection-chip" href="#group-${g.id}"><span class="collection-chip-media"><img src="${g.chip||photo(g.products[0])}" alt="" loading="lazy" width="1122" height="1402"></span><span>${g.title}</span></a>`).join('');
  groups.innerHTML=collectionGroups.map(g=>`<section class="collection-group" id="group-${g.id}" aria-labelledby="group-title-${g.id}"><h3 class="collection-group-title" id="group-title-${g.id}">${g.title}</h3><div class="product-grid">${g.products.map(productCard).join('')}</div></section>${g.banner?`<figure class="collection-banner"><img src="${g.banner.image}" alt="" loading="lazy"><figcaption><small>${g.banner.kicker}</small><strong>${g.banner.line}</strong></figcaption></figure>`:''}`).join('');
 }
 const giftIdeas=[
@@ -146,6 +146,7 @@ if(siteHeader){
  requestAnimationFrame(updateHeaderState);
 }
 initBitsEffects();
+initVasaExtras({catalog,lenis,isBusy:()=>panel.open,addToBag:id=>{bag.add(id);toast(`${productById(id).name} added to your bag`)}});
 initFragranceTheatre();
 initFestivalCarousel();
 document.fonts.ready.then(()=>{const heroTitle=document.querySelector('#hero-title');if(!reduced.matches&&heroTitle){const split=SplitText.create(heroTitle,{type:'lines',linesClass:'hero-title-line',aria:'auto'});gsap.fromTo(heroTitle,{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)',duration:1.35,ease:'power4.inOut',delay:.04,clearProps:'clipPath'});gsap.from(split.lines,{yPercent:108,opacity:0,duration:1.15,stagger:.13,ease:'power4.out',delay:.12});gsap.from('.hero-copy>.kicker,.hero-copy>.button',{opacity:0,y:12,duration:.8,stagger:.12,delay:.3});}initExperience();ScrollTrigger.refresh()});

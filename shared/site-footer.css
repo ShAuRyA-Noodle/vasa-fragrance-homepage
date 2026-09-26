@@ -1,0 +1,41 @@
+/* Canonical VASA footer: one 2x2 layout on every page and viewport.
+   Loaded after page styles (imported from 05-campaign/main.js and shared/store-shell.js);
+   the doubled class outranks the older footer rules still left in 05-campaign/style.css. */
+footer.cartier-footer.cartier-footer{
+ --vf-bg:#11100f;--vf-ink:#efe9e1;--vf-muted:#bdb2a6;--vf-line:rgba(205,188,172,.22);--vf-accent:#c79a54;
+ position:relative;isolation:isolate;overflow:hidden;display:block;margin:0!important;
+ padding:0 clamp(20px,4vw,68px) env(safe-area-inset-bottom)!important;
+ background:var(--vf-bg)!important;color:var(--vf-ink)!important;border-top:1px solid var(--vf-line)!important;
+ font-family:'Manrope',Arial,sans-serif;text-align:left
+}
+[data-theme="light"] footer.cartier-footer.cartier-footer{--vf-bg:#fff;--vf-ink:#151311;--vf-muted:#5f5a54;--vf-line:#dedad4;--vf-accent:#9b7b45}
+footer.cartier-footer.cartier-footer #footer-topography{position:absolute;inset:0;z-index:-1;width:100%;height:100%;opacity:.42;pointer-events:none}
+footer.cartier-footer.cartier-footer .footer-particle{position:relative;display:block;height:clamp(140px,17vw,240px)!important;margin:0!important;border-bottom:1px solid var(--vf-line)!important;overflow:hidden}
+footer.cartier-footer.cartier-footer .footer-particle canvas{display:block}
+footer.cartier-footer.cartier-footer .footer-main{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:clamp(36px,4.5vw,64px) clamp(20px,8vw,140px)!important;
+ width:100%;max-width:980px;margin:0 auto!important;padding:clamp(44px,5vw,72px) 0!important;border:0!important
+}
+footer.cartier-footer.cartier-footer .footer-main>div{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0}
+footer.cartier-footer.cartier-footer .footer-main h2{margin:0 0 12px!important;color:var(--vf-ink)!important;font:750 12px/1.35 'Manrope',Arial,sans-serif!important;letter-spacing:.08em!important;text-transform:uppercase}
+footer.cartier-footer.cartier-footer .footer-main>div>a{
+ display:block;width:auto!important;max-width:100%;margin:0!important;padding:4px 0!important;
+ color:var(--vf-muted)!important;font:500 14px/1.45 'Manrope',Arial,sans-serif!important;letter-spacing:0;text-transform:none;text-decoration:none;
+ transform:none!important;transition:color .25s ease
+}
+footer.cartier-footer.cartier-footer .footer-main>div>a:before{display:none!important}
+footer.cartier-footer.cartier-footer .footer-main>div>a:is(:hover,:focus-visible){color:var(--vf-ink)!important;text-decoration:underline;text-underline-offset:4px}
+footer.cartier-footer.cartier-footer .footer-bottom{
+ display:flex!important;flex-direction:row!important;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+ margin:0!important;padding:22px 0!important;border-top:1px solid var(--vf-line)!important;
+ color:var(--vf-muted)!important;font:600 11px/1.4 'Manrope',Arial,sans-serif!important;letter-spacing:.07em;text-transform:uppercase
+}
+footer.cartier-footer.cartier-footer .footer-country{color:var(--vf-ink)!important;font:inherit!important;letter-spacing:inherit;text-decoration:none}
+footer.cartier-footer.cartier-footer .footer-country:is(:hover,:focus-visible){color:var(--vf-accent)!important}
+footer.cartier-footer.cartier-footer .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:560px){
+ footer.cartier-footer.cartier-footer .footer-main{gap:34px 18px!important;padding:38px 0!important}
+ footer.cartier-footer.cartier-footer .footer-main>div>a{font-size:13px!important}
+ footer.cartier-footer.cartier-footer .footer-bottom{flex-direction:column-reverse!important;align-items:flex-start}
+}
